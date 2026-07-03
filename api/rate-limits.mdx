@@ -1,7 +1,7 @@
 ---
-title: "Rocketpunch API Rate Limits and Quotas"
+title: "Rocketpunch API Rate Limits, Quotas, and Retry Logic"
 sidebarTitle: "Rate Limits"
-description: "Understand the Rocketpunch API rate limits, request quotas per app key, and how to handle 429 Too Many Requests responses."
+description: "Learn about Rocketpunch API rate limits and request quotas, how to read rate limit headers, and how to handle 429 responses gracefully."
 ---
 
 Rate limits protect the Rocketpunch API from excessive traffic so that all developers get consistent, reliable performance. Every API key is subject to a request quota measured over a rolling time window. When your app exceeds its quota, the API returns a `429 Too Many Requests` response until the window resets. Building retry logic and caching into your integration from the start prevents these limits from affecting your users.
