@@ -1,28 +1,11 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "name": "Rocket Punch",
+  "projectType": "saas",
+  "projectName": "Rocket Punch",
+  "projectDescription": "Rocketpunch is a Korean tech-talent network and job platform that connects professionals, companies, and builders — offering social profiles, job postings, events, education, and an Open API for developers.",
   "theme": "luma",
-  "favicon": "https://media.brand.dev/4bb65048-90b6-4750-a250-45acf9a7863a.jpg",
-  "colors": {
-    "primary": "#4e64fa",
-    "light": "#a2b4e7",
-    "dark": "#e9ebf5"
-  },
-  "font": {
-    "headings": {
-      "family": "Inter"
-    },
-    "body": {
-      "family": "Inter"
-    }
-  },
-  "navbar": {
-    "primary": {
-      "type": "button",
-      "label": "Go to Rocketpunch",
-      "href": "https://www.rocketpunch.com"
-    }
-  },
+  "primaryColor": "#4e64fa",
+  "lightColor": "#a2b4e7",
+  "darkColor": "#e9ebf5",
   "navigation": {
     "tabs": [
       {
@@ -108,9 +91,29 @@
       }
     ]
   },
-  "footer": {
-    "socials": {
-      "website": "https://www.rocketpunch.com"
-    }
-  }
+  "keyFeatures": [
+    "Professional profile creation and networking",
+    "Job search and application with keyword filtering",
+    "Quick Apply — apply to jobs directly through Rocketpunch",
+    "Company profiles with people, posts, and open roles",
+    "Networking events — conferences, meetups, and exclusive gatherings",
+    "Education & training course discovery (bootcamps, academies, online courses)",
+    "Social feed (Discover) for tech news and community content",
+    "Real-time messaging and open chat rooms (Inbox)",
+    "Open API with App Key for builders — jobs, companies, and profile data",
+    "OAuth 2.0 support for user-consent data access",
+    "11-language multilingual support",
+    "170K+ company profiles indexed",
+    "99.95% availability SLA",
+    "Enterprise services for recruiters and event organizers"
+  ],
+  "publicApiSurface": [
+    "GET /api/v1/jobs — search job listings by keyword",
+    "GET /api/v1/companies — search company profiles",
+    "GET /api/v1/profiles — access user profiles",
+    "GET /api/v1/events — browse networking events",
+    "X-RP-API-Key header — App Key authentication",
+    "OAuth 2.0 authorization flow with redirect URI registration",
+    "App registration console at developers.rocketpunch.com/apps/new"
+  ]
 }

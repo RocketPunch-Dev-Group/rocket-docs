@@ -1,0 +1,66 @@
+---
+title: "Rocketpunch Open API: Build on Talent Data"
+sidebarTitle: "Overview"
+description: "The Rocketpunch Open API gives developers access to jobs, companies, profiles, and events data from Korea's leading tech talent network."
+---
+
+The Rocketpunch Open API gives you programmatic access to one of Asia's largest tech talent networks. Whether you're building a job aggregator, a recruitment platform, or a career analytics tool, the API exposes live data on jobs, companies, profiles, and events — all behind a single authenticated endpoint and a consistent, multilingual schema.
+
+## What You Can Build
+
+Developers and product teams use the Rocketpunch Open API across a wide range of use cases:
+
+- **Job aggregators** — Pull real-time job postings filtered by keyword, location, or category and surface them inside your own product.
+- **Recruitment tools** — Enrich your ATS or sourcing workflow with live company and candidate profile data from the Rocketpunch network.
+- **Talent analytics** — Analyze hiring trends, skill demand, and company growth signals across Korea's tech ecosystem.
+- **Career apps** — Build personalized job recommendation engines or career-path explorers backed by live market data.
+- **Company research tools** — Combine company profiles, headcount signals, and open roles into investor or sales intelligence dashboards.
+
+## Key Numbers
+
+<CardGroup cols={3}>
+  <Card title="11 Languages" icon="language">
+    Profile and job data is available in 11 languages including Korean, with a consistent schema across all locales.
+  </Card>
+  <Card title="170K+ Companies" icon="building">
+    Over 170,000 company profiles indexed, spanning startups to enterprises across Korea's tech landscape.
+  </Card>
+  <Card title="99.95% Uptime SLA" icon="shield-check">
+    Production-grade availability you can rely on when shipping customer-facing products.
+  </Card>
+</CardGroup>
+
+## Available Data
+
+<CardGroup cols={2}>
+  <Card title="Jobs" icon="briefcase" href="/api/reference/jobs">
+    Search and filter active job postings by keyword, company, location, and more.
+  </Card>
+  <Card title="Companies" icon="building-2" href="/api/reference/companies">
+    Access company profiles including industry, size, funding stage, and open roles.
+  </Card>
+  <Card title="Profiles" icon="user" href="/api/reference/profiles">
+    Look up developer and professional profiles with work history and skills data.
+  </Card>
+  <Card title="Events" icon="calendar" href="/api/reference/events">
+    Discover tech events, meetups, and career fairs listed on Rocketpunch.
+  </Card>
+</CardGroup>
+
+## How It Works
+
+<Steps>
+  <Step title="Register an app">
+    Go to [developers.rocketpunch.com/apps/new](https://developers.rocketpunch.com/apps/new), log in with your Rocketpunch account, and fill in your app name and description. You receive an App Key instantly — no separate approval required.
+  </Step>
+  <Step title="Authenticate your requests">
+    Add your App Key to every API request using the `X-RP-API-Key` header. All endpoints share the same base URL: `https://openapi.rocketpunch.com`.
+  </Step>
+  <Step title="Call endpoints and ship">
+    Query the endpoints you need, integrate the response data into your product, and monitor live usage from your developer dashboard. Your app is ready to share with the Rocketpunch community.
+  </Step>
+</Steps>
+
+<Card title="Get your App Key" icon="key" href="https://developers.rocketpunch.com/apps/new">
+  Register a new app and receive your credentials instantly at the Rocketpunch Developer Portal.
+</Card>
