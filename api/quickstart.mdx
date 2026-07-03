@@ -4,29 +4,28 @@ sidebarTitle: "퀵스타트"
 description: "로켓펀치 앱을 등록하고, API 키를 즉시 발급받고, 첫 인증 API 호출로 실시간 채용 공고·기업·프로필·이벤트를 가져오세요."
 ---
 
-This guide walks you through registering an app, authenticating a request, and reading your first response from the Rocketpunch Open API. You'll have live data flowing into your project in under five minutes.
+이 가이드는 앱 등록, 요청 인증, 로켓펀치 Open API에서 첫 응답 읽기 과정을 안내한다. 5분 안에 실시간 데이터가 프로젝트로 흘러들어오게 된다.
 
-## Steps
+## 단계
 
 <Steps>
-  <Step title="Register an App">
-    Head to [developers.rocketpunch.com/apps/new](https://developers.rocketpunch.com/apps/new) and log in with your Rocketpunch account. Fill in the following fields:
+  <Step title="앱 등록">
+    [developers.rocketpunch.com/apps/new](https://developers.rocketpunch.com/apps/new)로 이동해 로켓펀치 계정으로 로그인한다. 다음 필드를 입력한다:
 
-    | Field | Description |
-    |---|---|
-    | **App name** | A short, recognizable name for your project |
-    | **Description** | What your app does and how it uses Rocketpunch data |
-    | **Callback URI** | *(Optional)* Required only if you plan to use OAuth 2.0 for user-consent flows |
+    | 필드 | 설명 |
+    | --- | --- |
+    | **앱 이름** | 프로젝트를 알아볼 수 있는 짧은 이름 |
+    | **설명** | 앱이 무엇을 하고 로켓펀치 데이터를 어떻게 사용하는지 |
+    | **콜백 URI** | _(선택)_ 사용자 동의 흐름에 OAuth 2.0을 사용할 계획일 때만 필요 |
 
-    Click **Register**. Your App Key is issued immediately — no review period, no waiting.
+    **등록**을 클릭한다. App Key가 즉시 발급된다 — 검토 기간도, 대기도 없다.
 
     <Note>
-      Your App Key follows the format `rp_app_xxxxxxxxxxxxxxxx`. Copy it now and store it somewhere safe; treat it like a password.
+      App Key는 `rp_app_xxxxxxxxxxxxxxxx` 형식을 따른다. 지금 복사해 안전한 곳에 보관하고, 비밀번호처럼 다룬다.
     </Note>
   </Step>
-
-  <Step title="Make Your First API Call">
-    Add your App Key to the `X-RP-API-Key` request header and call any endpoint. The example below searches for jobs matching the keyword `AI`:
+  <Step title="첫 API 호출하기">
+    `X-RP-API-Key` 요청 헤더에 App Key를 추가하고 아무 엔드포인트나 호출한다. 아래 예시는 키워드 `AI`에 해당하는 채용 공고를 검색한다:
 
     <CodeGroup>
 
@@ -41,7 +40,7 @@ This guide walks you through registering an app, authenticating a request, and r
 
     ```python Python
     import requests
-
+    
     response = requests.get(
         "https://openapi.rocketpunch.com/api/v1/jobs",
         params={"keyword": "AI"},
@@ -59,12 +58,11 @@ This guide walks you through registering an app, authenticating a request, and r
     </CodeGroup>
 
     <Tip>
-      Replace `rp_app_YOUR_KEY_HERE` with the App Key you copied during registration.
+      `rp_app_YOUR_KEY_HERE`를 등록 시 복사한 App Key로 바꾼다.
     </Tip>
   </Step>
-
-  <Step title="Inspect the Response">
-    A successful request returns a JSON object containing an `items` array. Each element in the array represents a single job posting:
+  <Step title="응답 확인하기">
+    성공한 요청은 `items` 배열이 담긴 JSON 객체를 반환한다. 배열의 각 요소는 하나의 채용 공고를 나타낸다:
 
     ```json
     {
@@ -89,26 +87,27 @@ This guide walks you through registering an app, authenticating a request, and r
     }
     ```
 
-    | Field | Type | Description |
-    |---|---|---|
-    | `items` | array | The list of job objects matching your query |
-    | `total` | integer | Total number of matching results across all pages |
-    | `page` | integer | Current page number |
-    | `per_page` | integer | Number of results returned per page |
+    | 필드 | 타입 | 설명 |
+    | --- | --- | --- |
+    | `items` | array | 쿼리에 일치하는 채용 공고 객체 목록 |
+    | `total` | integer | 모든 페이지에 걸친 일치 결과 총 개수 |
+    | `page` | integer | 현재 페이지 번호 |
+    | `per_page` | integer | 페이지당 반환되는 결과 수 |
 
-    A `200 OK` status confirms your key is valid and the request succeeded. If you receive a `401`, double-check that you included the `X-RP-API-Key` header and that your key is correct.
+    `200 OK` 상태는 키가 유효하고 요청이 성공했음을 확인해준다. `401`을 받았다면 `X-RP-API-Key` 헤더를 포함했는지, 키가 올바른지 다시 확인한다.
   </Step>
 </Steps>
 
-## Next Steps
+## 다음 단계
 
-Now that you've made your first call, explore the rest of the API:
+첫 호출을 완료했으니 나머지 API를 살펴본다:
 
 <CardGroup cols={2}>
-  <Card title="Authentication" icon="lock" href="/api/authentication">
-    Learn how App Key and OAuth 2.0 authentication work, and how to keep your credentials secure.
+  <Card title="인증" icon="lock" href="/api/authentication">
+    App Key와 OAuth 2.0 인증이 어떻게 작동하는지, 자격 증명을 안전하게 유지하는 방법을 알아본다.
   </Card>
-  <Card title="API Reference" icon="book-open" href="/api/reference/jobs">
-    Browse all available endpoints — jobs, companies, profiles, and events — with full parameter and response documentation.
+
+  <Card title="API 레퍼런스" icon="book-open" href="/api/reference/jobs">
+    채용 공고, 기업, 프로필, 이벤트 등 이용 가능한 모든 엔드포인트를 전체 파라미터·응답 문서와 함께 살펴본다.
   </Card>
 </CardGroup>

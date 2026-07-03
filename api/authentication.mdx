@@ -4,15 +4,15 @@ sidebarTitle: "Authentication"
 description: "The Rocketpunch API uses App Key authentication via request headers. Learn how to secure your key, format headers, and handle auth errors."
 ---
 
-The Rocketpunch Open API supports two authentication methods. **App Key authentication** is the primary method for server-side API calls — you pass a static key in a request header and gain access to all public endpoints. **OAuth 2.0** is available when your app needs to access data on behalf of an individual Rocketpunch user with their explicit consent.
+로켓펀치 Open API는 두 가지 인증 방식을 지원한다. **App Key 인증**은 서버 사이드 API 호출의 기본 방식으로 — 요청 헤더에 정적 키를 전달해 모든 공개 엔드포인트에 접근한다. **OAuth 2.0**은 앱이 개별 로켓펀치 사용자의 명시적 동의를 받아 그 사용자를 대신해 데이터에 접근해야 할 때 사용한다.
 
-## App Key Authentication
+## App Key 인증
 
-Every API request must include your App Key in the `X-RP-API-Key` header. There are no cookies, query-string tokens, or session flows involved — just a single header on every request.
+모든 API 요청에는 `X-RP-API-Key` 헤더에 App Key를 포함해야 한다. 쿠키, 쿼리 문자열 토큰, 세션 흐름은 관여하지 않는다 — 매 요청에 헤더 하나만 있으면 된다.
 
-**Header format:**
+**헤더 형식:**
 
-```
+```text
 X-RP-API-Key: rp_app_xxxxxxxxxxxxxxxx
 ```
 
@@ -38,58 +38,58 @@ curl -X GET 'https://openapi.rocketpunch.com/api/v1/jobs?keyword=AI' \
 </CodeGroup>
 
 <Note>
-  All App Keys start with the prefix `rp_app_` followed by a unique alphanumeric string. If your key does not start with this prefix, it was not issued correctly — register a new app to generate a valid key.
+  모든 App Key는 `rp_app_` 접두사로 시작하고 뒤에 고유한 영숫자 문자열이 붙는다. 키가 이 접두사로 시작하지 않는다면 올바르게 발급되지 않은 것이니 — 새 앱을 등록해 유효한 키를 생성한다.
 </Note>
 
-## Getting Your App Key
+## App Key 발급받기
 
 <Steps>
-  <Step title="Go to the Developer Portal">
-    Navigate to [developers.rocketpunch.com/apps/new](https://developers.rocketpunch.com/apps/new) and log in with your Rocketpunch account.
+  <Step title="개발자 포털로 이동">
+    [developers.rocketpunch.com/apps/new](https://developers.rocketpunch.com/apps/new)로 이동해 로켓펀치 계정으로 로그인한다.
   </Step>
-  <Step title="Fill in your app details">
-    Enter an app name, a short description of your project, and — if you plan to use OAuth 2.0 — a redirect URI. All other fields are optional at this stage.
+  <Step title="앱 정보 입력">
+    앱 이름, 프로젝트에 대한 짧은 설명, 그리고 OAuth 2.0을 사용할 계획이라면 리디렉션 URI를 입력한다. 이 단계에서 다른 필드는 모두 선택 사항이다.
   </Step>
-  <Step title="Register and copy your key">
-    Click **Register**. Your App Key appears immediately on the confirmation screen. Copy it now and store it securely. **No separate approval is required** — your key is active the moment it is issued.
+  <Step title="등록하고 키 복사">
+    **등록**을 클릭한다. App Key가 확인 화면에 즉시 나타난다. 지금 복사해 안전하게 보관한다. **별도의 승인은 필요하지 않으며** 발급되는 즉시 키가 활성화된다.
   </Step>
 </Steps>
 
-## Keeping Your Key Secure
+## 키를 안전하게 유지하기
 
-Your App Key grants access to the Rocketpunch API on your behalf. Treat it with the same care as a database password.
+App Key는 여러분을 대신해 로켓펀치 API에 접근할 권한을 부여한다. 데이터베이스 비밀번호와 같은 수준으로 다룬다.
 
-- **Store keys in environment variables.** Never hard-code your App Key directly in source code. Use `process.env.ROCKETPUNCH_API_KEY` in Node.js, `os.environ` in Python, or your framework's secrets management.
-- **Never commit keys to version control.** Add `.env` files to your `.gitignore` and audit your repository history if you suspect accidental exposure.
-- **Rotate immediately if compromised.** If your key is leaked or exposed, go to the Developer Portal, revoke the old key, and issue a new one. Update all services using the old key before revoking it.
+- **키를 환경 변수에 저장한다.** App Key를 소스 코드에 직접 하드코딩하지 않는다. Node.js에서는 `process.env.ROCKETPUNCH_API_KEY`, Python에서는 `os.environ`, 또는 프레임워크의 시크릿 관리를 사용한다.
+- **키를 버전 관리에 커밋하지 않는다.** `.env` 파일을 `.gitignore`에 추가하고, 실수로 노출된 것이 의심되면 저장소 히스토리를 점검한다.
+- **유출되면 즉시 교체한다.** 키가 유출되거나 노출되면 개발자 포털로 이동해 기존 키를 폐기하고 새 키를 발급한다. 폐기 전에 기존 키를 사용하는 모든 서비스를 업데이트한다.
 
 <Warning>
-  Never include your App Key in client-side JavaScript that runs in the browser. Anyone who visits your site can read it from the source. Always proxy API calls through your own server-side backend and keep the key there.
+  브라우저에서 실행되는 클라이언트 사이드 JavaScript에 App Key를 절대 포함하지 않는다. 사이트를 방문하는 누구나 소스에서 키를 읽을 수 있다. 항상 자체 서버 사이드 백엔드를 통해 API 호출을 프록시하고 키를 그곳에 보관한다.
 </Warning>
 
-## OAuth 2.0 (User Data)
+## OAuth 2.0 (사용자 데이터)
 
-When your app needs to access data that belongs to a specific Rocketpunch user — such as their private profile or saved jobs — you must obtain their consent through the OAuth 2.0 flow. This allows users to grant and revoke access to their data without sharing their password.
+앱이 특정 로켓펀치 사용자에게 속한 데이터, 예를 들어 비공개 프로필이나 저장한 채용 공고 등에 접근해야 할 때는, OAuth 2.0 흐름을 통해 사용자의 동의를 받아야 한다. 이를 통해 사용자는 비밀번호를 공유하지 않고도 자신의 데이터에 대한 접근을 허용하고 철회할 수 있다.
 
-To enable OAuth 2.0 for your app:
+앱에 OAuth 2.0을 활성화하려면:
 
-1. Provide a **redirect URI** when registering your app at [developers.rocketpunch.com/apps/new](https://developers.rocketpunch.com/apps/new). This is the URL Rocketpunch redirects users back to after they approve or deny access.
-2. Implement the authorization code flow in your backend to exchange the returned code for an access token.
-3. Include the access token in your API requests instead of your App Key when calling user-specific endpoints.
+1. [developers.rocketpunch.com/apps/new](https://developers.rocketpunch.com/apps/new)에서 앱을 등록할 때 **리디렉션 URI**를 제공한다. 이는 사용자가 접근을 승인하거나 거부한 후 로켓펀치가 사용자를 다시 보내는 URL이다.
+2. 백엔드에 인증 코드 흐름을 구현해 반환된 코드를 액세스 토큰으로 교환한다.
+3. 사용자별 엔드포인트를 호출할 때 App Key 대신 액세스 토큰을 API 요청에 포함한다.
 
-<Card title="OAuth 2.0 Guide" icon="arrow-right" href="/api/oauth/overview">
-  Read the full OAuth 2.0 documentation for authorization flows, token exchange, scopes, and refresh token handling.
+<Card title="OAuth 2.0 가이드" icon="arrow-right" href="/api/oauth/overview">
+  인증 흐름, 토큰 교환, 스코프, 리프레시 토큰 처리에 대한 OAuth 2.0 전체 문서를 읽는다.
 </Card>
 
-## Authentication Errors
+## 인증 오류
 
-If your request is not authenticated correctly, the API returns one of the following HTTP error codes:
+요청이 올바르게 인증되지 않으면 API는 다음 HTTP 오류 코드 중 하나를 반환한다:
 
-| Status Code | Name | Cause | Resolution |
-|---|---|---|---|
-| `401` | Unauthorized | The `X-RP-API-Key` header is missing, malformed, or contains an invalid key. | Verify that the header is present on the request and that the key value starts with `rp_app_`. |
-| `403` | Forbidden | The App Key is valid, but it does not have permission to access the requested resource. | Check whether the endpoint requires OAuth 2.0 user-consent authorization, or contact support if you believe this is an error. |
+| 상태 코드 | 이름 | 원인 | 해결 |
+| --- | --- | --- | --- |
+| `401` | Unauthorized | `X-RP-API-Key` 헤더가 없거나, 형식이 잘못됐거나, 유효하지 않은 키를 포함한다. | 요청에 헤더가 있는지, 키 값이 `rp_app_`로 시작하는지 확인한다. |
+| `403` | Forbidden | App Key는 유효하지만 요청한 리소스에 접근할 권한이 없다. | 엔드포인트가 OAuth 2.0 사용자 동의 인증을 요구하는지 확인하거나, 오류라고 판단되면 지원팀에 문의한다. |
 
 <Note>
-  A `401` on your very first request almost always means the header name is misspelled or the key contains an extra space. Log the raw request headers before investigating further.
+  첫 요청에서의 `401`은 거의 항상 헤더 이름 오타이거나 키에 여분의 공백이 포함된 경우다. 더 조사하기 전에 원시 요청 헤더를 로깅한다.
 </Note>
