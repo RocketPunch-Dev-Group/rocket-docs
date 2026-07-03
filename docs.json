@@ -24,87 +24,95 @@
     }
   },
   "navigation": {
-    "tabs": [
+    "languages": [
       {
-        "tab": "User Guide",
-        "groups": [
+        "language": "ko",
+        "tabs": [
           {
-            "group": "Get Started",
-            "pages": [
-              "user-guide/introduction",
-              "user-guide/create-account",
-              "user-guide/profile-setup"
+            "tab": "User Guide",
+            "groups": [
+              {
+                "group": "Get Started",
+                "pages": [
+                  "user-guide/introduction",
+                  "user-guide/create-account",
+                  "user-guide/profile-setup"
+                ]
+              },
+              {
+                "group": "Finding Jobs",
+                "pages": [
+                  "user-guide/jobs/search",
+                  "user-guide/jobs/apply",
+                  "user-guide/jobs/quick-apply"
+                ]
+              },
+              {
+                "group": "Networking",
+                "pages": [
+                  "user-guide/networking/discover",
+                  "user-guide/networking/events",
+                  "user-guide/networking/messaging"
+                ]
+              },
+              {
+                "group": "Education",
+                "pages": [
+                  "user-guide/education/browse",
+                  "user-guide/education/enroll"
+                ]
+              },
+              {
+                "group": "Companies",
+                "pages": [
+                  "user-guide/companies/profiles",
+                  "user-guide/companies/post-jobs",
+                  "user-guide/companies/enterprise"
+                ]
+              }
             ]
           },
           {
-            "group": "Finding Jobs",
-            "pages": [
-              "user-guide/jobs/search",
-              "user-guide/jobs/apply",
-              "user-guide/jobs/quick-apply"
-            ]
-          },
-          {
-            "group": "Networking",
-            "pages": [
-              "user-guide/networking/discover",
-              "user-guide/networking/events",
-              "user-guide/networking/messaging"
-            ]
-          },
-          {
-            "group": "Education",
-            "pages": [
-              "user-guide/education/browse",
-              "user-guide/education/enroll"
-            ]
-          },
-          {
-            "group": "Companies",
-            "pages": [
-              "user-guide/companies/profiles",
-              "user-guide/companies/post-jobs",
-              "user-guide/companies/enterprise"
+            "tab": "Developer API",
+            "groups": [
+              {
+                "group": "Get Started",
+                "pages": [
+                  "api/overview",
+                  "api/quickstart",
+                  "api/authentication"
+                ]
+              },
+              {
+                "group": "API Reference",
+                "pages": [
+                  "api/reference/jobs",
+                  "api/reference/companies",
+                  "api/reference/profiles",
+                  "api/reference/events"
+                ]
+              },
+              {
+                "group": "OAuth",
+                "pages": [
+                  "api/oauth/overview",
+                  "api/oauth/flow"
+                ]
+              },
+              {
+                "group": "Resources",
+                "pages": [
+                  "api/rate-limits",
+                  "api/errors",
+                  "api/changelog"
+                ]
+              }
             ]
           }
         ]
       },
       {
-        "tab": "Developer API",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "api/overview",
-              "api/quickstart",
-              "api/authentication"
-            ]
-          },
-          {
-            "group": "API Reference",
-            "pages": [
-              "api/reference/jobs",
-              "api/reference/companies",
-              "api/reference/profiles",
-              "api/reference/events"
-            ]
-          },
-          {
-            "group": "OAuth",
-            "pages": [
-              "api/oauth/overview",
-              "api/oauth/flow"
-            ]
-          },
-          {
-            "group": "Resources",
-            "pages": [
-              "api/rate-limits",
-              "api/errors",
-              "api/changelog"
-            ]
-          }
-        ]
+        "language": "en"
       }
     ]
   },
