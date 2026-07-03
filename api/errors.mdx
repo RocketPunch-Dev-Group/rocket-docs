@@ -1,0 +1,172 @@
+---
+title: "Rocketpunch API Error Codes and Troubleshooting"
+sidebarTitle: "Error Codes"
+description: "Reference for Rocketpunch API HTTP status codes, error response format, and troubleshooting common authentication and request errors."
+---
+
+The Rocketpunch API uses standard HTTP status codes and returns a consistent JSON error body on every failure. This makes it straightforward to handle errors programmatically — your code can branch on the `status` field or the `code` string without parsing free-form error messages. This page covers every error your integration may encounter and how to resolve it.
+
+## Error Response Format
+
+All error responses share the same JSON structure, regardless of the error type. Check the `code` field for a machine-readable error identifier and `message` for a human-readable explanation.
+
+```json
+{
+  "error": {
+    "code": "UNAUTHORIZED",
+    "message": "Invalid or missing API key",
+    "status": 401
+  }
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `code` | string | Machine-readable error identifier (e.g. `UNAUTHORIZED`, `NOT_FOUND`) |
+| `message` | string | Human-readable description of the error |
+| `status` | integer | HTTP status code, mirrored in the response status line |
+
+## HTTP Status Codes
+
+The table below lists every status code the API returns, what it means, and the first action to take.
+
+| Status | Code String | Meaning | Action |
+|---|---|---|---|
+| `400` | `BAD_REQUEST` | The request contains invalid or missing parameters. | Check your query parameters against the endpoint reference. Look at the `message` field for which parameter is invalid. |
+| `401` | `UNAUTHORIZED` | The `X-RP-API-Key` header is missing, malformed, or refers to a revoked key. | Verify the header is present and that your key starts with `rp_app_`. Regenerate at [developers.rocketpunch.com](https://developers.rocketpunch.com) if needed. |
+| `403` | `FORBIDDEN` | Your API key is valid but does not have permission to access this resource. | Check that your app has the required scopes enabled. If using OAuth, ensure the user granted the scope your request requires. |
+| `404` | `NOT_FOUND` | The requested resource does not exist. | Confirm the endpoint path and any resource identifiers in the URL. The resource may have been deleted or the ID may be incorrect. |
+| `422` | `UNPROCESSABLE_ENTITY` | The request is well-formed but the values fail validation. | Read the `message` for field-level details, such as an out-of-range `page` value or an unsupported `lang` code. |
+| `429` | `RATE_LIMIT_EXCEEDED` | Your app has exceeded its request quota for the current window. | Wait for the time indicated in the `Retry-After` header, then retry. See the [Rate Limits](/api/rate-limits) page for retry strategies. |
+| `500` | `INTERNAL_SERVER_ERROR` | An unexpected error occurred on Rocketpunch's servers. | Retry the request after a short delay using exponential backoff. If the error persists, contact [support@rocketpunch.com](mailto:support@rocketpunch.com). |
+| `503` | `SERVICE_UNAVAILABLE` | The API is temporarily unavailable, typically during maintenance. | Retry after a brief delay. Check the developer portal for any active incidents. |
+
+## Common Issues and Solutions
+
+### Invalid or missing API key (401)
+
+The most common cause of `401` errors is a missing or incorrectly formatted `X-RP-API-Key` header.
+
+**Check the header name.** The header must be exactly `X-RP-API-Key` (case-insensitive in HTTP, but match it exactly to avoid bugs in some HTTP clients).
+
+**Check the key format.** App Keys follow the format `rp_app_xxxxxxxxxxxxxxxx`. If your key doesn't start with `rp_app_`, you may have copied the wrong value from the developer portal.
+
+**Regenerate a compromised key.** If you suspect your key has been exposed, go to [developers.rocketpunch.com](https://developers.rocketpunch.com), open your app settings, and rotate the key. Update your environment variables or secrets manager with the new value.
+
+```bash
+# Correct — header present with valid format
+curl "https://openapi.rocketpunch.com/api/v1/jobs" \
+  -H "X-RP-API-Key: rp_app_xxxxxxxxxxxxxxxx"
+
+# Wrong — header name typo
+curl "https://openapi.rocketpunch.com/api/v1/jobs" \
+  -H "X-API-Key: rp_app_xxxxxxxxxxxxxxxx"
+```
+
+### Unsupported language code (400 / 422)
+
+The `lang` parameter on endpoints like `/api/v1/jobs` and `/api/v1/companies` accepts specific locale codes. Passing an invalid value returns a `400` or `422` error.
+
+The API supports 11 languages. Use the IETF language tag format:
+
+| Language | `lang` value |
+|---|---|
+| Korean | `ko` |
+| English | `en` |
+| Japanese | `ja` |
+| Chinese (Simplified) | `zh-hans` |
+| Chinese (Traditional) | `zh-hant` |
+| Spanish | `es` |
+| French | `fr` |
+| German | `de` |
+| Portuguese | `pt` |
+| Indonesian | `id` |
+| Vietnamese | `vi` |
+
+### Pagination out of range (400 / 422)
+
+If you request a `page` or `per_page` value outside the accepted range, the API returns an error. Keep `per_page` within the documented maximum for each endpoint (typically 100), and do not request a page number beyond the last page of results.
+
+```bash
+# Check the total pages from the response envelope
+# and stop paginating when page >= total_pages
+```
+
+### OAuth token errors (401 / 403)
+
+If you receive a `401` when using a Bearer token, the token may have expired. Use your `refresh_token` to obtain a new access token. See the [Auth Flow guide](/api/oauth/flow#token-refresh) for the refresh flow.
+
+A `403` with a Bearer token usually means the token was issued without the scope required by the endpoint you're calling. Redirect the user through the authorization flow again and request the missing scope.
+
+## Handling Errors in Code
+
+Structure your error handling to read the `error.code` field for programmatic branching and surface `error.message` to your logs or monitoring system.
+
+<CodeGroup>
+```javascript Node.js
+async function callAPI(endpoint, params) {
+  const url = new URL(`https://openapi.rocketpunch.com${endpoint}`);
+  Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
+
+  const response = await fetch(url, {
+    headers: { "X-RP-API-Key": process.env.RP_API_KEY },
+  });
+
+  if (!response.ok) {
+    const { error } = await response.json();
+
+    switch (error.code) {
+      case "UNAUTHORIZED":
+        throw new Error("Check your RP_API_KEY environment variable.");
+      case "RATE_LIMIT_EXCEEDED":
+        // Caller should implement retry logic
+        throw new RateLimitError(error.message);
+      case "NOT_FOUND":
+        return null; // Treat as empty result
+      default:
+        throw new Error(`API error ${error.status}: ${error.message}`);
+    }
+  }
+
+  return response.json();
+}
+```
+
+```python Python
+import os
+import requests
+
+def call_api(endpoint, params):
+    url = f"https://openapi.rocketpunch.com{endpoint}"
+    response = requests.get(
+        url,
+        params=params,
+        headers={"X-RP-API-Key": os.environ["RP_API_KEY"]},
+    )
+
+    if not response.ok:
+        error = response.json().get("error", {})
+        code = error.get("code")
+        message = error.get("message", "Unknown error")
+
+        if code == "UNAUTHORIZED":
+            raise ValueError("Check your RP_API_KEY environment variable.")
+        elif code == "RATE_LIMIT_EXCEEDED":
+            raise RateLimitError(message)  # Caller handles retry
+        elif code == "NOT_FOUND":
+            return None  # Treat as empty result
+        else:
+            raise Exception(f"API error {response.status_code}: {message}")
+
+    return response.json()
+```
+</CodeGroup>
+
+## Getting Help
+
+If you encounter an error not covered here, or a `500` that persists after retrying, reach out to the Rocketpunch developer support team.
+
+- **Email:** [support@rocketpunch.com](mailto:support@rocketpunch.com)
+- **Developer portal:** [developers.rocketpunch.com](https://developers.rocketpunch.com)
+
+When contacting support, include the endpoint you called, the full error response body, and the timestamp of the request. This helps the team diagnose server-side issues quickly.

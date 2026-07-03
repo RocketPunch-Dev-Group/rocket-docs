@@ -1,0 +1,177 @@
+---
+title: "Jobs API: Search and Retrieve Job Listings"
+sidebarTitle: "Jobs"
+description: "GET /api/v1/jobs — Search Rocketpunch job listings by keyword, category, and language. Returns paginated job data from 170K+ company profiles."
+---
+
+The Jobs endpoint lets you search and retrieve job listings indexed from Rocketpunch's network of 170,000+ companies. Query by keyword to surface relevant positions across job titles, required skills, company names, and descriptions. Results are returned in a consistent paginated structure and are available in 11 languages, making it straightforward to build multilingual job boards, recommendation engines, or talent-matching tools on top of Rocketpunch data.
+
+## Endpoint
+
+```
+GET https://openapi.rocketpunch.com/api/v1/jobs
+```
+
+## Request Headers
+
+| Header | Required | Description |
+|---|---|---|
+| `X-RP-API-Key` | Yes | Your App Key, in the format `rp_app_xxxxxxxxxxxxxxxx`. Obtain this from the [developer portal](https://developers.rocketpunch.com). |
+
+## Query Parameters
+
+<ParamField query="keyword" type="string">
+  The search term used to filter job listings. Matched against job titles, company names, required skills, and job descriptions. For example, `AI`, `frontend`, or `product manager`.
+</ParamField>
+
+<ParamField query="lang" type="string" default="ko">
+  The language code for the response content. Rocketpunch supports 11 languages. Common values include `ko` (Korean) and `en` (English). The response schema is consistent across all supported languages.
+</ParamField>
+
+<ParamField query="page" type="integer" default="1">
+  The page number to retrieve. Use in combination with `per_page` to paginate through large result sets. Page numbering starts at `1`.
+</ParamField>
+
+<ParamField query="per_page" type="integer">
+  The number of job listings to return per page. Use this to control result set size and balance between payload size and the number of requests needed to traverse results.
+</ParamField>
+
+## Example Request
+
+<CodeGroup>
+
+```javascript JavaScript
+const response = await fetch(
+  "https://openapi.rocketpunch.com/api/v1/jobs?keyword=AI&lang=en",
+  {
+    method: "GET",
+    headers: {
+      "X-RP-API-Key": "rp_app_xxxxxxxxxxxxxxxx",
+    },
+  }
+);
+
+const data = await response.json();
+console.log(data.items);
+```
+
+```python Python
+import requests
+
+url = "https://openapi.rocketpunch.com/api/v1/jobs"
+params = {
+    "keyword": "AI",
+    "lang": "en",
+}
+headers = {
+    "X-RP-API-Key": "rp_app_xxxxxxxxxxxxxxxx",
+}
+
+response = requests.get(url, params=params, headers=headers)
+data = response.json()
+print(data["items"])
+```
+
+```bash cURL
+curl -G "https://openapi.rocketpunch.com/api/v1/jobs" \
+  --data-urlencode "keyword=AI" \
+  --data-urlencode "lang=en" \
+  -H "X-RP-API-Key: rp_app_xxxxxxxxxxxxxxxx"
+```
+
+</CodeGroup>
+
+## Response
+
+A successful request returns HTTP `200` with a JSON body containing a paginated list of job listings under the `items` key.
+
+```json
+{
+  "items": [
+    {
+      "id": "job_01hx9z",
+      "title": "AI Research Engineer",
+      "company": {
+        "name": "Rocketpunch Labs",
+        "handle": "rocketpunch-labs"
+      },
+      "location": "Seoul, South Korea",
+      "work_type": "full-time",
+      "posted_at": "2024-11-01T09:00:00Z"
+    }
+  ],
+  "total": 340,
+  "page": 1,
+  "per_page": 20
+}
+```
+
+<Note>
+  The field values shown above are illustrative examples. Actual values depend on live data at query time. Some fields may be `null` if the posting company has not provided that information.
+</Note>
+
+### Response Fields
+
+<ResponseField name="items" type="array" required>
+  An array of job listing objects matching your query. May be empty if no results are found.
+
+  <Expandable title="Job object fields">
+    <ResponseField name="items[].id" type="string">
+      The unique identifier for the job listing on Rocketpunch.
+    </ResponseField>
+
+    <ResponseField name="items[].title" type="string">
+      The job title as listed by the posting company.
+    </ResponseField>
+
+    <ResponseField name="items[].company" type="object">
+      A summary object for the company that posted the listing.
+
+      <Expandable title="Company fields">
+        <ResponseField name="items[].company.name" type="string">
+          The display name of the company.
+        </ResponseField>
+
+        <ResponseField name="items[].company.handle" type="string">
+          The URL-safe handle for the company's Rocketpunch profile, usable to construct profile links.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="items[].location" type="string">
+      The work location for the role. May describe a city, region, or indicate remote availability.
+    </ResponseField>
+
+    <ResponseField name="items[].work_type" type="string">
+      The employment type. Typical values include `full-time`, `part-time`, `contract`, and `internship`.
+    </ResponseField>
+
+    <ResponseField name="items[].posted_at" type="string">
+      An ISO 8601 timestamp indicating when the job listing was published.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="total" type="integer" required>
+  The total number of job listings matching your query across all pages.
+</ResponseField>
+
+<ResponseField name="page" type="integer" required>
+  The current page number reflected in this response.
+</ResponseField>
+
+<ResponseField name="per_page" type="integer" required>
+  The number of results per page reflected in this response.
+</ResponseField>
+
+## Error Responses
+
+| HTTP Status | Meaning |
+|---|---|
+| `401 Unauthorized` | Your `X-RP-API-Key` is missing or invalid. |
+| `429 Too Many Requests` | You have exceeded your plan's rate limit. |
+| `500 Internal Server Error` | An unexpected server-side error occurred. Retry with exponential backoff. |
+
+<Tip>
+  To build a multilingual job board, issue parallel requests with different `lang` values for the same `keyword`. The response schema is identical across all 11 supported languages, so you can use a single data model on your end.
+</Tip>
