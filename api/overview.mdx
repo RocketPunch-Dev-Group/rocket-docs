@@ -1,66 +1,71 @@
 ---
-title: "Rocketpunch Open API: Build Apps on Talent Data"
-sidebarTitle: "Overview"
-description: "The Rocketpunch Open API gives developers programmatic access to jobs, companies, profiles, and events from Korea's leading tech talent network."
+title: "로켓펀치 Open API: 인재 데이터로 앱 만들기"
+sidebarTitle: "개요"
+description: "로켓펀치 Open API는 개발자에게 한국 대표 IT 인재 네트워크의 채용 공고·기업·프로필·이벤트에 대한 프로그래밍 방식 접근을 제공합니다."
 ---
 
-The Rocketpunch Open API gives you programmatic access to one of Asia's largest tech talent networks. Whether you're building a job aggregator, a recruitment platform, or a career analytics tool, the API exposes live data on jobs, companies, profiles, and events — all behind a single authenticated endpoint and a consistent, multilingual schema.
+로켓펀치 Open API는 아시아 최대 규모의 IT 인재 네트워크에 대한 프로그래밍 방식 접근을 제공한다. 채용 공고 애그리게이터, 채용 플랫폼, 커리어 분석 도구 등 무엇을 만들든, API는 채용 공고·기업·프로필·이벤트에 대한 실시간 데이터를 단일 인증 엔드포인트와 일관된 다국어 스키마 뒤에서 노출한다.
 
-## What You Can Build
+## 무엇을 만들 수 있는가
 
-Developers and product teams use the Rocketpunch Open API across a wide range of use cases:
+개발자와 프로덕트 팀은 로켓펀치 Open API를 다양한 활용 사례에 사용한다:
 
-- **Job aggregators** — Pull real-time job postings filtered by keyword, location, or category and surface them inside your own product.
-- **Recruitment tools** — Enrich your ATS or sourcing workflow with live company and candidate profile data from the Rocketpunch network.
-- **Talent analytics** — Analyze hiring trends, skill demand, and company growth signals across Korea's tech ecosystem.
-- **Career apps** — Build personalized job recommendation engines or career-path explorers backed by live market data.
-- **Company research tools** — Combine company profiles, headcount signals, and open roles into investor or sales intelligence dashboards.
+- **채용 공고 애그리게이터** — 키워드, 위치, 카테고리로 필터링한 실시간 채용 공고를 가져와 자체 제품 안에 노출한다.
+- **채용 도구** — 로켓펀치 네트워크의 실시간 기업·후보자 프로필 데이터로 ATS나 소싱 워크플로를 보강한다.
+- **인재 분석** — 한국 IT 생태계 전반의 채용 트렌드, 스킬 수요, 기업 성장 신호를 분석한다.
+- **커리어 앱** — 실시간 시장 데이터를 기반으로 개인화된 채용 추천 엔진이나 커리어 경로 탐색기를 만든다.
+- **기업 리서치 도구** — 기업 프로필, 인원 신호, 채용 공고를 결합해 투자자용 또는 세일즈 인텔리전스 대시보드를 만든다.
 
-## Key Numbers
+## 주요 수치
 
 <CardGroup cols={3}>
-  <Card title="11 Languages" icon="language">
-    Profile and job data is available in 11 languages including Korean, with a consistent schema across all locales.
+  <Card title="11개 언어" icon="language">
+    프로필과 채용 데이터는 한국어를 포함한 11개 언어로 제공되며, 모든 로케일에서 일관된 스키마를 유지한다.
   </Card>
-  <Card title="170K+ Companies" icon="building">
-    Over 170,000 company profiles indexed, spanning startups to enterprises across Korea's tech landscape.
+
+  <Card title="17만+ 기업" icon="building">
+    한국 IT 지형 전반의 스타트업부터 대기업까지 17만 개 이상의 기업 프로필이 색인되어 있다.
   </Card>
-  <Card title="99.95% Uptime SLA" icon="shield-check">
-    Production-grade availability you can rely on when shipping customer-facing products.
+
+  <Card title="99.95% 가동률 SLA" icon="shield-check">
+    고객 대상 제품을 출시할 때 믿고 의존할 수 있는 프로덕션급 가용성.
   </Card>
 </CardGroup>
 
-## Available Data
+## 이용 가능한 데이터
 
 <CardGroup cols={2}>
   <Card title="Jobs" icon="briefcase" href="/api/reference/jobs">
-    Search and filter active job postings by keyword, company, location, and more.
+    활성 채용 공고를 키워드, 기업, 위치 등으로 검색하고 필터링한다.
   </Card>
+
   <Card title="Companies" icon="building" href="/api/reference/companies">
-    Access company profiles including industry, size, funding stage, and open roles.
+    산업, 규모, 투자 단계, 채용 공고를 포함한 기업 프로필에 접근한다.
   </Card>
+
   <Card title="Profiles" icon="user" href="/api/reference/profiles">
-    Look up developer and professional profiles with work history and skills data.
+    경력과 스킬 데이터가 담긴 개발자·전문가 프로필을 조회한다.
   </Card>
+
   <Card title="Events" icon="calendar" href="/api/reference/events">
-    Discover tech events, meetups, and career fairs listed on Rocketpunch.
+    로켓펀치에 등록된 IT 이벤트, 밋업, 커리어 페어를 발견한다.
   </Card>
 </CardGroup>
 
-## How It Works
+## 작동 방식
 
 <Steps>
-  <Step title="Register an app">
-    Go to [developers.rocketpunch.com/apps/new](https://developers.rocketpunch.com/apps/new), log in with your Rocketpunch account, and fill in your app name and description. You receive an App Key instantly — no separate approval required.
+  <Step title="앱 등록">
+    [developers.rocketpunch.com/apps/new](https://developers.rocketpunch.com/apps/new)로 이동해 로켓펀치 계정으로 로그인하고, 앱 이름과 설명을 입력한다. App Key가 즉시 발급되며 — 별도의 승인은 필요하지 않다.
   </Step>
-  <Step title="Authenticate your requests">
-    Add your App Key to every API request using the `X-RP-API-Key` header. All endpoints share the same base URL: `https://openapi.rocketpunch.com`.
+  <Step title="요청 인증">
+    `X-RP-API-Key` 헤더를 사용해 모든 API 요청에 App Key를 추가한다. 모든 엔드포인트는 동일한 base URL을 공유한다: `https://openapi.rocketpunch.com`.
   </Step>
-  <Step title="Call endpoints and ship">
-    Query the endpoints you need, integrate the response data into your product, and monitor live usage from your developer dashboard. Your app is ready to share with the Rocketpunch community.
+  <Step title="엔드포인트 호출 및 출시">
+    필요한 엔드포인트를 쿼리하고, 응답 데이터를 제품에 통합하고, 개발자 대시보드에서 실시간 사용량을 모니터링한다. 앱을 로켓펀치 커뮤니티에 공유할 준비가 완료된다.
   </Step>
 </Steps>
 
-<Card title="Get your App Key" icon="key" href="https://developers.rocketpunch.com/apps/new">
-  Register a new app and receive your credentials instantly at the Rocketpunch Developer Portal.
+<Card title="App Key 발급받기" icon="key" href="https://developers.rocketpunch.com/apps/new">
+  로켓펀치 개발자 포털에서 새 앱을 등록하고 자격 증명을 즉시 발급받는다.
 </Card>
