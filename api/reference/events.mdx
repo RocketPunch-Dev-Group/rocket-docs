@@ -1,42 +1,42 @@
 ---
-title: "Events API: Browse and Search Tech Networking Events"
+title: "Events API: IT 네트워킹 이벤트 조회·검색하기"
 sidebarTitle: "Events"
-description: "GET /api/v1/events — Retrieve tech networking events, conferences, and meetups from Rocketpunch to embed in your apps and services."
+description: "GET /api/v1/events — 로켓펀치의 IT 네트워킹 이벤트, 컨퍼런스, 밋업을 조회해 앱과 서비스에 임베드합니다."
 ---
 
-The Events endpoint lets you retrieve tech networking events, conferences, lectures, and exclusive meetups listed on Rocketpunch. You can search by keyword and filter by language to surface events relevant to your users, then embed that data in calendars, notification services, community platforms, or event aggregators. Results are paginated and follow the same consistent structure as other Rocketpunch API endpoints.
+Events 엔드포인트는 로켓펀치에 등록된 IT 네트워킹 이벤트, 컨퍼런스, 강연, 초대 전용 밋업을 조회하게 해준다. 키워드로 검색하고 언어로 필터링해 사용자에게 관련 이벤트를 노출한 뒤, 그 데이터를 캘린더, 알림 서비스, 커뮤니티 플랫폼, 이벤트 애그리게이터에 임베드할 수 있다. 결과는 페이지네이션되며 다른 로켓펀치 API 엔드포인트와 동일한 일관된 구조를 따른다.
 
-## Endpoint
+## 엔드포인트
 
-```
+```text
 GET https://openapi.rocketpunch.com/api/v1/events
 ```
 
-## Request Headers
+## 요청 헤더
 
-| Header | Required | Description |
-|---|---|---|
-| `X-RP-API-Key` | Yes | Your App Key, in the format `rp_app_xxxxxxxxxxxxxxxx`. Obtain this from the [developer portal](https://developers.rocketpunch.com). |
+| 헤더 | 필수 | 설명 |
+| --- | --- | --- |
+| `X-RP-API-Key` | 예 | `rp_app_xxxxxxxxxxxxxxxx` 형식의 App Key. [개발자 포털](https://developers.rocketpunch.com)에서 발급받는다. |
 
-## Query Parameters
+## 쿼리 파라미터
 
 <ParamField query="keyword" type="string">
-  A search term for filtering events. Matched against event titles, descriptions, and organizer names. For example, `AI`, `startup`, or `design`.
+  이벤트를 필터링하는 검색어. 이벤트 제목, 설명, 주최자 이름에 매칭된다. 예: `AI`, `startup`, `design`.
 </ParamField>
 
-<ParamField query="lang" type="string" default="ko">
-  Language code for the response content. Common values are `ko` (Korean) and `en` (English). Rocketpunch supports 11 languages and returns a consistent schema across all of them.
+<ParamField query="lang" default="ko" type="string">
+  응답 콘텐츠의 언어 코드. 일반적인 값은 `ko`(한국어), `en`(영어)이다. 로켓펀치는 11개 언어를 지원하며 모든 언어에서 일관된 스키마를 반환한다.
 </ParamField>
 
-<ParamField query="page" type="integer" default="1">
-  The page number to retrieve. Page numbering starts at `1`. Use together with `per_page` to paginate through large result sets.
+<ParamField query="page" default="1" type="integer">
+  조회할 페이지 번호. 페이지 번호는 `1`부터 시작한다. 큰 결과 집합을 페이지네이션하려면 `per_page`와 함께 사용한다.
 </ParamField>
 
 <ParamField query="per_page" type="integer">
-  The number of events to return per page. Adjust this to control payload size and the number of requests required for a full data traversal.
+  페이지당 반환할 이벤트 수. 페이로드 크기와 전체 데이터 순회에 필요한 요청 수를 제어하도록 조정한다.
 </ParamField>
 
-## Example Request
+## 요청 예시
 
 <CodeGroup>
 
@@ -81,9 +81,9 @@ curl -G "https://openapi.rocketpunch.com/api/v1/events" \
 
 </CodeGroup>
 
-## Response
+## 응답
 
-A successful request returns HTTP `200` with a JSON body containing a paginated list of event objects under the `items` key.
+성공한 요청은 HTTP `200`과 함께 `items` 키 아래에 페이지네이션된 이벤트 객체 목록이 담긴 JSON 본문을 반환한다.
 
 ```json
 {
@@ -108,53 +108,54 @@ A successful request returns HTTP `200` with a JSON body containing a paginated 
 ```
 
 <Note>
-  The field values shown above are illustrative examples. Actual values depend on live event data at query time. Fields such as `end_date` or `location` may be `null` for events where that information has not been provided by the organizer.
+  위에 표시된 필드 값은 예시일 뿐이다. 실제 값은 쿼리 시점의 실시간 이벤트 데이터에 따라 달라진다. 주최자가 해당 정보를 제공하지 않은 이벤트의 경우 `end_date`, `location` 같은 필드는 `null`일 수 있다.
 </Note>
 
-### Response Fields
+### 응답 필드
 
 <ResponseField name="items" type="array" required>
-  An array of event objects matching your query. Returns an empty array if no events match the given keyword.
+  쿼리에 일치하는 이벤트 객체 배열. 주어진 키워드에 일치하는 이벤트가 없으면 빈 배열을 반환한다.
 
-  <Expandable title="Event object fields">
+  <Expandable title="이벤트 객체 필드">
     <ResponseField name="items[].id" type="string">
-      The unique identifier for the event on Rocketpunch.
+      로켓펀치에서 이벤트의 고유 식별자.
     </ResponseField>
 
     <ResponseField name="items[].title" type="string">
-      The full display title of the event as listed by the organizer.
+      주최자가 등록한 이벤트의 전체 표시 제목.
     </ResponseField>
 
     <ResponseField name="items[].event_type" type="string">
-      A category describing the nature of the event. Typical values include:
-      - `conference` — Large-scale multi-session events
-      - `networking` — Casual or structured networking meetups
-      - `lecture` — Educational talks or seminars
-      - `exclusive` — Invite-only or limited-access events
+      이벤트 성격을 설명하는 카테고리. 일반적인 값은 다음과 같다:
+
+      - `conference` — 대규모 멀티 세션 이벤트
+      - `networking` — 자유롭거나 구조화된 네트워킹 밋업
+      - `lecture` — 교육 강연 또는 세미나
+      - `exclusive` — 초대 전용 또는 제한된 접근 이벤트
     </ResponseField>
 
     <ResponseField name="items[].start_date" type="string">
-      An ISO 8601 timestamp for when the event begins.
+      이벤트 시작 시점의 ISO 8601 타임스탬프.
     </ResponseField>
 
     <ResponseField name="items[].end_date" type="string">
-      An ISO 8601 timestamp for when the event ends. May be `null` for single-session or open-ended events.
+      이벤트 종료 시점의 ISO 8601 타임스탬프. 단일 세션이나 종료 시점이 정해지지 않은 이벤트의 경우 `null`일 수 있다.
     </ResponseField>
 
     <ResponseField name="items[].location" type="string">
-      A human-readable description of the event venue or location. May indicate an online format where applicable.
+      이벤트 장소나 위치에 대한 사람이 읽기 쉬운 설명. 해당하는 경우 온라인 형식을 나타낼 수 있다.
     </ResponseField>
 
     <ResponseField name="items[].organizer" type="object">
-      A summary of the entity organizing the event.
+      이벤트를 주최하는 주체의 요약.
 
-      <Expandable title="Organizer fields">
+      <Expandable title="주최자 필드">
         <ResponseField name="items[].organizer.name" type="string">
-          The display name of the organizing company or individual.
+          주최 기업 또는 개인의 표시 이름.
         </ResponseField>
 
         <ResponseField name="items[].organizer.handle" type="string">
-          The Rocketpunch handle of the organizer. Use this with the [Companies API](/api/reference/companies) to retrieve full organizer profile details.
+          주최자의 로켓펀치 핸들. 전체 주최자 프로필 상세를 조회하려면 [Companies API](/api/reference/companies)와 함께 사용한다.
         </ResponseField>
       </Expandable>
     </ResponseField>
@@ -162,25 +163,25 @@ A successful request returns HTTP `200` with a JSON body containing a paginated 
 </ResponseField>
 
 <ResponseField name="total" type="integer" required>
-  The total number of events matching your query across all pages.
+  모든 페이지에 걸쳐 쿼리에 일치하는 이벤트 총 개수.
 </ResponseField>
 
 <ResponseField name="page" type="integer" required>
-  The current page number reflected in this response.
+  이 응답에 반영된 현재 페이지 번호.
 </ResponseField>
 
 <ResponseField name="per_page" type="integer" required>
-  The number of results per page reflected in this response.
+  이 응답에 반영된 페이지당 결과 수.
 </ResponseField>
 
-## Error Responses
+## 오류 응답
 
-| HTTP Status | Meaning |
-|---|---|
-| `401 Unauthorized` | Your `X-RP-API-Key` is missing or invalid. |
-| `429 Too Many Requests` | You have exceeded your plan's rate limit. |
-| `500 Internal Server Error` | An unexpected server-side error occurred. Retry with exponential backoff. |
+| HTTP 상태 | 의미 |
+| --- | --- |
+| `401 Unauthorized` | `X-RP-API-Key`가 없거나 유효하지 않다. |
+| `429 Too Many Requests` | 플랜의 요청 한도를 초과했다. |
+| `500 Internal Server Error` | 예상치 못한 서버 측 오류가 발생했다. 지수 백오프로 재시도한다. |
 
 <Tip>
-  Use the Events endpoint to build event aggregators or send your users timely notifications about upcoming tech events in Korea. Poll the endpoint periodically with a relevant `keyword` and compare `start_date` values against the current date to surface only upcoming events in your UI.
+  Events 엔드포인트로 이벤트 애그리게이터를 만들거나 한국의 다가오는 IT 이벤트에 대한 알림을 사용자에게 시의적절하게 보낸다. 관련 `keyword`로 엔드포인트를 주기적으로 폴링하고 `start_date` 값을 현재 날짜와 비교해 UI에 다가오는 이벤트만 노출한다.
 </Tip>

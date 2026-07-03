@@ -1,42 +1,42 @@
 ---
-title: "Jobs API: Search and Retrieve Job Listings by Keyword"
+title: "Jobs API: 키워드로 채용 공고 검색·조회하기"
 sidebarTitle: "Jobs"
-description: "GET /api/v1/jobs — Search Rocketpunch job listings by keyword, category, and language. Returns paginated job data from 170K+ company profiles."
+description: "GET /api/v1/jobs — 로켓펀치 채용 공고를 키워드, 카테고리, 언어로 검색합니다. 17만+ 기업 프로필의 페이지네이션된 채용 데이터를 반환합니다."
 ---
 
-The Jobs endpoint lets you search and retrieve job listings indexed from Rocketpunch's network of 170,000+ companies. Query by keyword to surface relevant positions across job titles, required skills, company names, and descriptions. Results are returned in a consistent paginated structure and are available in 11 languages, making it straightforward to build multilingual job boards, recommendation engines, or talent-matching tools on top of Rocketpunch data.
+Jobs 엔드포인트는 17만\+개 기업으로 이루어진 로켓펀치 네트워크에서 색인된 채용 공고를 검색하고 조회하게 해준다. 키워드로 쿼리하면 직무 제목, 필수 스킬, 회사명, 설명 전반에서 관련 포지션을 찾아준다. 결과는 일관된 페이지네이션 구조로 반환되며 11개 언어로 제공되므로, 로켓펀치 데이터 위에 다국어 채용 보드, 추천 엔진, 인재 매칭 도구를 손쉽게 만들 수 있다.
 
-## Endpoint
+## 엔드포인트
 
-```
+```text
 GET https://openapi.rocketpunch.com/api/v1/jobs
 ```
 
-## Request Headers
+## 요청 헤더
 
-| Header | Required | Description |
-|---|---|---|
-| `X-RP-API-Key` | Yes | Your App Key, in the format `rp_app_xxxxxxxxxxxxxxxx`. Obtain this from the [developer portal](https://developers.rocketpunch.com). |
+| 헤더 | 필수 | 설명 |
+| --- | --- | --- |
+| `X-RP-API-Key` | 예 | `rp_app_xxxxxxxxxxxxxxxx` 형식의 App Key. [개발자 포털](https://developers.rocketpunch.com)에서 발급받는다. |
 
-## Query Parameters
+## 쿼리 파라미터
 
 <ParamField query="keyword" type="string">
-  The search term used to filter job listings. Matched against job titles, company names, required skills, and job descriptions. For example, `AI`, `frontend`, or `product manager`.
+  채용 공고를 필터링하는 검색어. 직무 제목, 회사명, 필수 스킬, 직무 설명과 매칭된다. 예: `AI`, `frontend`, `product manager`.
 </ParamField>
 
-<ParamField query="lang" type="string" default="ko">
-  The language code for the response content. Rocketpunch supports 11 languages. Common values include `ko` (Korean) and `en` (English). The response schema is consistent across all supported languages.
+<ParamField query="lang" default="ko" type="string">
+  응답 콘텐츠의 언어 코드. 로켓펀치는 11개 언어를 지원한다. 일반적인 값으로는 `ko`(한국어), `en`(영어)이 있다. 응답 스키마는 지원되는 모든 언어에서 일관된다.
 </ParamField>
 
-<ParamField query="page" type="integer" default="1">
-  The page number to retrieve. Use in combination with `per_page` to paginate through large result sets. Page numbering starts at `1`.
+<ParamField query="page" default="1" type="integer">
+  조회할 페이지 번호. `per_page`와 함께 사용해 큰 결과 집합을 페이지네이션한다. 페이지 번호는 `1`부터 시작한다.
 </ParamField>
 
 <ParamField query="per_page" type="integer">
-  The number of job listings to return per page. Use this to control result set size and balance between payload size and the number of requests needed to traverse results.
+  페이지당 반환할 채용 공고 수. 결과 집합 크기를 제어하고, 페이로드 크기와 결과 순회에 필요한 요청 수 사이의 균형을 맞추는 데 사용한다.
 </ParamField>
 
-## Example Request
+## 요청 예시
 
 <CodeGroup>
 
@@ -81,9 +81,9 @@ curl -G "https://openapi.rocketpunch.com/api/v1/jobs" \
 
 </CodeGroup>
 
-## Response
+## 응답
 
-A successful request returns HTTP `200` with a JSON body containing a paginated list of job listings under the `items` key.
+성공한 요청은 HTTP `200`과 함께 `items` 키 아래에 페이지네이션된 채용 공고 목록이 담긴 JSON 본문을 반환한다.
 
 ```json
 {
@@ -107,71 +107,71 @@ A successful request returns HTTP `200` with a JSON body containing a paginated 
 ```
 
 <Note>
-  The field values shown above are illustrative examples. Actual values depend on live data at query time. Some fields may be `null` if the posting company has not provided that information.
+  위에 표시된 필드 값은 예시일 뿐이다. 실제 값은 쿼리 시점의 실시간 데이터에 따라 달라진다. 게시 기업이 해당 정보를 제공하지 않은 경우 일부 필드는 `null`일 수 있다.
 </Note>
 
-### Response Fields
+### 응답 필드
 
 <ResponseField name="items" type="array" required>
-  An array of job listing objects matching your query. May be empty if no results are found.
+  쿼리에 일치하는 채용 공고 객체 배열. 결과가 없으면 비어 있을 수 있다.
 
-  <Expandable title="Job object fields">
+  <Expandable title="채용 공고 객체 필드">
     <ResponseField name="items[].id" type="string">
-      The unique identifier for the job listing on Rocketpunch.
+      로켓펀치에서 채용 공고의 고유 식별자.
     </ResponseField>
 
     <ResponseField name="items[].title" type="string">
-      The job title as listed by the posting company.
+      게시 기업이 등록한 직무 제목.
     </ResponseField>
 
     <ResponseField name="items[].company" type="object">
-      A summary object for the company that posted the listing.
+      공고를 게시한 기업의 요약 객체.
 
-      <Expandable title="Company fields">
+      <Expandable title="기업 필드">
         <ResponseField name="items[].company.name" type="string">
-          The display name of the company.
+          기업의 표시 이름.
         </ResponseField>
 
         <ResponseField name="items[].company.handle" type="string">
-          The URL-safe handle for the company's Rocketpunch profile, usable to construct profile links.
+          기업의 로켓펀치 프로필에 대한 URL-safe 핸들. 프로필 링크를 구성하는 데 사용할 수 있다.
         </ResponseField>
       </Expandable>
     </ResponseField>
 
     <ResponseField name="items[].location" type="string">
-      The work location for the role. May describe a city, region, or indicate remote availability.
+      직무의 근무 위치. 도시, 지역을 나타내거나 원격 가능 여부를 표시할 수 있다.
     </ResponseField>
 
     <ResponseField name="items[].work_type" type="string">
-      The employment type. Typical values include `full-time`, `part-time`, `contract`, and `internship`.
+      고용 형태. 일반적인 값으로는 `full-time`, `part-time`, `contract`, `internship`이 있다.
     </ResponseField>
 
     <ResponseField name="items[].posted_at" type="string">
-      An ISO 8601 timestamp indicating when the job listing was published.
+      채용 공고가 게시된 시점을 나타내는 ISO 8601 타임스탬프.
     </ResponseField>
   </Expandable>
 </ResponseField>
 
 <ResponseField name="total" type="integer" required>
-  The total number of job listings matching your query across all pages.
+  모든 페이지에 걸쳐 쿼리에 일치하는 채용 공고 총 개수.
 </ResponseField>
 
 <ResponseField name="page" type="integer" required>
-  The current page number reflected in this response.
+  이 응답에 반영된 현재 페이지 번호.
 </ResponseField>
 
 <ResponseField name="per_page" type="integer" required>
-  The number of results per page reflected in this response.
+  이 응답에 반영된 페이지당 결과 수.
 </ResponseField>
 
-## Error Responses
+## 오류 응답
 
-| HTTP Status | Meaning |
-|---|---|
-| `401 Unauthorized` | Your `X-RP-API-Key` is missing or invalid. |
-| `429 Too Many Requests` | You have exceeded your plan's rate limit. |
-| `500 Internal Server Error` | An unexpected server-side error occurred. Retry with exponential backoff. |
+| HTTP 상태 | 의미 |
+| --- | --- |
+| `401 Unauthorized` | `X-RP-API-Key`가 없거나 유효하지 않다. |
+| `429 Too Many Requests` | 플랜의 요청 한도를 초과했다. |
+| `500 Internal Server Error` | 예상치 못한 서버 측 오류가 발생했다. 지수 백오프로 재시도한다. |
 
 <Tip>
-  To build a multilingual job board, issue parallel requests with different `lang` values for the same `keyword`. The response schema is identical across all 11 supported languages, so you can use a single data model on your end.
+  다국어 채용 보드를 만들려면 동일한 `keyword`에 대해 서로 다른 `lang` 값으로 병렬 요청을 보낸다. 응답 스키마는 지원되는 11개 언어에서 동일하므로, 여러분 쪽에서는 단일 데이터 모델을 사용할 수 있다.
 </Tip>

@@ -1,42 +1,42 @@
 ---
-title: "Companies API: Search and Retrieve Company Profiles"
+title: "Companies API: 기업 프로필 검색·조회하기"
 sidebarTitle: "Companies"
-description: "GET /api/v1/companies — Search and retrieve company profiles from Rocketpunch's index of 170K+ Korean and global technology companies."
+description: "GET /api/v1/companies — 한국과 글로벌 기술 기업 17만+개가 색인된 로켓펀치 색인에서 기업 프로필을 검색하고 조회합니다."
 ---
 
-The Companies endpoint gives you searchable access to Rocketpunch's index of 170,000+ company profiles. You can query by company name, description keywords, or industry terms to retrieve structured profile data including founding details, employee count, and website URLs. This endpoint is well suited for powering company directories, enriching CRM records, building investor research tools, or surfacing employer context alongside job listings.
+Companies 엔드포인트는 17만\+개 기업 프로필로 이루어진 로켓펀치 색인에 대한 검색 접근을 제공한다. 회사명, 설명 키워드, 산업 용어로 쿼리해 창업 정보, 임직원 수, 웹사이트 URL을 포함한 구조화된 프로필 데이터를 조회할 수 있다. 이 엔드포인트는 기업 디렉터리 구동, CRM 레코드 보강, 투자자 리서치 도구 구축, 또는 채용 공고와 함께 고용주 맥락을 노출하는 데 적합하다.
 
-## Endpoint
+## 엔드포인트
 
-```
+```text
 GET https://openapi.rocketpunch.com/api/v1/companies
 ```
 
-## Request Headers
+## 요청 헤더
 
-| Header | Required | Description |
-|---|---|---|
-| `X-RP-API-Key` | Yes | Your App Key, in the format `rp_app_xxxxxxxxxxxxxxxx`. Obtain this from the [developer portal](https://developers.rocketpunch.com). |
+| 헤더 | 필수 | 설명 |
+| --- | --- | --- |
+| `X-RP-API-Key` | 예 | `rp_app_xxxxxxxxxxxxxxxx` 형식의 App Key. [개발자 포털](https://developers.rocketpunch.com)에서 발급받는다. |
 
-## Query Parameters
+## 쿼리 파라미터
 
 <ParamField query="keyword" type="string">
-  The search term used to filter companies. Matched against company names and descriptions. For example, `fintech`, `kakao`, or `SaaS`.
+  기업을 필터링하는 검색어. 회사명과 설명에 매칭된다. 예: `fintech`, `kakao`, `SaaS`.
 </ParamField>
 
-<ParamField query="lang" type="string" default="ko">
-  The language code for the response content. Supported values include `ko` (Korean) and `en` (English), among 11 total supported languages. The response schema is consistent across all languages.
+<ParamField query="lang" default="ko" type="string">
+  응답 콘텐츠의 언어 코드. 지원되는 값으로는 `ko`(한국어), `en`(영어)이 있으며 총 11개 언어를 지원한다. 응답 스키마는 모든 언어에서 일관된다.
 </ParamField>
 
-<ParamField query="page" type="integer" default="1">
-  The page number to retrieve. Page numbering starts at `1`. Use together with `per_page` to paginate through result sets larger than a single page.
+<ParamField query="page" default="1" type="integer">
+  조회할 페이지 번호. 페이지 번호는 `1`부터 시작한다. 단일 페이지보다 큰 결과 집합을 페이지네이션하려면 `per_page`와 함께 사용한다.
 </ParamField>
 
 <ParamField query="per_page" type="integer">
-  The number of company profiles to return per page. Tune this to balance payload size against the number of API calls your integration requires.
+  페이지당 반환할 기업 프로필 수. 페이로드 크기와 연동에 필요한 API 호출 수 사이의 균형을 맞추도록 조정한다.
 </ParamField>
 
-## Example Request
+## 요청 예시
 
 <CodeGroup>
 
@@ -81,9 +81,9 @@ curl -G "https://openapi.rocketpunch.com/api/v1/companies" \
 
 </CodeGroup>
 
-## Response
+## 응답
 
-A successful request returns HTTP `200` with a JSON body containing a paginated list of company profiles under the `items` key.
+성공한 요청은 HTTP `200`과 함께 `items` 키 아래에 페이지네이션된 기업 프로필 목록이 담긴 JSON 본문을 반환한다.
 
 ```json
 {
@@ -105,65 +105,65 @@ A successful request returns HTTP `200` with a JSON body containing a paginated 
 ```
 
 <Note>
-  The field values shown above are illustrative examples. Actual values reflect live data at query time. Fields such as `employee_count` and `founded_year` may be `null` if the company has not provided that information on their Rocketpunch profile.
+  위에 표시된 필드 값은 예시일 뿐이다. 실제 값은 쿼리 시점의 실시간 데이터를 반영한다. `employee_count`, `founded_year` 같은 필드는 기업이 로켓펀치 프로필에 해당 정보를 제공하지 않은 경우 `null`일 수 있다.
 </Note>
 
-### Response Fields
+### 응답 필드
 
 <ResponseField name="items" type="array" required>
-  An array of company profile objects matching your query. Returns an empty array if no companies match the given `keyword`.
+  쿼리에 일치하는 기업 프로필 객체 배열. 주어진 `keyword`에 일치하는 기업이 없으면 빈 배열을 반환한다.
 
-  <Expandable title="Company object fields">
+  <Expandable title="기업 객체 필드">
     <ResponseField name="items[].id" type="string">
-      The unique identifier for the company on Rocketpunch.
+      로켓펀치에서 기업의 고유 식별자.
     </ResponseField>
 
     <ResponseField name="items[].name" type="string">
-      The company's display name as it appears on its Rocketpunch profile.
+      로켓펀치 프로필에 표시되는 기업의 표시 이름.
     </ResponseField>
 
     <ResponseField name="items[].handle" type="string">
-      The URL-safe handle for the company's Rocketpunch profile. You can construct a direct profile link using `https://www.rocketpunch.com/companies/{handle}`.
+      기업의 로켓펀치 프로필에 대한 URL-safe 핸들. `https://www.rocketpunch.com/companies/{handle}`로 프로필 직접 링크를 구성할 수 있다.
     </ResponseField>
 
     <ResponseField name="items[].description" type="string">
-      A short description of the company's business or mission as provided by the company.
+      기업이 제공한 사업 또는 미션에 대한 짧은 설명.
     </ResponseField>
 
     <ResponseField name="items[].employee_count" type="integer">
-      The approximate number of employees. This value is self-reported and may be `null` if not provided.
+      대략적인 임직원 수. 자가 보고 값이며 제공되지 않은 경우 `null`일 수 있다.
     </ResponseField>
 
     <ResponseField name="items[].founded_year" type="integer">
-      The four-digit year the company was founded. May be `null` if not provided.
+      기업이 설립된 네 자리 연도. 제공되지 않은 경우 `null`일 수 있다.
     </ResponseField>
 
     <ResponseField name="items[].website" type="string">
-      The company's official website URL. May be `null` if not provided.
+      기업의 공식 웹사이트 URL. 제공되지 않은 경우 `null`일 수 있다.
     </ResponseField>
   </Expandable>
 </ResponseField>
 
 <ResponseField name="total" type="integer" required>
-  The total count of company profiles matching your query across all pages.
+  모든 페이지에 걸쳐 쿼리에 일치하는 기업 프로필 총 개수.
 </ResponseField>
 
 <ResponseField name="page" type="integer" required>
-  The current page number reflected in this response.
+  이 응답에 반영된 현재 페이지 번호.
 </ResponseField>
 
 <ResponseField name="per_page" type="integer" required>
-  The number of results per page reflected in this response.
+  이 응답에 반영된 페이지당 결과 수.
 </ResponseField>
 
-## Error Responses
+## 오류 응답
 
-| HTTP Status | Meaning |
-|---|---|
-| `401 Unauthorized` | Your `X-RP-API-Key` is missing or invalid. |
-| `429 Too Many Requests` | You have exceeded your plan's rate limit. |
-| `500 Internal Server Error` | An unexpected server-side error occurred. Retry with exponential backoff. |
+| HTTP 상태 | 의미 |
+| --- | --- |
+| `401 Unauthorized` | `X-RP-API-Key`가 없거나 유효하지 않다. |
+| `429 Too Many Requests` | 플랜의 요청 한도를 초과했다. |
+| `500 Internal Server Error` | 예상치 못한 서버 측 오류가 발생했다. 지수 백오프로 재시도한다. |
 
 <Tip>
-  Combine the Companies and Jobs endpoints to enrich job listings with full company context. Retrieve a job listing from `/api/v1/jobs`, then look up the company's `handle` against `/api/v1/companies?keyword={handle}` to display richer employer information to your users.
+  Companies와 Jobs 엔드포인트를 결합해 채용 공고에 전체 기업 맥락을 보강한다. `/api/v1/jobs`에서 채용 공고를 조회한 뒤, 기업의 `handle`을 `/api/v1/companies?keyword={handle}`로 조회해 사용자에게 더 풍부한 고용주 정보를 표시한다.
 </Tip>

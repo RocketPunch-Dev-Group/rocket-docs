@@ -1,66 +1,66 @@
 ---
-title: "Profiles API: Search and Retrieve User Profile Data"
+title: "Profiles API: 사용자 프로필 데이터 검색·조회하기"
 sidebarTitle: "Profiles"
-description: "GET /api/v1/profiles — Retrieve Rocketpunch user profiles including experience, skills, and education with OAuth-authorized access."
+description: "GET /api/v1/profiles — OAuth 인가 접근으로 경력, 스킬, 학력을 포함한 로켓펀치 사용자 프로필을 조회합니다."
 ---
 
-The Profiles endpoint gives you access to Rocketpunch user profile data including professional headlines, skills, and current company affiliations. Public profile data is accessible using your App Key alone, making it straightforward to build candidate search, skill-matching, or directory features. For accessing private or user-specific profile information — such as contact details or non-public career history — your request must carry an OAuth access token obtained with the user's explicit consent.
+Profiles 엔드포인트는 전문 헤드라인, 스킬, 현재 소속 기업을 포함한 로켓펀치 사용자 프로필 데이터에 대한 접근을 제공한다. 공개 프로필 데이터는 App Key만으로 접근할 수 있어, 후보자 검색, 스킬 매칭, 디렉터리 기능을 손쉽게 만들 수 있다. 연락처나 비공개 경력 같은 비공개 또는 사용자별 프로필 정보에 접근하려면, 요청에 사용자의 명시적 동의로 획득한 OAuth 액세스 토큰이 있어야 한다.
 
-## Endpoint
+## 엔드포인트
 
-```
+```text
 GET https://openapi.rocketpunch.com/api/v1/profiles
 ```
 
-## Authentication
+## 인증
 
 <Note>
-  This endpoint supports two authentication modes depending on the data you need:
+  이 엔드포인트는 필요한 데이터에 따라 두 가지 인증 모드를 지원한다:
 
-  - **App Key only** — Returns publicly available profile data. Suitable for search, discovery, and directory use cases.
-  - **OAuth access token** — Returns additional profile fields authorized by the user, such as private career history or contact information.
+  - **App Key만** — 공개적으로 이용 가능한 프로필 데이터를 반환한다. 검색, 발견, 디렉터리 활용 사례에 적합하다.
+  - **OAuth 액세스 토큰** — 비공개 경력이나 연락처 등 사용자가 승인한 추가 프로필 필드를 반환한다.
 
-  To set up OAuth and obtain user tokens, see the [OAuth Overview](/api/oauth/overview).
+  OAuth를 설정하고 사용자 토큰을 획득하려면 [OAuth 개요](/api/oauth/overview)를 참고한다.
 </Note>
 
-## Request Headers
+## 요청 헤더
 
-When authenticating with your App Key, include:
+App Key로 인증할 때는 다음을 포함한다:
 
-| Header | Required | Description |
-|---|---|---|
-| `X-RP-API-Key` | Yes (App Key mode) | Your App Key in the format `rp_app_xxxxxxxxxxxxxxxx`. |
+| 헤더 | 필수 | 설명 |
+| --- | --- | --- |
+| `X-RP-API-Key` | 예 (App Key 모드) | `rp_app_xxxxxxxxxxxxxxxx` 형식의 App Key. |
 
-When authenticating with an OAuth token on behalf of a user, replace the App Key header with:
+사용자를 대신해 OAuth 토큰으로 인증할 때는 App Key 헤더를 다음으로 대체한다:
 
-| Header | Required | Description |
-|---|---|---|
-| `Authorization` | Yes (OAuth mode) | Bearer token in the format `Bearer {oauth_token}`. |
+| 헤더 | 필수 | 설명 |
+| --- | --- | --- |
+| `Authorization` | 예 (OAuth 모드) | `Bearer {oauth_token}` 형식의 Bearer 토큰. |
 
-## Query Parameters
+## 쿼리 파라미터
 
 <ParamField query="keyword" type="string">
-  Search term for filtering profiles. Matched against user names, professional headlines, and listed skills. For example, `React`, `data scientist`, or `product designer`.
+  프로필을 필터링하는 검색어. 사용자 이름, 전문 헤드라인, 나열된 스킬에 매칭된다. 예: `React`, `data scientist`, `product designer`.
 </ParamField>
 
-<ParamField query="lang" type="string" default="ko">
-  Language code for the response content. Common values are `ko` (Korean) and `en` (English). Rocketpunch supports 11 languages and returns a consistent schema regardless of language.
+<ParamField query="lang" default="ko" type="string">
+  응답 콘텐츠의 언어 코드. 일반적인 값은 `ko`(한국어), `en`(영어)이다. 로켓펀치는 11개 언어를 지원하며 언어와 관계없이 일관된 스키마를 반환한다.
 </ParamField>
 
-<ParamField query="page" type="integer" default="1">
-  The page number to retrieve. Page numbering starts at `1`.
+<ParamField query="page" default="1" type="integer">
+  조회할 페이지 번호. 페이지 번호는 `1`부터 시작한다.
 </ParamField>
 
 <ParamField query="per_page" type="integer">
-  The number of profiles to return per page. Adjust this to suit the throughput and payload needs of your integration.
+  페이지당 반환할 프로필 수. 연동의 처리량과 페이로드 요구에 맞게 조정한다.
 </ParamField>
 
-## Example Request
+## 요청 예시
 
 <CodeGroup>
 
 ```javascript JavaScript
-// App Key authentication — public profiles
+// App Key 인증 — 공개 프로필
 const response = await fetch(
   "https://openapi.rocketpunch.com/api/v1/profiles?keyword=React&lang=en",
   {
@@ -84,7 +84,7 @@ params = {
     "lang": "en",
 }
 headers = {
-    # Use X-RP-API-Key for public data, or Authorization for OAuth
+    # 공개 데이터에는 X-RP-API-Key를, OAuth에는 Authorization을 사용
     "X-RP-API-Key": "rp_app_xxxxxxxxxxxxxxxx",
 }
 
@@ -94,13 +94,13 @@ print(data["items"])
 ```
 
 ```bash cURL
-# App Key authentication — public profiles
+# App Key 인증 — 공개 프로필
 curl -G "https://openapi.rocketpunch.com/api/v1/profiles" \
   --data-urlencode "keyword=React" \
   --data-urlencode "lang=en" \
   -H "X-RP-API-Key: rp_app_xxxxxxxxxxxxxxxx"
 
-# OAuth authentication — user-authorized profile data
+# OAuth 인증 — 사용자가 승인한 프로필 데이터
 curl -G "https://openapi.rocketpunch.com/api/v1/profiles" \
   --data-urlencode "keyword=React" \
   --data-urlencode "lang=en" \
@@ -109,9 +109,9 @@ curl -G "https://openapi.rocketpunch.com/api/v1/profiles" \
 
 </CodeGroup>
 
-## Response
+## 응답
 
-A successful request returns HTTP `200` with a JSON body containing a paginated list of user profile objects under the `items` key.
+성공한 요청은 HTTP `200`과 함께 `items` 키 아래에 페이지네이션된 사용자 프로필 객체 목록이 담긴 JSON 본문을 반환한다.
 
 ```json
 {
@@ -134,41 +134,41 @@ A successful request returns HTTP `200` with a JSON body containing a paginated 
 ```
 
 <Note>
-  The field values shown above are illustrative examples. Profile data is subject to each user's individual privacy settings. Fields may be `null` or absent for profiles where the user has not made that information public, or where OAuth consent has not been granted for private fields.
+  위에 표시된 필드 값은 예시일 뿐이다. 프로필 데이터는 각 사용자의 개인정보 설정에 따른다. 사용자가 해당 정보를 공개하지 않았거나 비공개 필드에 대한 OAuth 동의가 부여되지 않은 프로필의 경우, 필드는 `null`이거나 없을 수 있다.
 </Note>
 
-### Response Fields
+### 응답 필드
 
 <ResponseField name="items" type="array" required>
-  An array of user profile objects matching your query. Returns an empty array if no profiles match.
+  쿼리에 일치하는 사용자 프로필 객체 배열. 일치하는 프로필이 없으면 빈 배열을 반환한다.
 
-  <Expandable title="Profile object fields">
+  <Expandable title="프로필 객체 필드">
     <ResponseField name="items[].handle" type="string">
-      The URL-safe handle for the user's Rocketpunch profile. You can construct a direct link using `https://www.rocketpunch.com/@{handle}`.
+      사용자의 로켓펀치 프로필에 대한 URL-safe 핸들. `https://www.rocketpunch.com/@{handle}`로 직접 링크를 구성할 수 있다.
     </ResponseField>
 
     <ResponseField name="items[].name" type="string">
-      The user's display name. May be `null` if the user has restricted name visibility in their privacy settings.
+      사용자의 표시 이름. 사용자가 개인정보 설정에서 이름 공개를 제한한 경우 `null`일 수 있다.
     </ResponseField>
 
     <ResponseField name="items[].headline" type="string">
-      A short professional headline provided by the user, typically describing their role, expertise, or key skills.
+      사용자가 제공한 짧은 전문 헤드라인. 보통 직무, 전문성, 핵심 스킬을 설명한다.
     </ResponseField>
 
     <ResponseField name="items[].skills" type="array of strings">
-      A list of skills the user has added to their profile. Returns an empty array if the user has not listed any skills, or if skills are not publicly visible.
+      사용자가 프로필에 추가한 스킬 목록. 스킬을 나열하지 않았거나 스킬이 공개되지 않은 경우 빈 배열을 반환한다.
     </ResponseField>
 
     <ResponseField name="items[].current_company" type="object">
-      A summary of the user's current employer as listed on their profile. Returns `null` if the user has not provided current employment information.
+      프로필에 나열된 사용자의 현재 고용주 요약. 현재 재직 정보를 제공하지 않은 경우 `null`을 반환한다.
 
-      <Expandable title="Current company fields">
+      <Expandable title="현재 기업 필드">
         <ResponseField name="items[].current_company.name" type="string">
-          The display name of the user's current employer.
+          사용자의 현재 고용주 표시 이름.
         </ResponseField>
 
         <ResponseField name="items[].current_company.handle" type="string">
-          The Rocketpunch handle of the current employer, usable with the [Companies API](/api/reference/companies) for additional context.
+          현재 고용주의 로켓펀치 핸들. 추가 맥락을 위해 [Companies API](/api/reference/companies)와 함께 사용할 수 있다.
         </ResponseField>
       </Expandable>
     </ResponseField>
@@ -176,26 +176,26 @@ A successful request returns HTTP `200` with a JSON body containing a paginated 
 </ResponseField>
 
 <ResponseField name="total" type="integer" required>
-  The total number of profiles matching your query across all pages.
+  모든 페이지에 걸쳐 쿼리에 일치하는 프로필 총 개수.
 </ResponseField>
 
 <ResponseField name="page" type="integer" required>
-  The current page number reflected in this response.
+  이 응답에 반영된 현재 페이지 번호.
 </ResponseField>
 
 <ResponseField name="per_page" type="integer" required>
-  The number of results per page reflected in this response.
+  이 응답에 반영된 페이지당 결과 수.
 </ResponseField>
 
-## Error Responses
+## 오류 응답
 
-| HTTP Status | Meaning |
-|---|---|
-| `401 Unauthorized` | Your `X-RP-API-Key` or OAuth token is missing or invalid. |
-| `403 Forbidden` | You attempted to access private profile data without a valid OAuth token, or the user has not granted consent. |
-| `429 Too Many Requests` | You have exceeded your plan's rate limit. |
-| `500 Internal Server Error` | An unexpected server-side error occurred. Retry with exponential backoff. |
+| HTTP 상태 | 의미 |
+| --- | --- |
+| `401 Unauthorized` | `X-RP-API-Key` 또는 OAuth 토큰이 없거나 유효하지 않다. |
+| `403 Forbidden` | 유효한 OAuth 토큰 없이 비공개 프로필 데이터에 접근하려 했거나, 사용자가 동의하지 않았다. |
+| `429 Too Many Requests` | 플랜의 요청 한도를 초과했다. |
+| `500 Internal Server Error` | 예상치 못한 서버 측 오류가 발생했다. 지수 백오프로 재시도한다. |
 
 <Warning>
-  Profile data is personal information. You must handle all data returned by this endpoint in accordance with applicable privacy laws and Rocketpunch's API Terms of Service. Do not cache or store user profile data beyond what is necessary for your application's stated purpose.
+  프로필 데이터는 개인정보다. 이 엔드포인트가 반환하는 모든 데이터는 관련 개인정보 보호법과 로켓펀치 API 이용약관에 따라 처리해야 한다. 애플리케이션의 명시된 목적에 필요한 범위를 넘어 사용자 프로필 데이터를 캐시하거나 저장하지 않는다.
 </Warning>

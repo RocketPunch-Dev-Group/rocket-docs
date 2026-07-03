@@ -1,77 +1,77 @@
 ---
-title: "OAuth 2.0 for the Rocketpunch API: Integration Guide"
-sidebarTitle: "OAuth Overview"
-description: "Use OAuth 2.0 to request user consent and access Rocketpunch profile data on behalf of your users. Register a redirect URI to get started."
+title: "로켓펀치 API를 위한 OAuth 2.0: 연동 가이드"
+sidebarTitle: "OAuth 개요"
+description: "OAuth 2.0으로 사용자 동의를 요청하고 사용자를 대신해 로켓펀치 프로필 데이터에 접근하세요. 리디렉션 URI를 등록해 시작합니다."
 ---
 
-The Rocketpunch API supports two authentication models: App Key authentication for server-side access to public platform data, and OAuth 2.0 for accessing data on behalf of a specific Rocketpunch user. Choose the right model based on what your application needs to do — most integrations start with App Key auth and add OAuth only when user-specific features are required.
+로켓펀치 API는 두 가지 인증 모델을 지원한다. 공개 플랫폼 데이터에 대한 서버 사이드 접근을 위한 App Key 인증과, 특정 로켓펀치 사용자를 대신해 데이터에 접근하기 위한 OAuth 2.0이다. 애플리케이션이 무엇을 해야 하는지에 따라 올바른 모델을 선택한다. 대부분의 연동은 App Key 인증으로 시작하고, 사용자별 기능이 필요할 때만 OAuth를 추가한다.
 
-## When to Use OAuth
+## 언제 OAuth를 사용하는가
 
-Both authentication methods use the same underlying API, but they serve different purposes. Pick the one that matches your use case.
+두 인증 방식 모두 동일한 기반 API를 사용하지만, 목적이 다르다. 활용 사례에 맞는 것을 선택한다.
 
-| Use Case | Method |
-|---|---|
-| Search job listings on your platform | App Key |
-| Display company profiles in your app | App Key |
-| Browse public networking events | App Key |
-| Access a signed-in user's Rocketpunch profile | OAuth 2.0 |
-| Read a user's saved jobs or preferences | OAuth 2.0 |
-| Act on behalf of a user within Rocketpunch | OAuth 2.0 |
+| 활용 사례 | 방식 |
+| --- | --- |
+| 플랫폼에서 채용 공고 검색 | App Key |
+| 앱에 기업 프로필 표시 | App Key |
+| 공개 네트워킹 이벤트 조회 | App Key |
+| 로그인한 사용자의 로켓펀치 프로필 접근 | OAuth 2.0 |
+| 사용자가 저장한 채용 공고나 선호 읽기 | OAuth 2.0 |
+| 로켓펀치 내에서 사용자를 대신해 행동 | OAuth 2.0 |
 
-**App Key authentication** is the right choice when your server makes calls to public Rocketpunch data — jobs, companies, and events — without needing to identify or act as a specific user. You include your `X-RP-API-Key` header on every request, and the response reflects publicly available platform data.
+**App Key 인증**은 서버가 특정 사용자를 식별하거나 대신하지 않고 공개 로켓펀치 데이터(채용 공고, 기업, 이벤트)를 호출할 때 적합하다. 매 요청에 `X-RP-API-Key` 헤더를 포함하며, 응답은 공개적으로 이용 가능한 플랫폼 데이터를 반영한다.
 
-**OAuth 2.0** is the right choice when your application needs a Rocketpunch user to grant you permission to read or interact with their personal data. The user logs in to Rocketpunch, reviews what your app is requesting, and approves access. You receive a token scoped to that user, which you then use for subsequent API calls.
+**OAuth 2.0**은 애플리케이션이 로켓펀치 사용자에게 개인 데이터를 읽거나 상호작용할 권한을 요청해야 할 때 적합하다. 사용자가 로켓펀치에 로그인하고, 앱이 요청하는 내용을 검토한 뒤 접근을 승인한다. 그러면 해당 사용자로 범위가 지정된 토큰을 받아 이후 API 호출에 사용한다.
 
 <Note>
-  If you only need public data — job listings, company profiles, or events — you do not need OAuth. Set up [App Key authentication](/api/authentication) instead and skip the OAuth flow entirely.
+  채용 공고, 기업 프로필, 이벤트 같은 공개 데이터만 필요하다면 OAuth가 필요 없다. 대신 [App Key 인증](/api/authentication)을 설정하고 OAuth 흐름은 건너뛴다.
 </Note>
 
 ## OAuth 2.0 Authorization Code Flow
 
-Rocketpunch implements the **OAuth 2.0 Authorization Code Flow**, the industry-standard approach for web and server-side applications. Here is a high-level overview of the steps:
+로켓펀치는 웹 및 서버 사이드 애플리케이션을 위한 업계 표준 방식인 **OAuth 2.0 Authorization Code Flow**를 구현한다. 다음은 단계에 대한 상위 수준 개요다:
 
-1. **Redirect** — Your app redirects the user to Rocketpunch's authorization endpoint, including your `client_id`, requested scopes, and a `redirect_uri` where Rocketpunch will send the user back after consent.
-2. **Consent** — The user sees Rocketpunch's login and permission screen. If they approve, Rocketpunch redirects them to your `redirect_uri` with a short-lived `code` parameter.
-3. **Token exchange** — Your server sends a POST request to Rocketpunch's token endpoint, exchanging the `code` for an `access_token` (and optionally a `refresh_token`).
-4. **API calls** — Your app includes the `access_token` in the `Authorization: Bearer` header for any user-specific API requests.
+1. **리디렉션**: 앱이 사용자를 로켓펀치의 인증 엔드포인트로 리디렉션하며, `client_id`, 요청 스코프, 동의 후 로켓펀치가 사용자를 다시 보낼 `redirect_uri`를 포함한다.
+2. **동의**: 사용자가 로켓펀치 로그인 및 권한 화면을 본다. 승인하면 로켓펀치가 단기 `code` 파라미터와 함께 사용자를 `redirect_uri`로 리디렉션한다.
+3. **토큰 교환**: 서버가 로켓펀치 토큰 엔드포인트로 POST 요청을 보내 `code`를 `access_token`(및 선택적으로 `refresh_token`)으로 교환한다.
+4. **API 호출**: 앱이 사용자별 API 요청에 `Authorization: Bearer` 헤더로 `access_token`을 포함한다.
 
-See the [Auth Flow guide](/api/oauth/flow) for the complete implementation with code examples.
+전체 구현과 코드 예시는 [Auth Flow 가이드](/api/oauth/flow)를 참고한다.
 
-## Setting Up OAuth
+## OAuth 설정하기
 
-Before you can implement the flow, you need to register your application on the Rocketpunch developer portal.
+흐름을 구현하기 전에 로켓펀치 개발자 포털에서 애플리케이션을 등록해야 한다.
 
 <Steps>
-  <Step title="Create your app">
-    Go to [developers.rocketpunch.com/apps/new](https://developers.rocketpunch.com/apps/new) and fill in your application name and description. These details are shown to users on the consent screen.
+  <Step title="앱 만들기">
+    [developers.rocketpunch.com/apps/new](https://developers.rocketpunch.com/apps/new)로 이동해 애플리케이션 이름과 설명을 입력한다. 이 정보는 동의 화면에서 사용자에게 표시된다.
   </Step>
-  <Step title="Add your redirect URI">
-    Enter the callback URL where Rocketpunch will redirect users after they grant (or deny) consent. This must exactly match the `redirect_uri` you use in your authorization requests — including protocol, domain, and path.
+  <Step title="리디렉션 URI 추가">
+    사용자가 동의를 부여(또는 거부)한 후 로켓펀치가 리디렉션할 콜백 URL을 입력한다. 이는 인증 요청에 사용하는 `redirect_uri`와 프로토콜, 도메인, 경로까지 정확히 일치해야 한다.
 
-    ```
+    ```text
     https://yourapp.com/auth/rocketpunch/callback
     ```
   </Step>
-  <Step title="Copy your credentials">
-    After saving your app, the portal displays your **Client ID** and **Client Secret**. Store the Client Secret securely — treat it like a password. You will need both values when implementing the token exchange step.
+  <Step title="자격 증명 복사">
+    앱을 저장하면 포털이 **Client ID**와 **Client Secret**을 표시한다. Client Secret을 안전하게 보관하고 비밀번호처럼 다룬다. 토큰 교환 단계를 구현할 때 두 값이 모두 필요하다.
   </Step>
 </Steps>
 
 <Warning>
-  Your Client Secret must never appear in client-side code, mobile app binaries, or public repositories. Token exchange must always happen on your server.
+  Client Secret은 클라이언트 사이드 코드, 모바일 앱 바이너리, 공개 저장소에 절대 나타나서는 안 된다. 토큰 교환은 항상 서버에서 이뤄져야 한다.
 </Warning>
 
-## Scopes
+## 스코프
 
-Scopes define exactly what user data your application can access. When you redirect a user to the authorization endpoint, you include a `scope` parameter listing the permissions you need. The user sees these permissions on the consent screen before approving.
+스코프는 애플리케이션이 접근할 수 있는 사용자 데이터를 정확히 정의한다. 사용자를 인증 엔드포인트로 리디렉션할 때 필요한 권한을 나열하는 `scope` 파라미터를 포함한다. 사용자는 승인 전 동의 화면에서 이 권한을 본다.
 
-Request only the scopes your app genuinely needs — asking for unnecessary permissions reduces user trust and lowers approval rates. Available scopes are listed in the [Auth Flow guide](/api/oauth/flow).
+앱이 정말로 필요한 스코프만 요청한다. 불필요한 권한을 요청하면 사용자 신뢰가 떨어지고 승인율이 낮아진다. 이용 가능한 스코프는 [Auth Flow 가이드](/api/oauth/flow)에 나열되어 있다.
 
-## Next Steps
+## 다음 단계
 
-Now that you understand when and why to use OAuth, implement the full authorization flow in your application.
+이제 언제, 왜 OAuth를 사용하는지 이해했으니 애플리케이션에 전체 인증 흐름을 구현한다.
 
-<Card title="Implement the Auth Flow" icon="arrow-right" href="/api/oauth/flow">
-  Step-by-step guide to building the authorization code flow, including redirect URLs, token exchange, and making authenticated API calls.
+<Card title="Auth Flow 구현하기" icon="arrow-right" href="/api/oauth/flow">
+  리디렉션 URL, 토큰 교환, 인증된 API 호출을 포함한 authorization code flow 구축 단계별 가이드.
 </Card>

@@ -1,26 +1,26 @@
 ---
-title: "Rocketpunch API Rate Limits, Quotas, and Retry Logic"
-sidebarTitle: "Rate Limits"
-description: "Learn about Rocketpunch API rate limits and request quotas, how to read rate limit headers, and how to handle 429 responses gracefully."
+title: "로켓펀치 API 레이트 리미트, 할당량, 재시도 로직"
+sidebarTitle: "레이트 리미트"
+description: "로켓펀치 API 레이트 리미트와 요청 할당량, 레이트 리미트 헤더 읽는 법, 429 응답을 우아하게 처리하는 법을 알아보세요."
 ---
 
-Rate limits protect the Rocketpunch API from excessive traffic so that all developers get consistent, reliable performance. Every API key is subject to a request quota measured over a rolling time window. When your app exceeds its quota, the API returns a `429 Too Many Requests` response until the window resets. Building retry logic and caching into your integration from the start prevents these limits from affecting your users.
+레이트 리밋은 모든 개발자가 일관되고 안정적인 성능을 얻도록 로켓펀치 API를 과도한 트래픽으로부터 보호한다. 모든 API 키는 롤링 시간 창에 걸쳐 측정되는 요청 할당량의 적용을 받는다. 앱이 할당량을 초과하면 API는 창이 리셋될 때까지 `429 Too Many Requests` 응답을 반환한다. 처음부터 재시도 로직과 캐싱을 연동에 구축하면 이런 한도가 사용자에게 영향을 주는 것을 막을 수 있다.
 
 <Note>
-  Specific rate limit values for your app tier are displayed in your developer console at [developers.rocketpunch.com](https://developers.rocketpunch.com). If your use case requires a higher quota, contact [support@rocketpunch.com](mailto:support@rocketpunch.com) to discuss an increase.
+  앱 등급별 구체적인 레이트 리밋 값은 [developers.rocketpunch.com](https://developers.rocketpunch.com)의 개발자 콘솔에 표시된다. 활용 사례에 더 높은 할당량이 필요하면 [support@rocketpunch.com](mailto:support@rocketpunch.com)으로 문의해 상향을 논의한다.
 </Note>
 
-## Rate Limit Headers
+## 레이트 리밋 헤더
 
-Every API response includes headers that tell you the current state of your quota. Read these headers to monitor your usage and avoid hitting limits unexpectedly.
+모든 API 응답에는 할당량의 현재 상태를 알려주는 헤더가 포함된다. 이 헤더를 읽어 사용량을 모니터링하고 예기치 않게 한도에 도달하는 것을 피한다.
 
-| Header | Description |
-|---|---|
-| `X-RateLimit-Limit` | Total number of requests allowed in the current window |
-| `X-RateLimit-Remaining` | Requests remaining before you hit the limit |
-| `X-RateLimit-Reset` | Unix timestamp (UTC) when the current window resets and your quota is restored |
+| 헤더 | 설명 |
+| --- | --- |
+| `X-RateLimit-Limit` | 현재 창에서 허용되는 총 요청 수 |
+| `X-RateLimit-Remaining` | 한도에 도달하기 전 남은 요청 수 |
+| `X-RateLimit-Reset` | 현재 창이 리셋되고 할당량이 복원되는 Unix 타임스탬프(UTC) |
 
-Here is an example of what these headers look like on a successful response:
+성공한 응답에서 이 헤더가 어떻게 보이는지에 대한 예시는 다음과 같다:
 
 ```http
 HTTP/1.1 200 OK
@@ -30,16 +30,16 @@ X-RateLimit-Reset: 1718150400
 Content-Type: application/json
 ```
 
-You can calculate seconds until reset with:
+리셋까지 남은 초는 다음과 같이 계산할 수 있다:
 
 ```javascript
 const resetTime = parseInt(response.headers.get("X-RateLimit-Reset"), 10);
 const secondsUntilReset = resetTime - Math.floor(Date.now() / 1000);
 ```
 
-## Handling Rate Limit Errors
+## 레이트 리밋 오류 처리
 
-When your app exhausts its quota, the API responds with `429 Too Many Requests` and a `Retry-After` header indicating how many seconds to wait before retrying.
+앱이 할당량을 소진하면 API는 `429 Too Many Requests`와 함께 재시도 전 대기할 초를 나타내는 `Retry-After` 헤더로 응답한다.
 
 ```http
 HTTP/1.1 429 Too Many Requests
@@ -58,9 +58,10 @@ Content-Type: application/json
 }
 ```
 
-The most resilient pattern for handling rate limits is **exponential backoff with jitter**: wait a base interval after the first failure, double it on each subsequent failure, and add a small random offset to prevent synchronized retries from multiple instances.
+레이트 리밋을 처리하는 가장 견고한 패턴은 **지터를 곁들인 지수 백오프**다. 첫 실패 후 기본 간격만큼 대기하고, 이후 실패마다 두 배로 늘리며, 여러 인스턴스의 동기화된 재시도를 방지하기 위해 작은 무작위 오프셋을 더한다.
 
 <CodeGroup>
+
 ```javascript Node.js
 async function fetchWithRetry(url, options, maxRetries = 4) {
   let attempt = 0;
@@ -69,20 +70,20 @@ async function fetchWithRetry(url, options, maxRetries = 4) {
     const response = await fetch(url, options);
 
     if (response.status !== 429) {
-      return response; // Success or a non-rate-limit error
+      return response; // 성공 또는 레이트 리밋이 아닌 오류
     }
 
     if (attempt === maxRetries) {
       throw new Error(`Rate limit exceeded after ${maxRetries} retries`);
     }
 
-    // Read Retry-After header, fall back to exponential backoff
+    // Retry-After 헤더를 읽고, 없으면 지수 백오프로 대체
     const retryAfter = response.headers.get("Retry-After");
     const baseDelay = retryAfter
       ? parseInt(retryAfter, 10) * 1000
       : Math.pow(2, attempt) * 1000;
 
-    // Add jitter (±20%) to avoid synchronized retries
+    // 동기화된 재시도를 피하기 위해 지터(±20%) 추가
     const jitter = baseDelay * 0.2 * (Math.random() * 2 - 1);
     const delay = Math.round(baseDelay + jitter);
 
@@ -92,7 +93,7 @@ async function fetchWithRetry(url, options, maxRetries = 4) {
   }
 }
 
-// Usage
+// 사용법
 const response = await fetchWithRetry(
   "https://openapi.rocketpunch.com/api/v1/jobs",
   {
@@ -116,16 +117,16 @@ def fetch_with_retry(url, headers, max_retries=4):
         response = requests.get(url, headers=headers)
 
         if response.status_code != 429:
-            return response  # Success or a non-rate-limit error
+            return response  # 성공 또는 레이트 리밋이 아닌 오류
 
         if attempt == max_retries:
             raise Exception(f"Rate limit exceeded after {max_retries} retries")
 
-        # Read Retry-After header, fall back to exponential backoff
+        # Retry-After 헤더를 읽고, 없으면 지수 백오프로 대체
         retry_after = response.headers.get("Retry-After")
         base_delay = float(retry_after) if retry_after else (2 ** attempt)
 
-        # Add jitter (±20%) to avoid synchronized retries
+        # 동기화된 재시도를 피하기 위해 지터(±20%) 추가
         jitter = base_delay * 0.2 * (random.random() * 2 - 1)
         delay = base_delay + jitter
 
@@ -133,29 +134,30 @@ def fetch_with_retry(url, headers, max_retries=4):
         time.sleep(delay)
         attempt += 1
 
-# Usage
+# 사용법
 response = fetch_with_retry(
     "https://openapi.rocketpunch.com/api/v1/jobs",
     headers={"X-RP-API-Key": os.environ["RP_API_KEY"]},
 )
 data = response.json()
 ```
+
 </CodeGroup>
 
-## Best Practices
+## 모범 사례
 
-Follow these practices to keep your integration well within rate limits under normal operation.
+정상 운영에서 레이트 리밋을 충분히 여유 있게 유지하려면 다음 사례를 따른다.
 
-**Cache responses locally.** Job listings, company profiles, and event data do not change by the second. Store API responses in your application cache and serve them directly to users instead of making a live API call on every request. Refresh the cache on a schedule appropriate for your use case — every few minutes for high-traffic apps, hourly for less time-sensitive data.
+**응답을 로컬에 캐시한다.** 채용 공고, 기업 프로필, 이벤트 데이터는 초 단위로 바뀌지 않는다. API 응답을 애플리케이션 캐시에 저장하고, 매 요청마다 실시간 API를 호출하는 대신 사용자에게 직접 제공한다. 활용 사례에 맞는 주기로 캐시를 갱신한다. 트래픽이 많은 앱은 몇 분마다, 시급하지 않은 데이터는 시간 단위로.
 
-**Use pagination instead of bulk fetching.** Avoid requesting large page sizes to retrieve all records at once. Use the `per_page` parameter to fetch a reasonable number of results per page, and only load additional pages when your user actually requests them.
+**대량 조회 대신 페이지네이션을 사용한다.** 모든 레코드를 한 번에 가져오기 위해 큰 페이지 크기를 요청하지 않는다. `per_page` 파라미터로 페이지당 적정 수의 결과를 가져오고, 사용자가 실제로 요청할 때만 추가 페이지를 로드한다.
 
-**Deduplicate requests.** If multiple parts of your application might request the same resource simultaneously (for example, during high-traffic bursts), use a request-coalescing pattern so that concurrent calls share a single in-flight HTTP request.
+**요청을 중복 제거한다.** 애플리케이션의 여러 부분이 동시에 같은 리소스를 요청할 수 있다면(예: 트래픽 급증 시), 요청 병합 패턴을 사용해 동시 호출이 진행 중인 하나의 HTTP 요청을 공유하게 한다.
 
-**Monitor your usage.** Check the `X-RateLimit-Remaining` header in your responses and log a warning when it drops below a threshold you define. Your developer console at [developers.rocketpunch.com](https://developers.rocketpunch.com) also shows aggregate usage statistics for your app key.
+**사용량을 모니터링한다.** 응답의 `X-RateLimit-Remaining` 헤더를 확인하고, 정의한 임계값 아래로 떨어지면 경고를 로깅한다. [developers.rocketpunch.com](https://developers.rocketpunch.com)의 개발자 콘솔에도 앱 키의 집계 사용량 통계가 표시된다.
 
-**Back off proactively.** If `X-RateLimit-Remaining` drops to a low value, slow your request rate voluntarily rather than waiting for a `429` response. This keeps your app responsive and avoids gaps in service for your users.
+**선제적으로 백오프한다.** `X-RateLimit-Remaining`이 낮은 값으로 떨어지면 `429` 응답을 기다리기보다 자발적으로 요청 속도를 늦춘다. 이렇게 하면 앱이 반응성을 유지하고 사용자에게 서비스 공백이 생기는 것을 피한다.
 
 <Tip>
-  For read-heavy applications, consider caching job and company data locally and refreshing it on a scheduled interval — for example, every 10 minutes. This pattern can reduce your API call volume by an order of magnitude compared to making a live request for every user page load.
+  읽기 위주 애플리케이션의 경우, 채용 공고와 기업 데이터를 로컬에 캐시하고 정해진 간격(예: 10분마다)으로 갱신하는 것을 고려한다. 이 패턴은 매 사용자 페이지 로드마다 실시간 요청을 보내는 것에 비해 API 호출량을 한 자릿수 배수로 줄일 수 있다.
 </Tip>
