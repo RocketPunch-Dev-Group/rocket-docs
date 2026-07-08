@@ -1,88 +1,88 @@
 ---
-title: "Rocketpunch Open API Changelog and Release History"
-sidebarTitle: "Changelog"
-description: "Track every release, new endpoint, behavior change, and deprecation for the Rocketpunch Open API. Check here before updating your integration."
+title: "로켓펀치 Open API 체인지로그와 릴리스 이력"
+sidebarTitle: "체인지로그"
+description: "로켓펀치 Open API의 모든 릴리스, 신규 엔드포인트, 동작 변경, 지원 중단을 추적하세요. 연동을 업데이트하기 전에 확인하세요."
 ---
 
-The Rocketpunch Open API changelog records every release, new endpoint, behavior change, and deprecation notice in one place. Bookmark this page and check it whenever you update your integration. Entries are ordered newest-first.
+로켓펀치 Open API 체인지로그는 모든 릴리스, 신규 엔드포인트, 동작 변경, 지원 중단 안내를 한곳에 기록한다. 이 페이지를 북마크하고 연동을 업데이트할 때마다 확인한다. 항목은 최신순으로 정렬된다.
 
 <Note>
-  The Rocketpunch Open API is currently in **Invited Builder Beta**. The API surface is stable and production-ready for approved builders, but new endpoints and capabilities will be added as the beta progresses. Subscribe to announcements at [developers.rocketpunch.com](https://developers.rocketpunch.com) to be notified of changes.
+  로켓펀치 Open API는 현재 **초대 빌더 베타(Invited Builder Beta)** 단계다. API 표면은 승인된 빌더에게 안정적이고 프로덕션에 사용할 수 있지만, 베타가 진행되면서 신규 엔드포인트와 기능이 추가된다. 변경 사항을 알림받으려면 [developers.rocketpunch.com](https://developers.rocketpunch.com)에서 공지를 구독한다.
 </Note>
 
-## v1 — Builder Beta
+## v1 — 빌더 베타
 
-**Released: 2025**
+**릴리스: 2025**
 
-The initial public release of the Rocketpunch Open API, available to invited builders. This version establishes the foundational endpoint set, authentication model, and data schema that future versions will build on.
+초대 빌더에게 제공되는 로켓펀치 Open API의 최초 공개 릴리스. 이 버전은 향후 버전이 기반으로 삼을 기초 엔드포인트 집합, 인증 모델, 데이터 스키마를 확립한다.
 
-### Endpoints
+### 엔드포인트
 
 <Card title="GET /api/v1/jobs" icon="briefcase">
-  Search job listings across Rocketpunch's indexed positions. Filter by keyword and language. Returns paginated job objects including title, company, location, and tags.
+  로켓펀치의 색인된 포지션 전반에서 채용 공고를 검색한다. 키워드와 언어로 필터링한다. 제목, 기업, 위치, 태그를 포함한 페이지네이션된 채용 객체를 반환한다.
 </Card>
 
 <Card title="GET /api/v1/companies" icon="building">
-  Search and retrieve company profiles from over 170,000 indexed companies. Filter by keyword and language. Returns company name, industry, size, location, and social links.
+  17만 개 이상의 색인된 기업에서 기업 프로필을 검색하고 조회한다. 키워드와 언어로 필터링한다. 회사명, 산업, 규모, 위치, 소셜 링크를 반환한다.
 </Card>
 
 <Card title="GET /api/v1/profiles" icon="user">
-  Access public user profile data. Returns career history, skills, and public contact information for a given user. Requires OAuth 2.0 for user-specific profile access.
+  공개 사용자 프로필 데이터에 접근한다. 주어진 사용자의 경력, 스킬, 공개 연락처를 반환한다. 사용자별 프로필 접근에는 OAuth 2.0이 필요하다.
 </Card>
 
 <Card title="GET /api/v1/events" icon="calendar">
-  Browse and search Rocketpunch networking events. Returns event name, date, location, organizer, and registration link.
+  로켓펀치 네트워킹 이벤트를 조회하고 검색한다. 이벤트 이름, 날짜, 위치, 주최자, 등록 링크를 반환한다.
 </Card>
 
-### Authentication
+### 인증
 
-- **App Key authentication** via the `X-RP-API-Key` request header. Keys follow the format `rp_app_xxxxxxxxxxxxxxxx` and are issued through the developer portal.
-- **OAuth 2.0 Authorization Code Flow** for user-consent data access. Register a redirect URI at [developers.rocketpunch.com/apps/new](https://developers.rocketpunch.com/apps/new) and implement the four-step flow described in the [Auth Flow guide](/api/oauth/flow).
+- **App Key 인증** — `X-RP-API-Key` 요청 헤더를 통한 방식. 키는 `rp_app_xxxxxxxxxxxxxxxx` 형식을 따르며 개발자 포털에서 발급된다.
+- **OAuth 2.0 Authorization Code Flow** — 사용자 동의 데이터 접근용. [developers.rocketpunch.com/apps/new](https://developers.rocketpunch.com/apps/new)에서 리디렉션 URI를 등록하고 [Auth Flow 가이드](/api/oauth/flow)에 설명된 4단계 흐름을 구현한다.
 
-### Platform Features
+### 플랫폼 기능
 
-- **Multilingual support** — All endpoints accept a `lang` parameter. 11 languages supported with consistent response schema across all locales: Korean, English, Japanese, Chinese (Simplified), Chinese (Traditional), Spanish, French, German, Portuguese, Indonesian, and Vietnamese.
-- **99.95% availability SLA** — The API is backed by a 99.95% uptime commitment for invited builder partners.
-- **Paginated responses** — All list endpoints return paginated results with `page`, `per_page`, and `total_pages` fields in the response envelope.
-- **Rate limit headers** — Every response includes `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers. See the [Rate Limits](/api/rate-limits) page.
+- **다국어 지원** — 모든 엔드포인트가 `lang` 파라미터를 받는다. 모든 로케일에서 일관된 응답 스키마로 11개 언어를 지원한다: 한국어, 영어, 일본어, 중국어(간체), 중국어(번체), 스페인어, 프랑스어, 독일어, 포르투갈어, 인도네시아어, 베트남어.
+- **99.95% 가용성 SLA** — API는 초대 빌더 파트너를 위해 99.95% 가동률을 보장한다.
+- **페이지네이션된 응답** — 모든 목록 엔드포인트는 응답 엔벨로프에 `page`, `per_page`, `total_pages` 필드가 포함된 페이지네이션 결과를 반환한다.
+- **레이트 리밋 헤더** — 모든 응답에 `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` 헤더가 포함된다. [레이트 리밋](/api/rate-limits) 페이지를 참고한다.
 
 ---
 
-## Versioning Policy
+## 버저닝 정책
 
-The Rocketpunch API uses **URL-based versioning**. The current version is `v1`, reflected in every endpoint path:
+로켓펀치 API는 **URL 기반 버저닝**을 사용한다. 현재 버전은 `v1`이며 모든 엔드포인트 경로에 반영된다:
 
-```
+```text
 https://openapi.rocketpunch.com/api/v1/{resource}
 ```
 
-### What triggers a new version
+### 무엇이 새 버전을 유발하는가
 
-A new major version (e.g. `v2`) is released when a change would break existing integrations. Examples of breaking changes include:
+기존 연동을 깨뜨리는 변경이 있을 때 새 메이저 버전(예: `v2`)이 릴리스된다. 파괴적 변경의 예:
 
-- Removing an endpoint
-- Renaming or removing a required request parameter
-- Changing the data type of a response field
-- Removing a field from the response schema
+- 엔드포인트 제거
+- 필수 요청 파라미터의 이름 변경 또는 제거
+- 응답 필드의 데이터 타입 변경
+- 응답 스키마에서 필드 제거
 
-### What does not trigger a new version
+### 무엇이 새 버전을 유발하지 않는가
 
-Additive changes are made within the current version without a version bump. These changes are backward-compatible and will not break existing integrations:
+추가적 변경은 버전 상향 없이 현재 버전 내에서 이뤄진다. 이런 변경은 하위 호환되며 기존 연동을 깨뜨리지 않는다:
 
-- Adding a new endpoint
-- Adding optional request parameters
-- Adding new fields to response objects
-- Adding new supported values to existing parameters (such as new `lang` codes)
-- Performance improvements and bug fixes
+- 새 엔드포인트 추가
+- 선택적 요청 파라미터 추가
+- 응답 객체에 새 필드 추가
+- 기존 파라미터에 새 지원 값 추가(예: 새 `lang` 코드)
+- 성능 개선 및 버그 수정
 
-### Deprecation policy
+### 지원 중단 정책
 
-When a version is scheduled for retirement, Rocketpunch will:
+버전이 폐기 예정일 때 로켓펀치는:
 
-1. Announce the deprecation date at least **six months** in advance via the developer portal and email to registered app owners.
-2. Continue serving the deprecated version for the full notice period.
-3. Return a `Deprecation` header on all responses from the deprecated version as the retirement date approaches.
+1. 개발자 포털과 등록된 앱 소유자 이메일을 통해 최소 **6개월** 전에 지원 중단 날짜를 공지한다.
+2. 전체 공지 기간 동안 지원 중단된 버전을 계속 제공한다.
+3. 폐기일이 다가오면 지원 중단된 버전의 모든 응답에 `Deprecation` 헤더를 반환한다.
 
 <Tip>
-  Watch [developers.rocketpunch.com](https://developers.rocketpunch.com) for announcements about new endpoints, beta features, and upcoming releases. You can also follow the changelog via the RSS feed linked in the developer portal.
+  신규 엔드포인트, 베타 기능, 예정된 릴리스에 대한 공지는 [developers.rocketpunch.com](https://developers.rocketpunch.com)에서 확인한다. 개발자 포털에 링크된 RSS 피드로 체인지로그를 팔로우할 수도 있다.
 </Tip>

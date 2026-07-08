@@ -24,84 +24,175 @@
     }
   },
   "navigation": {
-    "tabs": [
+    "languages": [
       {
-        "tab": "User Guide",
-        "groups": [
+        "language": "ko",
+        "tabs": [
           {
-            "group": "Get Started",
-            "pages": [
-              "user-guide/introduction",
-              "user-guide/create-account",
-              "user-guide/profile-setup"
+            "tab": "사용자 가이드",
+            "groups": [
+              {
+                "group": "시작하기",
+                "pages": [
+                  "user-guide/introduction",
+                  "user-guide/create-account",
+                  "user-guide/profile-setup"
+                ]
+              },
+              {
+                "group": "채용 공고 찾기",
+                "pages": [
+                  "user-guide/jobs/search",
+                  "user-guide/jobs/apply",
+                  "user-guide/jobs/quick-apply"
+                ]
+              },
+              {
+                "group": "네트워킹",
+                "pages": [
+                  "user-guide/networking/discover",
+                  "user-guide/networking/events",
+                  "user-guide/networking/messaging"
+                ]
+              },
+              {
+                "group": "교육",
+                "pages": [
+                  "user-guide/education/browse",
+                  "user-guide/education/enroll"
+                ]
+              },
+              {
+                "group": "기업",
+                "pages": [
+                  "user-guide/companies/profiles",
+                  "user-guide/companies/post-jobs",
+                  "user-guide/companies/enterprise"
+                ]
+              }
             ]
           },
           {
-            "group": "Finding Jobs",
-            "pages": [
-              "user-guide/jobs/search",
-              "user-guide/jobs/apply",
-              "user-guide/jobs/quick-apply"
-            ]
-          },
-          {
-            "group": "Networking",
-            "pages": [
-              "user-guide/networking/discover",
-              "user-guide/networking/events",
-              "user-guide/networking/messaging"
-            ]
-          },
-          {
-            "group": "Education",
-            "pages": [
-              "user-guide/education/browse",
-              "user-guide/education/enroll"
-            ]
-          },
-          {
-            "group": "Companies",
-            "pages": [
-              "user-guide/companies/profiles",
-              "user-guide/companies/post-jobs",
-              "user-guide/companies/enterprise"
+            "tab": "개발자 API",
+            "groups": [
+              {
+                "group": "시작하기",
+                "pages": [
+                  "api/overview",
+                  "api/quickstart",
+                  "api/authentication"
+                ]
+              },
+              {
+                "group": "API 레퍼런스",
+                "pages": [
+                  "api/reference/jobs",
+                  "api/reference/companies",
+                  "api/reference/profiles",
+                  "api/reference/events"
+                ]
+              },
+              {
+                "group": "OAuth",
+                "pages": [
+                  "api/oauth/overview",
+                  "api/oauth/flow"
+                ]
+              },
+              {
+                "group": "리소스",
+                "pages": [
+                  "api/rate-limits",
+                  "api/errors",
+                  "api/changelog"
+                ]
+              }
             ]
           }
         ]
       },
       {
-        "tab": "Developer API",
-        "groups": [
+        "language": "en",
+        "tabs": [
           {
-            "group": "Get Started",
-            "pages": [
-              "api/overview",
-              "api/quickstart",
-              "api/authentication"
+            "tab": "User Guide",
+            "groups": [
+              {
+                "group": "Get Started",
+                "pages": [
+                  "en/user-guide/introduction",
+                  "en/user-guide/create-account",
+                  "en/user-guide/profile-setup"
+                ]
+              },
+              {
+                "group": "Finding Jobs",
+                "pages": [
+                  "en/user-guide/jobs/search",
+                  "en/user-guide/jobs/apply",
+                  "en/user-guide/jobs/quick-apply"
+                ]
+              },
+              {
+                "group": "Networking",
+                "pages": [
+                  "en/user-guide/networking/discover",
+                  "en/user-guide/networking/events",
+                  "en/user-guide/networking/messaging"
+                ]
+              },
+              {
+                "group": "Education",
+                "pages": [
+                  "en/user-guide/education/browse",
+                  "en/user-guide/education/enroll"
+                ]
+              },
+              {
+                "group": "Companies",
+                "pages": [
+                  "en/user-guide/companies/profiles",
+                  "en/user-guide/companies/post-jobs",
+                  "en/user-guide/companies/enterprise"
+                ]
+              }
             ]
           },
           {
-            "group": "API Reference",
-            "pages": [
-              "api/reference/jobs",
-              "api/reference/companies",
-              "api/reference/profiles",
-              "api/reference/events"
-            ]
-          },
-          {
-            "group": "OAuth",
-            "pages": [
-              "api/oauth/overview",
-              "api/oauth/flow"
-            ]
-          },
-          {
-            "group": "Resources",
-            "pages": [
-              "api/rate-limits",
-              "api/errors",
-              "api/changelog"
+            "tab": "Developer API",
+            "groups": [
+              {
+                "group": "Get Started",
+                "pages": [
+                  "en/api/overview",
+                  "en/api/quickstart",
+                  "en/api/authentication"
+                ]
+              },
+              {
+                "group": "API Reference",
+                "pages": [
+                  "en/api/reference/jobs",
+                  "en/api/reference/companies",
+                  "en/api/reference/profiles",
+                  "en/api/reference/events"
+                ]
+              },
+              {
+                "group": "OAuth",
+                "pages": [
+                  "en/api/oauth/overview",
+                  "en/api/oauth/flow"
+                ]
+              },
+              {
+                "group": "Resources",
+                "pages": [
+                  "en/api/rate-limits",
+                  "en/api/errors",
+                  "en/api/changelog"
+                ]
+              }
             ]
           }
         ]

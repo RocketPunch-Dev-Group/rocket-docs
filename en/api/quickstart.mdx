@@ -1,0 +1,113 @@
+---
+title: "Rocketpunch Open API Quickstart: Your First API Call"
+sidebarTitle: "Quickstart"
+description: "Register a Rocketpunch app, get your API key instantly, and make your first authenticated API call to fetch live jobs, companies, profiles, or events."
+---
+
+This guide walks you through registering an app, authenticating a request, and reading your first response from the Rocketpunch Open API. You'll have live data flowing into your project in under five minutes.
+
+## Steps
+
+<Steps>
+  <Step title="Register an App">
+    Head to [developers.rocketpunch.com/apps/new](https://developers.rocketpunch.com/apps/new) and log in with your Rocketpunch account. Fill in the following fields:
+
+    | Field | Description |
+    | --- | --- |
+    | **App name** | A short, recognizable name for your project |
+    | **Description** | What your app does and how it uses Rocketpunch data |
+    | **Callback URI** | _(Optional)_ Required only if you plan to use OAuth 2.0 for user-consent flows |
+
+    Click **Register**. Your App Key is issued immediately — no review period, no waiting.
+
+    <Note>
+      Your App Key follows the format `rp_app_xxxxxxxxxxxxxxxx`. Copy it now and store it somewhere safe; treat it like a password.
+    </Note>
+  </Step>
+  <Step title="Make Your First API Call">
+    Add your App Key to the `X-RP-API-Key` request header and call any endpoint. The example below searches for jobs matching the keyword `AI`:
+
+    <CodeGroup>
+
+    ```javascript JavaScript
+    const res = await fetch(
+      "https://openapi.rocketpunch.com/api/v1/jobs?keyword=AI",
+      { headers: { "X-RP-API-Key": "rp_app_YOUR_KEY_HERE" } },
+    );
+    const { items } = await res.json();
+    console.log(items);
+    ```
+
+    ```python Python
+    import requests
+    
+    response = requests.get(
+        "https://openapi.rocketpunch.com/api/v1/jobs",
+        params={"keyword": "AI"},
+        headers={"X-RP-API-Key": "rp_app_YOUR_KEY_HERE"},
+    )
+    data = response.json()
+    print(data["items"])
+    ```
+
+    ```bash cURL
+    curl -X GET 'https://openapi.rocketpunch.com/api/v1/jobs?keyword=AI' \
+      -H 'X-RP-API-Key: rp_app_YOUR_KEY_HERE'
+    ```
+
+    </CodeGroup>
+
+    <Tip>
+      Replace `rp_app_YOUR_KEY_HERE` with the App Key you copied during registration.
+    </Tip>
+  </Step>
+  <Step title="Inspect the Response">
+    A successful request returns a JSON object containing an `items` array. Each element in the array represents a single job posting:
+
+    ```json
+    {
+      "items": [
+        {
+          "id": "123456",
+          "title": "AI Research Engineer",
+          "company": {
+            "id": "78910",
+            "name": "Example Corp",
+            "slug": "example-corp"
+          },
+          "location": "Seoul, Korea",
+          "tags": ["AI", "Machine Learning", "Python"],
+          "posted_at": "2025-01-15T09:00:00Z",
+          "url": "https://www.rocketpunch.com/jobs/123456"
+        }
+      ],
+      "total": 842,
+      "page": 1,
+      "per_page": 20
+    }
+    ```
+
+    | Field | Type | Description |
+    | --- | --- | --- |
+    | `items` | array | The list of job objects matching your query |
+    | `total` | integer | Total number of matching results across all pages |
+    | `page` | integer | Current page number |
+    | `per_page` | integer | Number of results returned per page |
+
+    A `200 OK` status confirms your key is valid and the request succeeded. If you receive a `401`, double-check that you included the `X-RP-API-Key` header and that your key is correct.
+  </Step>
+</Steps>
+
+## Next Steps
+
+Now that you've made your first call, explore the rest of the API:
+
+<CardGroup cols={2}>
+  <Card title="Authentication" icon="lock" href="/en/api/authentication">
+    Learn how App Key and OAuth 2.0 authentication work, and how to keep your credentials secure.
+  </Card>
+
+  <Card title="API Reference" icon="book-open" href="/en/api/reference/jobs">
+    Browse all available endpoints — jobs, companies, profiles, and events — with full parameter and response documentation.
+  </Card>
+</CardGroup>

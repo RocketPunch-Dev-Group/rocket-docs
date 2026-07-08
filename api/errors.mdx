@@ -1,14 +1,14 @@
 ---
-title: "Rocketpunch API Error Codes and Troubleshooting Guide"
-sidebarTitle: "Error Codes"
-description: "Reference for Rocketpunch API HTTP status codes, error response format, and troubleshooting common authentication and request errors."
+title: "로켓펀치 API 오류 코드와 문제 해결 가이드"
+sidebarTitle: "오류 코드"
+description: "로켓펀치 API HTTP 상태 코드, 오류 응답 형식, 흔한 인증·요청 오류 해결을 위한 레퍼런스예요."
 ---
 
-The Rocketpunch API uses standard HTTP status codes and returns a consistent JSON error body on every failure. This makes it straightforward to handle errors programmatically — your code can branch on the `status` field or the `code` string without parsing free-form error messages. This page covers every error your integration may encounter and how to resolve it.
+로켓펀치 API는 표준 HTTP 상태 코드를 사용하고 모든 실패에 대해 일관된 JSON 오류 본문을 반환한다. 덕분에 오류를 프로그래밍 방식으로 처리하기 쉽다. 자유 형식 오류 메시지를 파싱하지 않고도 `status` 필드나 `code` 문자열로 코드를 분기할 수 있다. 이 페이지는 연동에서 마주칠 수 있는 모든 오류와 해결 방법을 다룬다.
 
-## Error Response Format
+## 오류 응답 형식
 
-All error responses share the same JSON structure, regardless of the error type. Check the `code` field for a machine-readable error identifier and `message` for a human-readable explanation.
+모든 오류 응답은 오류 유형과 관계없이 동일한 JSON 구조를 공유한다. 기계가 읽을 수 있는 오류 식별자는 `code` 필드를, 사람이 읽을 수 있는 설명은 `message`를 확인한다.
 
 ```json
 {
@@ -20,89 +20,90 @@ All error responses share the same JSON structure, regardless of the error type.
 }
 ```
 
-| Field | Type | Description |
-|---|---|---|
-| `code` | string | Machine-readable error identifier (e.g. `UNAUTHORIZED`, `NOT_FOUND`) |
-| `message` | string | Human-readable description of the error |
-| `status` | integer | HTTP status code, mirrored in the response status line |
+| 필드 | 타입 | 설명 |
+| --- | --- | --- |
+| `code` | string | 기계가 읽을 수 있는 오류 식별자 (예: `UNAUTHORIZED`, `NOT_FOUND`) |
+| `message` | string | 사람이 읽을 수 있는 오류 설명 |
+| `status` | integer | HTTP 상태 코드. 응답 상태 라인에도 반영됨 |
 
-## HTTP Status Codes
+## HTTP 상태 코드
 
-The table below lists every status code the API returns, what it means, and the first action to take.
+아래 표는 API가 반환하는 모든 상태 코드, 의미, 그리고 취할 첫 조치를 나열한다.
 
-| Status | Code String | Meaning | Action |
-|---|---|---|---|
-| `400` | `BAD_REQUEST` | The request contains invalid or missing parameters. | Check your query parameters against the endpoint reference. Look at the `message` field for which parameter is invalid. |
-| `401` | `UNAUTHORIZED` | The `X-RP-API-Key` header is missing, malformed, or refers to a revoked key. | Verify the header is present and that your key starts with `rp_app_`. Regenerate at [developers.rocketpunch.com](https://developers.rocketpunch.com) if needed. |
-| `403` | `FORBIDDEN` | Your API key is valid but does not have permission to access this resource. | Check that your app has the required scopes enabled. If using OAuth, ensure the user granted the scope your request requires. |
-| `404` | `NOT_FOUND` | The requested resource does not exist. | Confirm the endpoint path and any resource identifiers in the URL. The resource may have been deleted or the ID may be incorrect. |
-| `422` | `UNPROCESSABLE_ENTITY` | The request is well-formed but the values fail validation. | Read the `message` for field-level details, such as an out-of-range `page` value or an unsupported `lang` code. |
-| `429` | `RATE_LIMIT_EXCEEDED` | Your app has exceeded its request quota for the current window. | Wait for the time indicated in the `Retry-After` header, then retry. See the [Rate Limits](/api/rate-limits) page for retry strategies. |
-| `500` | `INTERNAL_SERVER_ERROR` | An unexpected error occurred on Rocketpunch's servers. | Retry the request after a short delay using exponential backoff. If the error persists, contact [support@rocketpunch.com](mailto:support@rocketpunch.com). |
-| `503` | `SERVICE_UNAVAILABLE` | The API is temporarily unavailable, typically during maintenance. | Retry after a brief delay. Check the developer portal for any active incidents. |
+| 상태 | 코드 문자열 | 의미 | 조치 |
+| --- | --- | --- | --- |
+| `400` | `BAD_REQUEST` | 요청에 잘못되거나 누락된 파라미터가 있다. | 엔드포인트 레퍼런스와 쿼리 파라미터를 대조한다. `message` 필드에서 어떤 파라미터가 잘못됐는지 확인한다. |
+| `401` | `UNAUTHORIZED` | `X-RP-API-Key` 헤더가 없거나, 형식이 잘못됐거나, 폐기된 키를 가리킨다. | 헤더가 있는지, 키가 `rp_app_`로 시작하는지 확인한다. 필요하면 [developers.rocketpunch.com](https://developers.rocketpunch.com)에서 재발급한다. |
+| `403` | `FORBIDDEN` | API 키는 유효하지만 이 리소스에 접근할 권한이 없다. | 앱에 필요한 스코프가 활성화되어 있는지 확인한다. OAuth를 사용한다면 사용자가 요청에 필요한 스코프를 부여했는지 확인한다. |
+| `404` | `NOT_FOUND` | 요청한 리소스가 존재하지 않는다. | 엔드포인트 경로와 URL의 리소스 식별자를 확인한다. 리소스가 삭제됐거나 ID가 잘못됐을 수 있다. |
+| `422` | `UNPROCESSABLE_ENTITY` | 요청 형식은 올바르지만 값이 검증에 실패했다. | 범위를 벗어난 `page` 값이나 지원되지 않는 `lang` 코드 같은 필드 수준 상세는 `message`를 읽는다. |
+| `429` | `RATE_LIMIT_EXCEEDED` | 앱이 현재 창의 요청 할당량을 초과했다. | `Retry-After` 헤더에 표시된 시간만큼 기다린 뒤 재시도한다. 재시도 전략은 [레이트 리밋](/api/rate-limits) 페이지를 참고한다. |
+| `500` | `INTERNAL_SERVER_ERROR` | 로켓펀치 서버에서 예상치 못한 오류가 발생했다. | 짧은 지연 후 지수 백오프로 재시도한다. 오류가 지속되면 [support@rocketpunch.com](mailto:support@rocketpunch.com)으로 문의한다. |
+| `503` | `SERVICE_UNAVAILABLE` | 보통 점검 중에 API를 일시적으로 이용할 수 없다. | 잠시 후 재시도한다. 진행 중인 인시던트가 있는지 개발자 포털을 확인한다. |
 
-## Common Issues and Solutions
+## 흔한 문제와 해결책
 
-### Invalid or missing API key (401)
+### 유효하지 않거나 누락된 API 키 (401)
 
-The most common cause of `401` errors is a missing or incorrectly formatted `X-RP-API-Key` header.
+`401` 오류의 가장 흔한 원인은 누락되거나 형식이 잘못된 `X-RP-API-Key` 헤더다.
 
-**Check the header name.** The header must be exactly `X-RP-API-Key` (case-insensitive in HTTP, but match it exactly to avoid bugs in some HTTP clients).
+**헤더 이름을 확인한다.** 헤더는 정확히 `X-RP-API-Key`여야 한다(HTTP에서 대소문자 구분 없음이지만, 일부 HTTP 클라이언트의 버그를 피하려면 정확히 일치시킨다).
 
-**Check the key format.** App Keys follow the format `rp_app_xxxxxxxxxxxxxxxx`. If your key doesn't start with `rp_app_`, you may have copied the wrong value from the developer portal.
+**키 형식을 확인한다.** App Key는 `rp_app_xxxxxxxxxxxxxxxx` 형식을 따른다. 키가 `rp_app_`로 시작하지 않는다면 개발자 포털에서 잘못된 값을 복사했을 수 있다.
 
-**Regenerate a compromised key.** If you suspect your key has been exposed, go to [developers.rocketpunch.com](https://developers.rocketpunch.com), open your app settings, and rotate the key. Update your environment variables or secrets manager with the new value.
+**유출된 키를 재발급한다.** 키가 노출된 것이 의심되면 [developers.rocketpunch.com](https://developers.rocketpunch.com)에서 앱 설정을 열어 키를 교체한다. 새 값으로 환경 변수나 시크릿 매니저를 업데이트한다.
 
 ```bash
-# Correct — header present with valid format
+# 올바름 — 유효한 형식의 헤더 존재
 curl "https://openapi.rocketpunch.com/api/v1/jobs" \
   -H "X-RP-API-Key: rp_app_xxxxxxxxxxxxxxxx"
 
-# Wrong — header name typo
+# 잘못됨 — 헤더 이름 오타
 curl "https://openapi.rocketpunch.com/api/v1/jobs" \
   -H "X-API-Key: rp_app_xxxxxxxxxxxxxxxx"
 ```
 
-### Unsupported language code (400 / 422)
+### 지원되지 않는 언어 코드 (400 / 422)
 
-The `lang` parameter on endpoints like `/api/v1/jobs` and `/api/v1/companies` accepts specific locale codes. Passing an invalid value returns a `400` or `422` error.
+`/api/v1/jobs`, `/api/v1/companies` 같은 엔드포인트의 `lang` 파라미터는 특정 로케일 코드를 받는다. 유효하지 않은 값을 전달하면 `400` 또는 `422` 오류를 반환한다.
 
-The API supports 11 languages. Use the IETF language tag format:
+API는 11개 언어를 지원한다. IETF 언어 태그 형식을 사용한다:
 
-| Language | `lang` value |
-|---|---|
-| Korean | `ko` |
-| English | `en` |
-| Japanese | `ja` |
-| Chinese (Simplified) | `zh-hans` |
-| Chinese (Traditional) | `zh-hant` |
-| Spanish | `es` |
-| French | `fr` |
-| German | `de` |
-| Portuguese | `pt` |
-| Indonesian | `id` |
-| Vietnamese | `vi` |
+| 언어 | `lang` 값 |
+| --- | --- |
+| 한국어 | `ko` |
+| 영어 | `en` |
+| 일본어 | `ja` |
+| 중국어(간체) | `zh-hans` |
+| 중국어(번체) | `zh-hant` |
+| 스페인어 | `es` |
+| 프랑스어 | `fr` |
+| 독일어 | `de` |
+| 포르투갈어 | `pt` |
+| 인도네시아어 | `id` |
+| 베트남어 | `vi` |
 
-### Pagination out of range (400 / 422)
+### 범위를 벗어난 페이지네이션 (400 / 422)
 
-If you request a `page` or `per_page` value outside the accepted range, the API returns an error. Keep `per_page` within the documented maximum for each endpoint (typically 100), and do not request a page number beyond the last page of results.
+허용 범위를 벗어난 `page` 또는 `per_page` 값을 요청하면 API가 오류를 반환한다. `per_page`는 엔드포인트별 문서화된 최댓값(보통 100) 이내로 유지하고, 결과의 마지막 페이지를 넘는 페이지 번호를 요청하지 않는다.
 
 ```bash
-# Check the total pages from the response envelope
-# and stop paginating when page >= total_pages
+# 응답 엔벨로프에서 total pages를 확인하고
+# page >= total_pages일 때 페이지네이션을 중단한다
 ```
 
-### OAuth token errors (401 / 403)
+### OAuth 토큰 오류 (401 / 403)
 
-If you receive a `401` when using a Bearer token, the token may have expired. Use your `refresh_token` to obtain a new access token. See the [Auth Flow guide](/api/oauth/flow#token-refresh) for the refresh flow.
+Bearer 토큰 사용 시 `401`을 받으면 토큰이 만료됐을 수 있다. `refresh_token`을 사용해 새 액세스 토큰을 획득한다. 갱신 흐름은 [Auth Flow 가이드](/api/oauth/flow)를 참고한다.
 
-A `403` with a Bearer token usually means the token was issued without the scope required by the endpoint you're calling. Redirect the user through the authorization flow again and request the missing scope.
+Bearer 토큰에서의 `403`은 보통 호출하는 엔드포인트에 필요한 스코프 없이 토큰이 발급된 경우다. 사용자를 인증 흐름으로 다시 안내하고 누락된 스코프를 요청한다.
 
-## Handling Errors in Code
+## 코드에서 오류 처리하기
 
-Structure your error handling to read the `error.code` field for programmatic branching and surface `error.message` to your logs or monitoring system.
+프로그래밍 방식 분기를 위해 `error.code` 필드를 읽고, `error.message`를 로그나 모니터링 시스템에 노출하도록 오류 처리를 구성한다.
 
 <CodeGroup>
+
 ```javascript Node.js
 async function callAPI(endpoint, params) {
   const url = new URL(`https://openapi.rocketpunch.com${endpoint}`);
@@ -119,10 +120,10 @@ async function callAPI(endpoint, params) {
       case "UNAUTHORIZED":
         throw new Error("Check your RP_API_KEY environment variable.");
       case "RATE_LIMIT_EXCEEDED":
-        // Caller should implement retry logic
+        // 호출자가 재시도 로직을 구현해야 함
         throw new RateLimitError(error.message);
       case "NOT_FOUND":
-        return null; // Treat as empty result
+        return null; // 빈 결과로 처리
       default:
         throw new Error(`API error ${error.status}: ${error.message}`);
     }
@@ -152,21 +153,22 @@ def call_api(endpoint, params):
         if code == "UNAUTHORIZED":
             raise ValueError("Check your RP_API_KEY environment variable.")
         elif code == "RATE_LIMIT_EXCEEDED":
-            raise RateLimitError(message)  # Caller handles retry
+            raise RateLimitError(message)  # 호출자가 재시도 처리
         elif code == "NOT_FOUND":
-            return None  # Treat as empty result
+            return None  # 빈 결과로 처리
         else:
             raise Exception(f"API error {response.status_code}: {message}")
 
     return response.json()
 ```
+
 </CodeGroup>
 
-## Getting Help
+## 도움받기
 
-If you encounter an error not covered here, or a `500` that persists after retrying, reach out to the Rocketpunch developer support team.
+여기서 다루지 않은 오류를 만나거나 재시도 후에도 `500`이 지속되면 로켓펀치 개발자 지원팀에 연락한다.
 
-- **Email:** [support@rocketpunch.com](mailto:support@rocketpunch.com)
-- **Developer portal:** [developers.rocketpunch.com](https://developers.rocketpunch.com)
+- **이메일:** [support@rocketpunch.com](mailto:support@rocketpunch.com)
+- **개발자 포털:** [developers.rocketpunch.com](https://developers.rocketpunch.com)
 
-When contacting support, include the endpoint you called, the full error response body, and the timestamp of the request. This helps the team diagnose server-side issues quickly.
+지원팀에 문의할 때는 호출한 엔드포인트, 전체 오류 응답 본문, 요청 타임스탬프를 포함한다. 이렇게 하면 팀이 서버 측 문제를 빠르게 진단하는 데 도움이 된다.

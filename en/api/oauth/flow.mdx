@@ -1,42 +1,42 @@
 ---
-title: "로켓펀치 OAuth 2.0 인증 플로우 구현하기"
+title: "Implement the Rocketpunch OAuth 2.0 Authorization Flow"
 sidebarTitle: "Auth Flow"
-description: "로켓펀치 API의 OAuth 2.0 authorization code flow를 초기 리디렉션부터 토큰 교환까지 구현하는 단계별 가이드예요."
+description: "Step-by-step guide to implementing the OAuth 2.0 authorization code flow for the Rocketpunch API, from initial redirect to token exchange."
 ---
 
-로켓펀치 OAuth 2.0 흐름 구현은 네 단계로 이뤄진다. 사용자를 로켓펀치로 리디렉션하고, 콜백 URL에서 인증 코드를 받고, 그 코드를 액세스 토큰으로 교환하고, 토큰을 사용해 사용자 범위의 API를 호출한다. 이 가이드는 각 단계를 동작하는 코드 예시와 함께 설명한다.
+Implementing the Rocketpunch OAuth 2.0 flow takes four steps: redirect the user to Rocketpunch, receive the authorization code at your callback URL, exchange that code for an access token, and use the token to make user-scoped API calls. This guide walks through each step with working code examples.
 
-시작하기 전에 [OAuth 설정](/api/oauth/overview)을 완료했는지 확인한다. **Client ID**, **Client Secret**, 등록된 **리디렉션 URI**가 필요하다.
+Before you start, make sure you have completed the [OAuth setup](/en/api/oauth/overview#setting-up-oauth) — you will need your **Client ID**, **Client Secret**, and a registered **redirect URI**.
 
 <Warning>
-  Client Secret을 클라이언트 사이드 JavaScript, 모바일 앱, 공개 소스 코드에 절대 노출하지 않는다. 모든 토큰 교환 요청은 서버에서 시작되어야 한다.
+  Never expose your Client Secret in client-side JavaScript, mobile apps, or public source code. All token exchange requests must originate from your server.
 </Warning>
 
-## 1단계: 사용자를 인증 URL로 리디렉션
+## Step 1: Redirect the User to the Authorization URL
 
-사용자가 로켓펀치 계정을 앱에 연결하려 할 때, 로켓펀치의 인증 엔드포인트로 리디렉션한다. 필수 쿼리 파라미터로 URL을 구성해 사용자를 그곳으로 보낸다.
+When a user wants to connect their Rocketpunch account to your app, redirect them to Rocketpunch's authorization endpoint. Build the URL with the required query parameters and send the user there.
 
-**인증 엔드포인트:**
+**Authorization endpoint:**
 
 ```text
 https://www.rocketpunch.com/oauth/authorize
 ```
 
-**필수 파라미터:**
+**Required parameters:**
 
-| 파라미터 | 값 | 설명 |
+| Parameter | Value | Description |
 | --- | --- | --- |
-| `client_id` | 앱의 Client ID | 애플리케이션을 식별 |
-| `redirect_uri` | 콜백 URL | 앱 설정에 등록된 URI와 일치해야 함 |
-| `response_type` | `code` | 인증 코드를 요청 |
-| `scope` | 공백으로 구분된 스코프 목록 | 앱이 요청하는 권한 |
+| `client_id` | Your app's Client ID | Identifies your application |
+| `redirect_uri` | Your callback URL | Must match the URI registered in your app settings |
+| `response_type` | `code` | Requests an authorization code |
+| `scope` | Space-separated scope list | Permissions your app is requesting |
 
-**이용 가능한 스코프:**
+**Available scopes:**
 
-| 스코프 | 설명 |
+| Scope | Description |
 | --- | --- |
-| `profile:read` | 사용자의 공개 프로필 정보 읽기 |
-| `profile:email` | 사용자의 이메일 주소 접근 |
+| `profile:read` | Read the user's public profile information |
+| `profile:email` | Access the user's email address |
 
 <CodeGroup>
 
@@ -50,7 +50,7 @@ const params = new URLSearchParams({
 
 const authorizationUrl = `https://www.rocketpunch.com/oauth/authorize?${params.toString()}`;
 
-// Express 라우트 핸들러에서:
+// In an Express route handler:
 res.redirect(authorizationUrl);
 ```
 
@@ -67,11 +67,11 @@ params = urlencode({
 
 authorization_url = f"https://www.rocketpunch.com/oauth/authorize?{params}"
 
-# Flask 라우트 핸들러에서:
+# In a Flask route handler:
 return redirect(authorization_url)
 ```
 
-```bash cURL (테스트용)
+```bash cURL (for testing)
 curl -G "https://www.rocketpunch.com/oauth/authorize" \
   --data-urlencode "client_id=YOUR_CLIENT_ID" \
   --data-urlencode "redirect_uri=https://yourapp.com/auth/rocketpunch/callback" \
@@ -81,18 +81,18 @@ curl -G "https://www.rocketpunch.com/oauth/authorize" \
 
 </CodeGroup>
 
-## 2단계: 사용자가 동의를 부여
+## Step 2: User Grants Consent
 
-리디렉션 후에는 로켓펀치가 이어받는다. 사용자는 (로그인되어 있지 않다면) 로그인 화면을 본 뒤, 앱 이름과 요청한 권한을 보여주는 동의 화면을 본다.
+After you redirect the user, Rocketpunch takes over. The user sees a login screen (if not already signed in) followed by a consent screen showing your app's name and the permissions you requested.
 
-- 사용자가 **승인**하면 로켓펀치가 `?code=` 쿼리 파라미터와 함께 사용자를 `redirect_uri`로 리디렉션한다.
-- 사용자가 접근을 **거부**하거나 취소하면 로켓펀치가 `?error=access_denied` 파라미터와 함께 `redirect_uri`로 리디렉션한다.
+- If the user **approves**, Rocketpunch redirects them to your `redirect_uri` with an `?code=` query parameter.
+- If the user **denies** access or cancels, Rocketpunch redirects to your `redirect_uri` with an `?error=access_denied` parameter.
 
-콜백 핸들러는 두 결과를 모두 확인해야 한다.
+Your callback handler must check for both outcomes.
 
-## 3단계: 인증 코드 받기
+## Step 3: Receive the Authorization Code
 
-로켓펀치는 동의 결정 후 사용자를 `redirect_uri`로 리디렉션한다. 쿼리 문자열에서 `code` 파라미터를 추출해 토큰 교환 로직으로 전달한다.
+Rocketpunch redirects the user to your `redirect_uri` after the consent decision. Extract the `code` parameter from the query string and pass it to your token exchange logic.
 
 ```text
 https://yourapp.com/auth/rocketpunch/callback?code=AUTH_CODE_HERE
@@ -105,7 +105,7 @@ app.get("/auth/rocketpunch/callback", async (req, res) => {
   const { code, error } = req.query;
 
   if (error) {
-    // 사용자가 접근을 거부했거나 오류가 발생함
+    // User denied access or an error occurred
     return res.redirect("/connect-failed");
   }
 
@@ -113,9 +113,9 @@ app.get("/auth/rocketpunch/callback", async (req, res) => {
     return res.status(400).send("Missing authorization code");
   }
 
-  // 토큰 교환으로 진행 (4단계)
+  // Proceed to token exchange (Step 4)
   const token = await exchangeCodeForToken(code);
-  // 토큰을 저장하고 사용자를 리디렉션
+  // Store token and redirect the user
   req.session.accessToken = token.access_token;
   res.redirect("/dashboard");
 });
@@ -135,7 +135,7 @@ def rocketpunch_callback():
     if not code:
         return "Missing authorization code", 400
 
-    # 토큰 교환으로 진행 (4단계)
+    # Proceed to token exchange (Step 4)
     token = exchange_code_for_token(code)
     session["access_token"] = token["access_token"]
     return redirect("/dashboard")
@@ -143,25 +143,25 @@ def rocketpunch_callback():
 
 </CodeGroup>
 
-## 4단계: 코드를 액세스 토큰으로 교환
+## Step 4: Exchange the Code for an Access Token
 
-인증 코드는 단기이며 일회용이다. 서버가 로켓펀치 토큰 엔드포인트로 POST 요청을 보내 이를 액세스 토큰으로 교환해야 한다.
+The authorization code is short-lived and single-use. Your server must exchange it for an access token by making a POST request to Rocketpunch's token endpoint.
 
-**토큰 엔드포인트:**
+**Token endpoint:**
 
 ```text
 POST https://www.rocketpunch.com/oauth/token
 ```
 
-**필수 파라미터:**
+**Required parameters:**
 
-| 파라미터 | 값 |
+| Parameter | Value |
 | --- | --- |
 | `grant_type` | `authorization_code` |
-| `code` | 3단계의 인증 코드 |
-| `client_id` | 앱의 Client ID |
-| `client_secret` | 앱의 Client Secret |
-| `redirect_uri` | 1단계에서 사용한 동일한 리디렉션 URI |
+| `code` | The authorization code from Step 3 |
+| `client_id` | Your app's Client ID |
+| `client_secret` | Your app's Client Secret |
+| `redirect_uri` | The same redirect URI used in Step 1 |
 
 <CodeGroup>
 
@@ -187,7 +187,7 @@ async function exchangeCodeForToken(code) {
   }
 
   return response.json();
-  // 반환: { access_token, token_type, expires_in, refresh_token, scope }
+  // Returns: { access_token, token_type, expires_in, refresh_token, scope }
 }
 ```
 
@@ -209,7 +209,7 @@ def exchange_code_for_token(code):
     )
     response.raise_for_status()
     return response.json()
-    # 반환: { access_token, token_type, expires_in, refresh_token, scope }
+    # Returns: { access_token, token_type, expires_in, refresh_token, scope }
 ```
 
 ```bash cURL
@@ -224,7 +224,7 @@ curl -X POST "https://www.rocketpunch.com/oauth/token" \
 
 </CodeGroup>
 
-성공한 응답은 액세스 토큰이 담긴 JSON 객체를 반환한다:
+A successful response returns a JSON object with the access token:
 
 ```json
 {
@@ -236,11 +236,11 @@ curl -X POST "https://www.rocketpunch.com/oauth/token" \
 }
 ```
 
-`access_token`과 `refresh_token`을 백엔드에 안전하게 저장한다. 브라우저의 `localStorage`나 모바일 앱의 보호되지 않은 저장소에는 절대 저장하지 않는다.
+Store the `access_token` and `refresh_token` securely in your backend — never in a browser's `localStorage` or a mobile app's unsecured storage.
 
-## 5단계: 액세스 토큰 사용
+## Step 5: Use the Access Token
 
-모든 사용자별 API 요청의 `Authorization` 헤더에 액세스 토큰을 포함한다. `Bearer` 스킴을 사용한다.
+Include the access token in the `Authorization` header of every user-specific API request. Use the `Bearer` scheme.
 
 <CodeGroup>
 
@@ -288,9 +288,9 @@ curl "https://openapi.rocketpunch.com/api/v1/profiles/me" \
 
 </CodeGroup>
 
-## 토큰 갱신
+## Token Refresh
 
-액세스 토큰은 `expires_in`에 표시된 기간(초) 후 만료된다. 토큰이 만료되면 `refresh_token`을 사용해 사용자가 동의 흐름을 다시 거치지 않고도 새 액세스 토큰을 획득한다.
+Access tokens expire after the period indicated in `expires_in` (in seconds). When a token expires, use the `refresh_token` to obtain a new access token without requiring the user to go through the consent flow again.
 
 <CodeGroup>
 
@@ -310,7 +310,7 @@ async function refreshAccessToken(refreshToken) {
   });
 
   if (!response.ok) {
-    // 리프레시 토큰이 만료되었을 수 있음. 사용자에게 재인증을 요청
+    // Refresh token may have expired — prompt the user to re-authorize
     throw new Error("Token refresh failed. Re-authorization required.");
   }
 
@@ -331,7 +331,7 @@ def refresh_access_token(refresh_token):
         headers={"Content-Type": "application/x-www-form-urlencoded"},
     )
     if not response.ok:
-        # 리프레시 토큰이 만료되었을 수 있음. 사용자에게 재인증을 요청
+        # Refresh token may have expired — prompt the user to re-authorize
         raise Exception("Token refresh failed. Re-authorization required.")
     return response.json()
 ```
@@ -339,7 +339,7 @@ def refresh_access_token(refresh_token):
 </CodeGroup>
 
 <Tip>
-  `401 Unauthorized` 응답을 기다리기보다 만료 전에 액세스 토큰을 선제적으로 갱신한다. `expires_in` 값을 추적하고 몇 분 일찍 갱신을 예약해 사용자 세션을 매끄럽게 유지한다.
+  Proactively refresh the access token before it expires rather than waiting for a `401 Unauthorized` response. Track the `expires_in` value and schedule a refresh a few minutes early to keep your users' sessions seamless.
 </Tip>
 
-리프레시 토큰 자체가 만료되었거나 폐기되었다면, 사용자를 전체 인증 흐름으로 다시 안내해야 한다.
+If the refresh token itself has expired or been revoked, you must redirect the user through the full authorization flow again.

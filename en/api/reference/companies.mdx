@@ -1,0 +1,169 @@
+---
+title: "Companies API: Search and Retrieve Company Profiles"
+sidebarTitle: "Companies"
+description: "GET /api/v1/companies — Search and retrieve company profiles from Rocketpunch's index of 170K+ Korean and global technology companies."
+---
+
+The Companies endpoint gives you searchable access to Rocketpunch's index of 170,000\+ company profiles. You can query by company name, description keywords, or industry terms to retrieve structured profile data including founding details, employee count, and website URLs. This endpoint is well suited for powering company directories, enriching CRM records, building investor research tools, or surfacing employer context alongside job listings.
+
+## Endpoint
+
+```text
+GET https://openapi.rocketpunch.com/api/v1/companies
+```
+
+## Request Headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-RP-API-Key` | Yes | Your App Key, in the format `rp_app_xxxxxxxxxxxxxxxx`. Obtain this from the [developer portal](https://developers.rocketpunch.com). |
+
+## Query Parameters
+
+<ParamField query="keyword" type="string">
+  The search term used to filter companies. Matched against company names and descriptions. For example, `fintech`, `kakao`, or `SaaS`.
+</ParamField>
+
+<ParamField query="lang" default="ko" type="string">
+  The language code for the response content. Supported values include `ko` (Korean) and `en` (English), among 11 total supported languages. The response schema is consistent across all languages.
+</ParamField>
+
+<ParamField query="page" default="1" type="integer">
+  The page number to retrieve. Page numbering starts at `1`. Use together with `per_page` to paginate through result sets larger than a single page.
+</ParamField>
+
+<ParamField query="per_page" type="integer">
+  The number of company profiles to return per page. Tune this to balance payload size against the number of API calls your integration requires.
+</ParamField>
+
+## Example Request
+
+<CodeGroup>
+
+```javascript JavaScript
+const response = await fetch(
+  "https://openapi.rocketpunch.com/api/v1/companies?keyword=fintech&lang=en",
+  {
+    method: "GET",
+    headers: {
+      "X-RP-API-Key": "rp_app_xxxxxxxxxxxxxxxx",
+    },
+  }
+);
+
+const data = await response.json();
+console.log(data.items);
+```
+
+```python Python
+import requests
+
+url = "https://openapi.rocketpunch.com/api/v1/companies"
+params = {
+    "keyword": "fintech",
+    "lang": "en",
+}
+headers = {
+    "X-RP-API-Key": "rp_app_xxxxxxxxxxxxxxxx",
+}
+
+response = requests.get(url, params=params, headers=headers)
+data = response.json()
+print(data["items"])
+```
+
+```bash cURL
+curl -G "https://openapi.rocketpunch.com/api/v1/companies" \
+  --data-urlencode "keyword=fintech" \
+  --data-urlencode "lang=en" \
+  -H "X-RP-API-Key: rp_app_xxxxxxxxxxxxxxxx"
+```
+
+</CodeGroup>
+
+## Response
+
+A successful request returns HTTP `200` with a JSON body containing a paginated list of company profiles under the `items` key.
+
+```json
+{
+  "items": [
+    {
+      "id": "co_04kp2m",
+      "name": "Toss",
+      "handle": "toss",
+      "description": "Korea's leading fintech super-app providing payments, banking, and investment services.",
+      "employee_count": 1200,
+      "founded_year": 2013,
+      "website": "https://toss.im"
+    }
+  ],
+  "total": 872,
+  "page": 1,
+  "per_page": 20
+}
+```
+
+<Note>
+  The field values shown above are illustrative examples. Actual values reflect live data at query time. Fields such as `employee_count` and `founded_year` may be `null` if the company has not provided that information on their Rocketpunch profile.
+</Note>
+
+### Response Fields
+
+<ResponseField name="items" type="array" required>
+  An array of company profile objects matching your query. Returns an empty array if no companies match the given `keyword`.
+
+  <Expandable title="Company object fields">
+    <ResponseField name="items[].id" type="string">
+      The unique identifier for the company on Rocketpunch.
+    </ResponseField>
+
+    <ResponseField name="items[].name" type="string">
+      The company's display name as it appears on its Rocketpunch profile.
+    </ResponseField>
+
+    <ResponseField name="items[].handle" type="string">
+      The URL-safe handle for the company's Rocketpunch profile. You can construct a direct profile link using `https://www.rocketpunch.com/companies/{handle}`.
+    </ResponseField>
+
+    <ResponseField name="items[].description" type="string">
+      A short description of the company's business or mission as provided by the company.
+    </ResponseField>
+
+    <ResponseField name="items[].employee_count" type="integer">
+      The approximate number of employees. This value is self-reported and may be `null` if not provided.
+    </ResponseField>
+
+    <ResponseField name="items[].founded_year" type="integer">
+      The four-digit year the company was founded. May be `null` if not provided.
+    </ResponseField>
+
+    <ResponseField name="items[].website" type="string">
+      The company's official website URL. May be `null` if not provided.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="total" type="integer" required>
+  The total count of company profiles matching your query across all pages.
+</ResponseField>
+
+<ResponseField name="page" type="integer" required>
+  The current page number reflected in this response.
+</ResponseField>
+
+<ResponseField name="per_page" type="integer" required>
+  The number of results per page reflected in this response.
+</ResponseField>
+
+## Error Responses
+
+| HTTP Status | Meaning |
+| --- | --- |
+| `401 Unauthorized` | Your `X-RP-API-Key` is missing or invalid. |
+| `429 Too Many Requests` | You have exceeded your plan's rate limit. |
+| `500 Internal Server Error` | An unexpected server-side error occurred. Retry with exponential backoff. |
+
+<Tip>
+  Combine the Companies and Jobs endpoints to enrich job listings with full company context. Retrieve a job listing from `/api/v1/jobs`, then look up the company's `handle` against `/api/v1/companies?keyword={handle}` to display richer employer information to your users.
+</Tip>
