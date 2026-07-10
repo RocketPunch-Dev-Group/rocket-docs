@@ -1,26 +1,22 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "name": "Rocket Punch",
   "theme": "luma",
-  "favicon": "https://media.brand.dev/4bb65048-90b6-4750-a250-45acf9a7863a.jpg",
+  "name": "Rocket Punch",
   "colors": {
     "primary": "#4e64fa",
     "light": "#a2b4e7",
     "dark": "#e9ebf5"
   },
-  "font": {
-    "headings": {
-      "family": "Inter"
-    },
-    "body": {
-      "family": "Inter"
-    }
-  },
+  "favicon": "https://media.brand.dev/4bb65048-90b6-4750-a250-45acf9a7863a.jpg",
   "navbar": {
     "primary": {
       "type": "button",
       "label": "Go to Rocketpunch",
       "href": "https://www.rocketpunch.com"
+    }
+  },
+  "footer": {
+    "socials": {
+      "website": "https://www.rocketpunch.com"
     }
   },
   "navigation": {
@@ -105,12 +101,160 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "시작하기",
+        "icon": "rocket-launch",
+        "pages": [
+          "file",
+          "file-1"
+        ]
+      },
+      {
+        "tab": "계정 · 로그인",
+        "pages": [
+          "file-2",
+          "file-5",
+          "file-3",
+          "file-4",
+          "file-33",
+          "file-7",
+          "world-id"
+        ]
+      },
+      {
+        "tab": "홈",
+        "icon": "house-blank",
+        "pages": [
+          "file-11",
+          "file-46"
+        ]
+      },
+      {
+        "tab": "디스커버",
+        "icon": "newspaper",
+        "pages": [
+          "file-35",
+          "file-36"
+        ]
+      },
+      {
+        "tab": "채용",
+        "icon": "briefcase-blank",
+        "pages": [
+          "file-14",
+          "file-15",
+          "file-16",
+          "file-17"
+        ]
+      },
+      {
+        "tab": "교육",
+        "icon": "graduation-cap",
+        "pages": [
+          "file-19",
+          "file-18"
+        ]
+      },
+      {
+        "tab": "이벤트",
+        "icon": "calendar",
+        "pages": [
+          "file-20",
+          "file-22",
+          "file-34",
+          "file-21",
+          "file-6"
+        ]
+      },
+      {
+        "tab": "트래블",
+        "icon": "plane",
+        "pages": [
+          "file-29",
+          "file-30"
+        ]
+      },
+      {
+        "tab": "프로필",
+        "icon": "circle-user",
+        "pages": [
+          "file-8",
+          "file-9",
+          "file-10",
+          "url"
+        ]
+      },
+      {
+        "tab": "채팅",
+        "icon": "message-middle",
+        "pages": [
+          "file-23",
+          "file-24"
+        ]
+      },
+      {
+        "tab": "월렛",
+        "icon": "wallet",
+        "pages": [
+          "file-25",
+          "file-26",
+          "file-27",
+          "file-28"
+        ]
+      },
+      {
+        "tab": "다국어 지원",
+        "pages": [
+          "file-31"
+        ]
+      },
+      {
+        "tab": "FAQ",
+        "icon": "message-question",
+        "groups": [
+          {
+            "group": "탈퇴",
+            "pages": [
+              "file-38",
+              "file-37"
+            ]
+          },
+          {
+            "group": "기존 계정",
+            "pages": [
+              "file-41",
+              "untitled-page"
+            ]
+          },
+          {
+            "group": "핸들",
+            "pages": [
+              "file-40",
+              "file-45"
+            ]
+          },
+          {
+            "group": "기업 프로필",
+            "pages": [
+              "file-42",
+              "file-43"
+            ]
+          },
+          {
+            "group": "광고 수신",
+            "pages": [
+              "file-44"
+            ]
+          },
+          {
+            "group": "상담 · 문의",
+            "pages": [
+              "file-39"
+            ]
+          }
+        ]
       }
     ]
-  },
-  "footer": {
-    "socials": {
-      "website": "https://www.rocketpunch.com"
-    }
   }
 }
