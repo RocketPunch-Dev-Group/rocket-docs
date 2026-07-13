@@ -1,6 +1,6 @@
 {
   "theme": "luma",
-  "name": "Rocket Punch",
+  "name": "Rocketpunch",
   "colors": {
     "primary": "#4e64fa",
     "light": "#a2b4e7",
@@ -20,237 +20,206 @@
     }
   },
   "navigation": {
-    "tabs": [
+    "dropdowns": [
       {
-        "tab": "User Guide",
-        "groups": [
+        "dropdown": "Untitled Dropdown",
+        "tabs": [
           {
-            "group": "Get Started",
+            "tab": "시작하기",
+            "icon": "rocket-launch"
+          },
+          {
+            "tab": "계정 · 로그인",
             "pages": [
-              "user-guide/introduction",
-              "user-guide/create-account",
-              "user-guide/profile-setup"
+              "file-2",
+              "file-5",
+              "file-3",
+              "file-4",
+              "file-33",
+              "file-7",
+              "world-id"
             ]
           },
           {
-            "group": "Finding Jobs",
-            "pages": [
-              "user-guide/jobs/search",
-              "user-guide/jobs/apply",
-              "user-guide/jobs/quick-apply"
+            "tab": "User Guide",
+            "groups": [
+              {
+                "group": "시작하기",
+                "pages": [
+                  "file",
+                  "file-1"
+                ]
+              }
             ]
           },
           {
-            "group": "Networking",
-            "pages": [
-              "user-guide/networking/discover",
-              "user-guide/networking/events",
-              "user-guide/networking/messaging"
+            "tab": "Developer API",
+            "groups": [
+              {
+                "group": "Get Started",
+                "pages": [
+                  "api/overview",
+                  "api/quickstart",
+                  "api/authentication"
+                ]
+              },
+              {
+                "group": "API Reference",
+                "pages": [
+                  "api/reference/jobs",
+                  "api/reference/companies",
+                  "api/reference/profiles",
+                  "api/reference/events"
+                ]
+              },
+              {
+                "group": "OAuth",
+                "pages": [
+                  "api/oauth/overview",
+                  "api/oauth/flow"
+                ]
+              },
+              {
+                "group": "Resources",
+                "pages": [
+                  "api/rate-limits",
+                  "api/errors",
+                  "api/changelog"
+                ]
+              }
             ]
           },
           {
-            "group": "Education",
+            "tab": "홈",
+            "icon": "house-blank",
             "pages": [
-              "user-guide/education/browse",
-              "user-guide/education/enroll"
+              "file-11",
+              "file-46"
             ]
           },
           {
-            "group": "Companies",
+            "tab": "디스커버",
+            "icon": "newspaper",
             "pages": [
-              "user-guide/companies/profiles",
-              "user-guide/companies/post-jobs",
-              "user-guide/companies/enterprise"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Developer API",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "api/overview",
-              "api/quickstart",
-              "api/authentication"
+              "file-35",
+              "file-36"
             ]
           },
           {
-            "group": "API Reference",
+            "tab": "채용",
+            "icon": "briefcase-blank",
             "pages": [
-              "api/reference/jobs",
-              "api/reference/companies",
-              "api/reference/profiles",
-              "api/reference/events"
+              "file-14",
+              "file-15",
+              "file-16",
+              "file-17"
             ]
           },
           {
-            "group": "OAuth",
+            "tab": "교육",
+            "icon": "graduation-cap",
             "pages": [
-              "api/oauth/overview",
-              "api/oauth/flow"
+              "file-19",
+              "file-18"
             ]
           },
           {
-            "group": "Resources",
+            "tab": "이벤트",
+            "icon": "calendar",
             "pages": [
-              "api/rate-limits",
-              "api/errors",
-              "api/changelog"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "시작하기",
-        "icon": "rocket-launch",
-        "pages": [
-          "file",
-          "file-1"
-        ]
-      },
-      {
-        "tab": "계정 · 로그인",
-        "pages": [
-          "file-2",
-          "file-5",
-          "file-3",
-          "file-4",
-          "file-33",
-          "file-7",
-          "world-id"
-        ]
-      },
-      {
-        "tab": "홈",
-        "icon": "house-blank",
-        "pages": [
-          "file-11",
-          "file-46"
-        ]
-      },
-      {
-        "tab": "디스커버",
-        "icon": "newspaper",
-        "pages": [
-          "file-35",
-          "file-36"
-        ]
-      },
-      {
-        "tab": "채용",
-        "icon": "briefcase-blank",
-        "pages": [
-          "file-14",
-          "file-15",
-          "file-16",
-          "file-17"
-        ]
-      },
-      {
-        "tab": "교육",
-        "icon": "graduation-cap",
-        "pages": [
-          "file-19",
-          "file-18"
-        ]
-      },
-      {
-        "tab": "이벤트",
-        "icon": "calendar",
-        "pages": [
-          "file-20",
-          "file-22",
-          "file-34",
-          "file-21",
-          "file-6"
-        ]
-      },
-      {
-        "tab": "트래블",
-        "icon": "plane",
-        "pages": [
-          "file-29",
-          "file-30"
-        ]
-      },
-      {
-        "tab": "프로필",
-        "icon": "circle-user",
-        "pages": [
-          "file-8",
-          "file-9",
-          "file-10",
-          "url"
-        ]
-      },
-      {
-        "tab": "채팅",
-        "icon": "message-middle",
-        "pages": [
-          "file-23",
-          "file-24"
-        ]
-      },
-      {
-        "tab": "월렛",
-        "icon": "wallet",
-        "pages": [
-          "file-25",
-          "file-26",
-          "file-27",
-          "file-28"
-        ]
-      },
-      {
-        "tab": "다국어 지원",
-        "pages": [
-          "file-31"
-        ]
-      },
-      {
-        "tab": "FAQ",
-        "icon": "message-question",
-        "groups": [
-          {
-            "group": "탈퇴",
-            "pages": [
-              "file-38",
-              "file-37"
+              "file-20",
+              "file-22",
+              "file-34",
+              "file-21",
+              "file-6"
             ]
           },
           {
-            "group": "기존 계정",
+            "tab": "트래블",
+            "icon": "plane",
             "pages": [
-              "file-41",
-              "untitled-page"
+              "file-29",
+              "file-30"
             ]
           },
           {
-            "group": "핸들",
+            "tab": "프로필",
+            "icon": "circle-user",
             "pages": [
-              "file-40",
-              "file-45"
+              "file-8",
+              "file-9",
+              "file-10",
+              "url"
             ]
           },
           {
-            "group": "기업 프로필",
+            "tab": "채팅",
+            "icon": "message-middle",
             "pages": [
-              "file-42",
-              "file-43"
+              "file-23",
+              "file-24"
             ]
           },
           {
-            "group": "광고 수신",
+            "tab": "월렛",
+            "icon": "wallet",
             "pages": [
-              "file-44"
+              "file-25",
+              "file-26",
+              "file-27",
+              "file-28"
             ]
           },
           {
-            "group": "상담 · 문의",
+            "tab": "다국어 지원",
             "pages": [
-              "file-39"
+              "file-31"
+            ]
+          },
+          {
+            "tab": "FAQ",
+            "icon": "message-question",
+            "groups": [
+              {
+                "group": "탈퇴",
+                "pages": [
+                  "file-38",
+                  "file-37"
+                ]
+              },
+              {
+                "group": "기존 계정",
+                "pages": [
+                  "file-41",
+                  "untitled-page"
+                ]
+              },
+              {
+                "group": "핸들",
+                "pages": [
+                  "file-40",
+                  "file-45"
+                ]
+              },
+              {
+                "group": "기업 프로필",
+                "pages": [
+                  "file-42",
+                  "file-43"
+                ]
+              },
+              {
+                "group": "광고 수신",
+                "pages": [
+                  "file-44"
+                ]
+              },
+              {
+                "group": "상담 · 문의",
+                "pages": [
+                  "file-39"
+                ]
+              }
             ]
           }
         ]
