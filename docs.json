@@ -65,7 +65,6 @@
                 "pages": [
                   "file-14",
                   "file-15",
-                  "file-17",
                   "file-16"
                 ]
               },
@@ -89,17 +88,15 @@
               {
                 "group": "트래블",
                 "pages": [
-                  "file-29",
-                  "file-30"
+                  "file-9",
+                  "file-29"
                 ]
               },
               {
                 "group": "프로필",
                 "pages": [
                   "file-8",
-                  "file-9",
-                  "file-10",
-                  "url"
+                  "file-10"
                 ]
               },
               {
@@ -170,45 +167,9 @@
                 ]
               }
             ]
-          },
-          {
-            "tab": "Developer API",
-            "groups": [
-              {
-                "group": "Get Started",
-                "pages": [
-                  "api/overview",
-                  "api/quickstart",
-                  "api/authentication"
-                ]
-              },
-              {
-                "group": "API Reference",
-                "pages": [
-                  "api/reference/jobs",
-                  "api/reference/companies",
-                  "api/reference/profiles",
-                  "api/reference/events"
-                ]
-              },
-              {
-                "group": "OAuth",
-                "pages": [
-                  "api/oauth/overview",
-                  "api/oauth/flow"
-                ]
-              },
-              {
-                "group": "Resources",
-                "pages": [
-                  "api/rate-limits",
-                  "api/errors",
-                  "api/changelog"
-                ]
-              }
-            ]
           }
-        ]
+        ],
+        "icon": "rocket-launch"
       }
     ]
   }
