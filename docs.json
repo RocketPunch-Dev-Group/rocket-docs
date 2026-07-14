@@ -37,7 +37,7 @@
               {
                 "group": "계정",
                 "pages": [
-                  "linked-accounts",
+                  "account-linked",
                   "account-transfer",
                   "handle",
                   "logout-delete",
