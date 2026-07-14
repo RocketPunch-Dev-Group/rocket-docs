@@ -30,7 +30,7 @@
               {
                 "group": "시작하기",
                 "pages": [
-                  "introduction",
+                  "start-introduction",
                   "how-to-use"
                 ]
               },
