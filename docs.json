@@ -37,13 +37,13 @@
               {
                 "group": "계정",
                 "pages": [
-                  "file",
+                  "account-login",
+                  "account-identity-verification",
                   "account-linked",
                   "account-transfer",
                   "handle",
                   "logout-delete",
-                  "world-id",
-                  "untitled-page"
+                  "world-id"
                 ]
               },
               {
@@ -133,8 +133,7 @@
                   {
                     "group": "기존 계정",
                     "pages": [
-                      "file-41",
-                      "untitled-page"
+                      "file-41"
                     ]
                   },
                   {
