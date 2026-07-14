@@ -72,15 +72,15 @@
                 "group": "교육",
                 "pages": [
                   "edu-search",
-                  "file-18"
+                  "edu-detail"
                 ]
               },
               {
                 "group": "이벤트",
                 "pages": [
-                  "file-20",
-                  "file-22",
-                  "file-34",
+                  "event-overview",
+                  "event-participation-request",
+                  "event-ticket-purchase",
                   "file-21",
                   "file-6"
                 ]
