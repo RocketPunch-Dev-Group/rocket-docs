@@ -37,6 +37,8 @@
               {
                 "group": "계정",
                 "pages": [
+                  "login",
+                  "identity-verification",
                   "account-linked",
                   "account-transfer",
                   "handle",
