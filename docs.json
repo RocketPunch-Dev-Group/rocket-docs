@@ -37,10 +37,10 @@
               {
                 "group": "계정 · 로그인",
                 "pages": [
-                  "file-2",
-                  "file-5",
-                  "file-3",
-                  "file-4",
+                  "login",
+                  "identitiy-verification",
+                  "linked-accounts",
+                  "account-transfer",
                   "file-33",
                   "file-7",
                   "world-id"
