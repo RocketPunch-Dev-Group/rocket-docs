@@ -102,7 +102,7 @@
                 "group": "채팅",
                 "pages": [
                   "chat-overview",
-                  "file-24"
+                  "chat-usage"
                 ]
               },
               {
@@ -117,7 +117,7 @@
               {
                 "group": "다국어 지원",
                 "pages": [
-                  "file-31"
+                  "language-transfer"
                 ]
               },
               {
