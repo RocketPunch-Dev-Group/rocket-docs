@@ -30,8 +30,8 @@
               {
                 "group": "시작하기",
                 "pages": [
-                  "file",
-                  "file-1"
+                  "introduction",
+                  "how-to-use"
                 ]
               },
               {
