@@ -35,10 +35,8 @@
                 ]
               },
               {
-                "group": "계정 · 로그인",
+                "group": "계정",
                 "pages": [
-                  "login",
-                  "identitiy-verification",
                   "linked-accounts",
                   "account-transfer",
                   "handle",
