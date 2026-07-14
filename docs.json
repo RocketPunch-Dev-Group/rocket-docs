@@ -65,13 +65,13 @@
                 "pages": [
                   "jobs-search",
                   "jobs-detail",
-                  "file-16"
+                  "jobs-apply"
                 ]
               },
               {
                 "group": "교육",
                 "pages": [
-                  "file-19",
+                  "edu-search",
                   "file-18"
                 ]
               },
