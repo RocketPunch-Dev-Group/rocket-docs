@@ -37,11 +37,13 @@
               {
                 "group": "계정",
                 "pages": [
+                  "file",
                   "account-linked",
                   "account-transfer",
                   "handle",
                   "logout-delete",
-                  "world-id"
+                  "world-id",
+                  "untitled-page"
                 ]
               },
               {
