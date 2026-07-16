@@ -80,7 +80,6 @@
                 "group": "이벤트",
                 "pages": [
                   "event-overview",
-                  "event-participation-request",
                   "event-ticket-purchase",
                   "event-ticket-refund",
                   "event-host"
