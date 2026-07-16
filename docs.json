@@ -31,6 +31,7 @@
                 "group": "시작하기",
                 "pages": [
                   "start-introduction",
+                  "start-history",
                   "start-how-to-use"
                 ]
               },
@@ -88,14 +89,14 @@
               {
                 "group": "트래블",
                 "pages": [
-                  "file-9"
+                  "travel-introduction"
                 ]
               },
               {
                 "group": "프로필",
                 "pages": [
                   "profile-overview",
-                  "file-10"
+                  "share-my-profile"
                 ]
               },
               {
@@ -108,53 +109,30 @@
               {
                 "group": "월렛",
                 "pages": [
-                  "file-25",
-                  "file-26",
-                  "file-27",
-                  "file-28"
+                  "start-wallet",
+                  "wallet-cashback",
+                  "wallet-usage",
+                  "wallet-profit"
                 ]
               },
               {
-                "group": "다국어 지원",
+                "group": "지역 및 언어 설정",
                 "pages": [
-                  "language-transfer"
+                  "language-transfer",
+                  "cash-transfer",
+                  "timezone-transfer"
                 ]
               },
               {
-                "group": "FAQ",
+                "group": "자주 묻는 질문",
                 "pages": [
-                  {
-                    "group": "탈퇴",
-                    "pages": [
-                      "file-38",
-                      "file-37"
-                    ]
-                  },
-                  {
-                    "group": "기존 계정",
-                    "pages": [
-                      "file-41"
-                    ]
-                  },
-                  {
-                    "group": "핸들",
-                    "pages": [
-                      "file-40",
-                      "file-45"
-                    ]
-                  },
-                  {
-                    "group": "광고 수신",
-                    "pages": [
-                      "file-44"
-                    ]
-                  },
-                  {
-                    "group": "상담 · 문의",
-                    "pages": [
-                      "file-39"
-                    ]
-                  }
+                  "login-error",
+                  "current-id-error",
+                  "delete-error",
+                  "handle-error",
+                  "no-more-ad",
+                  "phone-support",
+                  "deleted-profile-search"
                 ]
               }
             ]
