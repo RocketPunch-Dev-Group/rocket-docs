@@ -123,6 +123,10 @@
                 ]
               },
               {
+                "group": "신고하기",
+                "pages": []
+              },
+              {
                 "group": "자주 묻는 질문",
                 "pages": [
                   "login-error",
