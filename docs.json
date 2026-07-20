@@ -48,10 +48,10 @@
                 ]
               },
               {
-                "group": "신고 · 차단",
+                "group": "프로필",
                 "pages": [
-                  "file-1",
-                  "file-2"
+                  "profile-overview",
+                  "share-my-profile"
                 ]
               },
               {
@@ -99,13 +99,6 @@
                 ]
               },
               {
-                "group": "프로필",
-                "pages": [
-                  "profile-overview",
-                  "share-my-profile"
-                ]
-              },
-              {
                 "group": "채팅",
                 "pages": [
                   "chat-overview",
@@ -127,6 +120,14 @@
                   "language-transfer",
                   "cash-transfer",
                   "timezone-transfer"
+                ]
+              },
+              {
+                "group": "신고 · 차단",
+                "pages": [
+                  "post-report",
+                  "profile-report",
+                  "discover-report"
                 ]
               },
               {
