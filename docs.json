@@ -40,9 +40,9 @@
                 "pages": [
                   "account-login",
                   "account-identity-verification",
+                  "handle",
                   "account-linked",
                   "account-transfer",
-                  "handle",
                   "logout-delete",
                   "world-id"
                 ]
