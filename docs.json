@@ -132,14 +132,14 @@
               {
                 "group": "자주 묻는 질문",
                 "pages": [
+                  "newway",
                   "login-error",
                   "current-id-error",
                   "delete-error",
                   "handle-error",
                   "no-more-ad",
                   "phone-support",
-                  "deleted-profile-search",
-                  "newway"
+                  "deleted-profile-search"
                 ]
               }
             ]
