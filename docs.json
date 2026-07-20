@@ -119,7 +119,8 @@
                 "pages": [
                   "language-transfer",
                   "cash-transfer",
-                  "timezone-transfer"
+                  "timezone-transfer",
+                  "language-location-time-setting"
                 ]
               },
               {
