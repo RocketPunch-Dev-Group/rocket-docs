@@ -50,7 +50,6 @@
               {
                 "group": "신고 · 차단",
                 "pages": [
-                  "file",
                   "file-1",
                   "file-2"
                 ]
