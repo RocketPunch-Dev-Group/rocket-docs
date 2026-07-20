@@ -40,11 +40,18 @@
                 "pages": [
                   "account-login",
                   "account-identity-verification",
+                  "handle",
                   "account-linked",
                   "account-transfer",
-                  "handle",
                   "logout-delete",
                   "world-id"
+                ]
+              },
+              {
+                "group": "프로필",
+                "pages": [
+                  "profile-overview",
+                  "share-my-profile"
                 ]
               },
               {
@@ -80,7 +87,6 @@
                 "group": "이벤트",
                 "pages": [
                   "event-overview",
-                  "event-participation-request",
                   "event-ticket-purchase",
                   "event-ticket-refund",
                   "event-host"
@@ -90,13 +96,6 @@
                 "group": "트래블",
                 "pages": [
                   "travel-introduction"
-                ]
-              },
-              {
-                "group": "프로필",
-                "pages": [
-                  "profile-overview",
-                  "share-my-profile"
                 ]
               },
               {
@@ -120,12 +119,20 @@
                 "pages": [
                   "language-transfer",
                   "cash-transfer",
-                  "timezone-transfer"
+                  "timezone-transfer",
+                  "language-location-time-setting"
+                ]
+              },
+              {
+                "group": "신고 · 차단",
+                "pages": [
+                  "report"
                 ]
               },
               {
                 "group": "자주 묻는 질문",
                 "pages": [
+                  "newway",
                   "login-error",
                   "current-id-error",
                   "delete-error",
