@@ -48,6 +48,14 @@
                 ]
               },
               {
+                "group": "신고 · 차단",
+                "pages": [
+                  "file",
+                  "file-1",
+                  "file-2"
+                ]
+              },
+              {
                 "group": "홈",
                 "pages": [
                   "home-overview",
@@ -121,10 +129,6 @@
                   "cash-transfer",
                   "timezone-transfer"
                 ]
-              },
-              {
-                "group": "신고 · 차단",
-                "pages": []
               },
               {
                 "group": "자주 묻는 질문",
