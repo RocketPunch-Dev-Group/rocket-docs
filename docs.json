@@ -125,7 +125,7 @@
               {
                 "group": "신고 · 차단",
                 "pages": [
-                  "post-report",
+                  "report",
                   "profile-report",
                   "discover-report"
                 ]
