@@ -42,7 +42,7 @@
                   "account-identity-verification",
                   "account-initialization",
                   "account-linked",
-                  "account-transfer",
+                  "account-migration",
                   "account-delete",
                   "account-world"
                 ]
