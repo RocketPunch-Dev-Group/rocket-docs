@@ -117,10 +117,10 @@
               {
                 "group": "지역 및 언어 설정",
                 "pages": [
+                  "language-region",
                   "language-transfer",
                   "cash-transfer",
-                  "timezone-transfer",
-                  "language-location-time-setting"
+                  "timezone-transfer"
                 ]
               },
               {
