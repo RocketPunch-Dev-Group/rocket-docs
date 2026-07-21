@@ -40,11 +40,11 @@
                 "pages": [
                   "account-login",
                   "account-identity-verification",
-                  "start-initialization",
+                  "account-initialization",
                   "account-linked",
                   "account-transfer",
-                  "logout-delete",
-                  "world-id"
+                  "account-delete",
+                  "account-world"
                 ]
               },
               {
