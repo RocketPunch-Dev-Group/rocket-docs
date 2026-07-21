@@ -126,7 +126,8 @@
               {
                 "group": "신고 · 차단",
                 "pages": [
-                  "report"
+                  "report-all",
+                  "report-identity-theft"
                 ]
               },
               {
