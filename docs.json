@@ -40,7 +40,7 @@
                 "pages": [
                   "account-login",
                   "account-identity-verification",
-                  "handle",
+                  "start-initialization",
                   "account-linked",
                   "account-transfer",
                   "logout-delete",
