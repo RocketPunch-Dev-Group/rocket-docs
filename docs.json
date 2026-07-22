@@ -124,8 +124,9 @@
                 "group": "계정 설정",
                 "pages": [
                   "settings-language-region-currency",
-                  "settings-notification",
-                  "settings-certification-badge"
+                  "setting-notification",
+                  "settings-certification-badge",
+                  "settings-billing"
                 ]
               },
               {
