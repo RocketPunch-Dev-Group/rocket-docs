@@ -114,12 +114,6 @@
                 ]
               },
               {
-                "group": "언어 및 지역",
-                "pages": [
-                  "language-region-setting"
-                ]
-              },
-              {
                 "group": "신고 · 차단",
                 "pages": [
                   "report-all",
@@ -129,7 +123,8 @@
               {
                 "group": "계정 설정",
                 "pages": [
-                  "language-region-currency"
+                  "settings-language-region-currency",
+                  "settings-certification-badge"
                 ]
               },
               {
