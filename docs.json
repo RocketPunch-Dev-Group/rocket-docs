@@ -127,22 +127,15 @@
                 ]
               },
               {
-                "group": "자주 묻는 질문",
-                "pages": [
-                  "newway",
-                  "login-error",
-                  "current-id-error",
-                  "delete-error",
-                  "handle-error",
-                  "no-more-ad",
-                  "phone-support",
-                  "deleted-profile-search"
-                ]
-              },
-              {
                 "group": "계정 설정",
                 "pages": [
                   "file-1"
+                ]
+              },
+              {
+                "group": "자주 묻는 질문",
+                "pages": [
+                  "FAQ"
                 ]
               }
             ]
