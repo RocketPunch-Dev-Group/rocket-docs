@@ -114,7 +114,7 @@
                 ]
               },
               {
-                "group": "언어 및 지역 설정",
+                "group": "언어 및 지역",
                 "pages": [
                   "language-region"
                 ]
@@ -137,6 +137,12 @@
                   "no-more-ad",
                   "phone-support",
                   "deleted-profile-search"
+                ]
+              },
+              {
+                "group": "계정 설정",
+                "pages": [
+                  "file-1"
                 ]
               }
             ]
