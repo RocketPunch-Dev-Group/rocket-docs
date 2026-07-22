@@ -126,7 +126,8 @@
                   "settings-language-region-currency",
                   "setting-notification",
                   "settings-certification-badge",
-                  "settings-billing"
+                  "settings-billing",
+                  "settings-security"
                 ]
               },
               {
