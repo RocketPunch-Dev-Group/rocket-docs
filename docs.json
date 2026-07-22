@@ -123,7 +123,8 @@
               {
                 "group": "계정 설정",
                 "pages": [
-                  "settings-language-region-currency"
+                  "settings-language-region-currency",
+                  "settings-notification"
                 ]
               },
               {
