@@ -116,7 +116,7 @@
               {
                 "group": "언어 및 지역",
                 "pages": [
-                  "language-region"
+                  "language-region-setting"
                 ]
               },
               {
@@ -129,7 +129,7 @@
               {
                 "group": "계정 설정",
                 "pages": [
-                  "file-1"
+                  "language-region-currency"
                 ]
               },
               {
