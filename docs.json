@@ -133,7 +133,7 @@
                 ]
               },
               {
-                "group": "계정 설정",
+                "group": "환경 설정",
                 "pages": [
                   "settings-language-region-currency",
                   "setting-notification",
