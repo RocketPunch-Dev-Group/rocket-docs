@@ -40,6 +40,7 @@
                 "pages": [
                   "account-login",
                   "account-identity-verification",
+                  "account-login-error",
                   "account-initialization",
                   "account-linked",
                   "account-migration",
@@ -51,6 +52,11 @@
                 "group": "프로필",
                 "pages": [
                   "profile-overview",
+                  "profile-career",
+                  "profile-education",
+                  "profile-experience",
+                  "profile-language",
+                  "profile-library",
                   "profile-share"
                 ]
               },
