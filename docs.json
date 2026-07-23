@@ -125,11 +125,11 @@
                 "group": "신고 · 차단",
                 "pages": [
                   "report-all",
-                  "report-identity-theft",
                   "report-post",
                   "report-discover",
                   "report-chat",
-                  "report-profile"
+                  "report-profile",
+                  "report-identity-theft"
                 ]
               },
               {
