@@ -52,11 +52,11 @@
                 "group": "프로필",
                 "pages": [
                   "profile-overview",
+                  "profile-library",
                   "profile-career",
                   "profile-education",
                   "profile-experience",
                   "profile-language",
-                  "profile-library",
                   "profile-share"
                 ]
               },
