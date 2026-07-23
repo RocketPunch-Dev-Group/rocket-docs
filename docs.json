@@ -26,7 +26,7 @@
         "tabs": [
           {
             "tab": "User Guide",
-            "groups": [
+            "pages": [
               {
                 "group": "시작하기",
                 "pages": [
@@ -52,15 +52,15 @@
                 "group": "프로필",
                 "pages": [
                   "profile-overview",
-                  "profile-private",
-                  "profile-share",
                   "profile-library",
+                  "profile-private",
                   "profile-career",
                   "profile-education",
                   "profile-experience",
                   "profile-language"
                 ]
               },
+              "profile-share",
               {
                 "group": "피드",
                 "pages": [
