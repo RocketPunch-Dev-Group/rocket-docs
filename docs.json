@@ -52,12 +52,13 @@
                 "group": "프로필",
                 "pages": [
                   "profile-overview",
+                  "profile-private",
                   "profile-library",
+                  "profile-share",
                   "profile-career",
                   "profile-education",
                   "profile-experience",
-                  "profile-language",
-                  "profile-share"
+                  "profile-language"
                 ]
               },
               {
