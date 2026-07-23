@@ -64,8 +64,10 @@
               {
                 "group": "피드",
                 "pages": [
-                  "home-overview",
-                  "home-usage"
+                  "feed-overview",
+                  "feed-post",
+                  "feed-reaction",
+                  "feed-usage"
                 ]
               },
               {
