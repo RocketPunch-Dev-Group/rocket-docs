@@ -66,8 +66,7 @@
                 "pages": [
                   "feed-overview",
                   "feed-post",
-                  "feed-reaction",
-                  "feed-usage"
+                  "feed-reaction"
                 ]
               },
               {
