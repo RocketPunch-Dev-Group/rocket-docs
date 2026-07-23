@@ -53,8 +53,8 @@
                 "pages": [
                   "profile-overview",
                   "profile-private",
-                  "profile-library",
                   "profile-share",
+                  "profile-library",
                   "profile-career",
                   "profile-education",
                   "profile-experience",
