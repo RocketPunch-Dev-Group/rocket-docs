@@ -36,7 +36,7 @@
                 ]
               },
               {
-                "group": "계정",
+                "group": "로그인",
                 "pages": [
                   "account-login",
                   "account-identity-verification",
