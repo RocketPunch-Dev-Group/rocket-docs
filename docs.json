@@ -36,29 +36,38 @@
                 ]
               },
               {
-                "group": "계정",
+                "group": "로그인",
                 "pages": [
                   "account-login",
                   "account-identity-verification",
-                  "handle",
+                  "account-login-error",
+                  "account-initialization",
                   "account-linked",
-                  "account-transfer",
-                  "logout-delete",
-                  "world-id"
+                  "account-migration",
+                  "account-delete",
+                  "account-world"
                 ]
               },
               {
                 "group": "프로필",
                 "pages": [
                   "profile-overview",
-                  "share-my-profile"
+                  "profile-library",
+                  "settings-certification-badge",
+                  "profile-career",
+                  "profile-share",
+                  "profile-private",
+                  "profile-education",
+                  "profile-experience",
+                  "profile-language"
                 ]
               },
               {
-                "group": "홈",
+                "group": "피드",
                 "pages": [
-                  "home-overview",
-                  "home-usage"
+                  "feed-overview",
+                  "feed-post",
+                  "feed-reaction"
                 ]
               },
               {
@@ -72,7 +81,6 @@
                 "group": "채용",
                 "pages": [
                   "jobs-search",
-                  "jobs-detail",
                   "jobs-apply"
                 ]
               },
@@ -80,7 +88,7 @@
                 "group": "교육",
                 "pages": [
                   "edu-search",
-                  "edu-detail"
+                  "edu-apply"
                 ]
               },
               {
@@ -115,31 +123,29 @@
                 ]
               },
               {
-                "group": "지역 및 언어 설정",
+                "group": "신고 · 차단",
                 "pages": [
-                  "language-transfer",
-                  "cash-transfer",
-                  "timezone-transfer",
-                  "language-location-time-setting"
+                  "report-all",
+                  "report-post",
+                  "report-discover",
+                  "report-chat",
+                  "report-profile",
+                  "report-identity-theft"
                 ]
               },
               {
-                "group": "신고 · 차단",
+                "group": "환경 설정",
                 "pages": [
-                  "report"
+                  "settings-language-region-currency",
+                  "setting-notification",
+                  "settings-billing",
+                  "settings-security"
                 ]
               },
               {
                 "group": "자주 묻는 질문",
                 "pages": [
-                  "newway",
-                  "login-error",
-                  "current-id-error",
-                  "delete-error",
-                  "handle-error",
-                  "no-more-ad",
-                  "phone-support",
-                  "deleted-profile-search"
+                  "FAQ"
                 ]
               }
             ]
