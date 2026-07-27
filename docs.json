@@ -116,10 +116,7 @@
               {
                 "group": "월렛",
                 "pages": [
-                  "start-wallet",
-                  "wallet-cashback",
-                  "wallet-usage",
-                  "wallet-profit"
+                  "start-wallet"
                 ]
               },
               {
