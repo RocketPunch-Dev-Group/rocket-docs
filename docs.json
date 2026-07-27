@@ -125,7 +125,6 @@
               {
                 "group": "신고 · 차단",
                 "pages": [
-                  "report-all",
                   "report-post",
                   "report-discover",
                   "report-chat",
