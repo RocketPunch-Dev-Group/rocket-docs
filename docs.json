@@ -117,14 +117,14 @@
                 "group": "월렛",
                 "pages": [
                   "start-wallet",
+                  "wallet-manage",
                   "wallet-passkey",
+                  "wallet-nft",
+                  "wallet-giftcard",
                   "wallet-exchange",
                   "wallet-send",
                   "wallet-recieve",
-                  "wallet-manage",
-                  "wallet-networks-token",
-                  "wallet-nft",
-                  "wallet-giftcard"
+                  "wallet-networks-token"
                 ]
               },
               {
