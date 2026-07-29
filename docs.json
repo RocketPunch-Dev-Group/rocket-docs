@@ -163,7 +163,8 @@
   },
   "logo": {
     "light": "/images/docs-light.svg",
-    "dark": "/images/docs-dark.svg"
+    "dark": "/images/docs-dark.svg",
+    "href": "https://www.rocketpunch.com/"
   },
   "background": {
     "color": {
