@@ -25,7 +25,7 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "User Guide",
+        "tab": "서비스 이용 가이드",
         "groups": [
           {
             "group": "시작하기",
@@ -151,7 +151,8 @@
               "FAQ"
             ]
           }
-        ]
+        ],
+        "icon": "book"
       }
     ]
   },
