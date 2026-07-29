@@ -118,9 +118,9 @@
                 "pages": [
                   "start-wallet",
                   "wallet-passkey",
+                  "wallet-exchange",
                   "wallet-manage",
                   "wallet-send",
-                  "wallet-exchange",
                   "wallet-recieve",
                   "wallet-networks-token",
                   "wallet-nft",
