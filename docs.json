@@ -118,8 +118,8 @@
                 "pages": [
                   "start-wallet",
                   "wallet-passkey",
-                  "wallet-exchange",
                   "wallet-manage",
+                  "wallet-exchange",
                   "wallet-send",
                   "wallet-recieve",
                   "wallet-networks-token",
