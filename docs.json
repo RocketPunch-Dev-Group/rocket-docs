@@ -23,136 +23,141 @@
     }
   },
   "navigation": {
-    "tabs": [
+    "languages": [
       {
-        "tab": "서비스 이용 가이드",
-        "groups": [
+        "language": "ko",
+        "tabs": [
           {
-            "group": "시작하기",
-            "pages": [
-              "start-introduction",
-              "start-history",
-              "start-how-to-use"
-            ]
-          },
-          {
-            "group": "로그인",
-            "pages": [
-              "account-login",
-              "account-identity-verification",
-              "account-login-error",
-              "account-initialization",
-              "account-linked",
-              "account-migration",
-              "account-delete",
-              "account-world"
-            ]
-          },
-          {
-            "group": "프로필",
-            "pages": [
-              "profile-overview",
-              "profile-library",
-              "settings-certification-badge",
-              "profile-share",
-              "profile-career",
-              "profile-private",
-              "profile-education",
-              "profile-experience",
-              "profile-language"
-            ]
-          },
-          {
-            "group": "피드",
-            "pages": [
-              "feed-overview",
-              "feed-post",
-              "feed-reaction"
-            ]
-          },
-          {
-            "group": "디스커버",
-            "pages": [
-              "discover-overview",
-              "discover-usage"
-            ]
-          },
-          {
-            "group": "채용",
-            "pages": [
-              "jobs-search",
-              "jobs-apply"
-            ]
-          },
-          {
-            "group": "교육",
-            "pages": [
-              "edu-search",
-              "edu-apply"
-            ]
-          },
-          {
-            "group": "이벤트",
-            "pages": [
-              "event-overview",
-              "event-ticket-purchase",
-              "event-ticket-refund",
-              "event-host"
-            ]
-          },
-          {
-            "group": "트래블",
-            "pages": [
-              "travel-introduction"
-            ]
-          },
-          {
-            "group": "채팅",
-            "pages": [
-              "chat-overview",
-              "chat-usage"
-            ]
-          },
-          {
-            "group": "월렛",
-            "pages": [
-              "start-wallet",
-              "wallet-passkey",
-              "wallet-manage",
-              "wallet-exchange",
-              "wallet-send",
-              "wallet-recieve",
-              "wallet-networks-token",
-              "wallet-nft",
-              "wallet-giftcard"
-            ]
-          },
-          {
-            "group": "신고 · 차단",
-            "pages": [
-              "report-post-reply",
-              "report-discover",
-              "report-chat",
-              "report-profile"
-            ]
-          },
-          {
-            "group": "환경 설정",
-            "pages": [
-              "settings-language-region-currency",
-              "setting-notification",
-              "settings-billing",
-              "settings-security"
-            ]
-          },
-          {
-            "group": "자주 묻는 질문",
-            "pages": [
-              "FAQ"
+            "tab": "서비스 이용 가이드",
+            "icon": "book",
+            "groups": [
+              {
+                "group": "시작하기",
+                "pages": [
+                  "start-introduction",
+                  "start-history",
+                  "start-how-to-use"
+                ]
+              },
+              {
+                "group": "로그인",
+                "pages": [
+                  "account-login",
+                  "account-identity-verification",
+                  "account-login-error",
+                  "account-initialization",
+                  "account-linked",
+                  "account-migration",
+                  "account-delete",
+                  "account-world"
+                ]
+              },
+              {
+                "group": "프로필",
+                "pages": [
+                  "profile-overview",
+                  "profile-library",
+                  "settings-certification-badge",
+                  "profile-share",
+                  "profile-career",
+                  "profile-private",
+                  "profile-education",
+                  "profile-experience",
+                  "profile-language"
+                ]
+              },
+              {
+                "group": "피드",
+                "pages": [
+                  "feed-overview",
+                  "feed-post",
+                  "feed-reaction"
+                ]
+              },
+              {
+                "group": "디스커버",
+                "pages": [
+                  "discover-overview",
+                  "discover-usage"
+                ]
+              },
+              {
+                "group": "채용",
+                "pages": [
+                  "jobs-search",
+                  "jobs-apply"
+                ]
+              },
+              {
+                "group": "교육",
+                "pages": [
+                  "edu-search",
+                  "edu-apply"
+                ]
+              },
+              {
+                "group": "이벤트",
+                "pages": [
+                  "event-overview",
+                  "event-ticket-purchase",
+                  "event-ticket-refund",
+                  "event-host"
+                ]
+              },
+              {
+                "group": "트래블",
+                "pages": [
+                  "travel-introduction"
+                ]
+              },
+              {
+                "group": "채팅",
+                "pages": [
+                  "chat-overview",
+                  "chat-usage"
+                ]
+              },
+              {
+                "group": "월렛",
+                "pages": [
+                  "start-wallet",
+                  "wallet-passkey",
+                  "wallet-manage",
+                  "wallet-exchange",
+                  "wallet-send",
+                  "wallet-recieve",
+                  "wallet-networks-token",
+                  "wallet-nft",
+                  "wallet-giftcard"
+                ]
+              },
+              {
+                "group": "신고 · 차단",
+                "pages": [
+                  "report-post-reply",
+                  "report-discover",
+                  "report-chat",
+                  "report-profile"
+                ]
+              },
+              {
+                "group": "환경 설정",
+                "pages": [
+                  "settings-language-region-currency",
+                  "setting-notification",
+                  "settings-billing",
+                  "settings-security"
+                ]
+              },
+              {
+                "group": "자주 묻는 질문",
+                "pages": [
+                  "FAQ"
+                ]
+              }
             ]
           }
-        ],
-        "icon": "book"
+        ]
       }
     ]
   },
@@ -168,5 +173,8 @@
   },
   "icons": {
     "library": "lucide"
+  },
+  "appearance": {
+    "default": "light"
   }
 }
