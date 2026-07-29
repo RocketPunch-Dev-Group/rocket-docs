@@ -1,12 +1,15 @@
 {
-  "theme": "luma",
+  "theme": "mint",
   "name": "Rocketpunch Docs",
   "colors": {
-    "primary": "#4e64fa",
-    "light": "#a2b4e7",
-    "dark": "#e9ebf5"
+    "primary": "#121314",
+    "light": "#121314",
+    "dark": "#ffffff"
   },
-  "favicon": "https://media.brand.dev/4bb65048-90b6-4750-a250-45acf9a7863a.jpg",
+  "favicon": {
+    "light": "https://media.brand.dev/4bb65048-90b6-4750-a250-45acf9a7863a.jpg",
+    "dark": "/images/favicon.png"
+  },
   "navbar": {
     "primary": {
       "type": "button",
@@ -157,5 +160,18 @@
         "icon": "rocket-launch"
       }
     ]
+  },
+  "logo": {
+    "light": "/images/docs-light.svg",
+    "dark": "/images/docs-dark.svg"
+  },
+  "background": {
+    "color": {
+      "light": "#ffffff",
+      "dark": "#0E0F10"
+    }
+  },
+  "icons": {
+    "library": "lucide"
   }
 }
