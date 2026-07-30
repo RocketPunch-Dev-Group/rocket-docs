@@ -173,7 +173,7 @@
     }
   },
   "icons": {
-    "library": "lucide"
+    "library": "fontawesome"
   },
   "appearance": {
     "default": "light"
