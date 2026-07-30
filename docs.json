@@ -132,6 +132,15 @@
                 ]
               },
               {
+                "group": "활동",
+                "pages": [
+                  "activity-jobs-apply",
+                  "activity-event",
+                  "activity-contents",
+                  "activity-etc"
+                ]
+              },
+              {
                 "group": "신고 · 차단",
                 "pages": [
                   "report-post-reply",
