@@ -121,7 +121,6 @@
                 "group": "월렛",
                 "pages": [
                   "wallet-overview",
-                  "wallet-passkey",
                   "wallet-manage",
                   "wallet-send",
                   "wallet-recieve",
