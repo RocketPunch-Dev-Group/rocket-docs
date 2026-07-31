@@ -144,13 +144,13 @@
                 "group": "신고 · 차단",
                 "pages": [
                   "report-post-reply",
-                  "report-discover",
-                  "report-chat",
-                  "report-profile"
+                  "report-profile",
+                  "report-jobs-edu",
+                  "report-discover"
                 ]
               },
               {
-                "group": "환경 설정",
+                "group": "계정 설정",
                 "pages": [
                   "settings-language-region-currency",
                   "setting-notification",
