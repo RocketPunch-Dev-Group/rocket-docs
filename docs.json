@@ -120,7 +120,7 @@
               {
                 "group": "월렛",
                 "pages": [
-                  "start-wallet",
+                  "wallet-overview",
                   "wallet-passkey",
                   "wallet-manage",
                   "wallet-exchange",
