@@ -123,9 +123,9 @@
                   "wallet-overview",
                   "wallet-passkey",
                   "wallet-manage",
-                  "wallet-exchange",
                   "wallet-send",
                   "wallet-recieve",
+                  "wallet-exchange",
                   "wallet-networks-token",
                   "wallet-nft",
                   "wallet-giftcard"
