@@ -32,6 +32,12 @@
             "icon": "book",
             "groups": [
               {
+                "group": "자주 묻는 질문",
+                "pages": [
+                  "FAQ"
+                ]
+              },
+              {
                 "group": "시작하기",
                 "pages": [
                   "start-introduction",
@@ -122,6 +128,7 @@
                 "pages": [
                   "wallet-overview",
                   "wallet-manage",
+                  "untitled-page-2",
                   "wallet-send",
                   "wallet-recieve",
                   "wallet-exchange",
@@ -155,12 +162,6 @@
                   "setting-notification",
                   "settings-billing",
                   "settings-security"
-                ]
-              },
-              {
-                "group": "자주 묻는 질문",
-                "pages": [
-                  "FAQ"
                 ]
               }
             ]
