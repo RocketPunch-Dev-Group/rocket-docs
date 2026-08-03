@@ -186,5 +186,12 @@
   },
   "appearance": {
     "default": "light"
-  }
+  },
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/FAQ",
+      "permanent": false
+    }
+  ]
 }
