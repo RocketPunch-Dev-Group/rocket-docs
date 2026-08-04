@@ -34,141 +34,191 @@
               {
                 "group": "자주 묻는 질문",
                 "pages": [
-                  "index"
+                  "service/index"
                 ]
               },
               {
                 "group": "시작하기",
                 "pages": [
-                  "start-introduction",
-                  "start-history",
-                  "start-how-to-use"
+                  "service/start-introduction",
+                  "service/start-history",
+                  "service/start-how-to-use"
                 ]
               },
               {
                 "group": "로그인",
                 "pages": [
-                  "account-login",
-                  "account-identity-verification",
-                  "account-login-error",
-                  "account-initialization",
-                  "account-linked",
-                  "account-migration",
-                  "account-delete",
-                  "account-world"
+                  "service/account-login",
+                  "service/account-identity-verification",
+                  "service/account-login-error",
+                  "service/account-initialization",
+                  "service/account-linked",
+                  "service/account-migration",
+                  "service/account-delete",
+                  "service/account-world"
                 ]
               },
               {
                 "group": "프로필",
                 "pages": [
-                  "profile-overview",
-                  "profile-library",
-                  "settings-certification-badge",
-                  "profile-share",
-                  "profile-career",
-                  "profile-private",
-                  "profile-education",
-                  "profile-experience",
-                  "profile-language"
+                  "service/profile-overview",
+                  "service/profile-library",
+                  "service/settings-certification-badge",
+                  "service/profile-share",
+                  "service/profile-career",
+                  "service/profile-private",
+                  "service/profile-education",
+                  "service/profile-experience",
+                  "service/profile-language"
                 ]
               },
               {
                 "group": "피드",
                 "pages": [
-                  "feed-overview",
-                  "feed-post",
-                  "feed-reaction"
+                  "service/feed-overview",
+                  "service/feed-post",
+                  "service/feed-reaction"
                 ]
               },
               {
                 "group": "디스커버",
                 "pages": [
-                  "discover-overview",
-                  "discover-usage"
+                  "service/discover-overview",
+                  "service/discover-usage"
                 ]
               },
               {
                 "group": "채용",
                 "pages": [
-                  "jobs-search",
-                  "jobs-apply"
+                  "service/jobs-search",
+                  "service/jobs-apply"
                 ]
               },
               {
                 "group": "교육",
                 "pages": [
-                  "edu-search",
-                  "edu-apply"
+                  "service/edu-search",
+                  "service/edu-apply"
                 ]
               },
               {
                 "group": "이벤트",
                 "pages": [
-                  "event-overview",
-                  "event-ticket-purchase",
-                  "event-ticket-refund",
-                  "event-host"
+                  "service/event-overview",
+                  "service/event-ticket-purchase",
+                  "service/event-ticket-refund",
+                  "service/event-host"
                 ]
               },
               {
                 "group": "트래블",
                 "pages": [
-                  "travel-introduction"
+                  "service/travel-introduction"
                 ]
               },
               {
                 "group": "채팅",
                 "pages": [
-                  "chat-overview",
-                  "chat-usage"
+                  "service/chat-overview",
+                  "service/chat-usage"
                 ]
               },
               {
                 "group": "월렛",
                 "pages": [
-                  "wallet-overview",
-                  "wallet-manage",
-                  "wallet-connect",
-                  "wallet-send",
-                  "wallet-recieve",
-                  "wallet-exchange",
-                  "wallet-networks-token",
-                  "wallet-nft",
-                  "wallet-giftcard"
+                  "service/wallet-overview",
+                  "service/wallet-manage",
+                  "service/wallet-connect",
+                  "service/wallet-send",
+                  "service/wallet-recieve",
+                  "service/wallet-exchange",
+                  "service/wallet-networks-token",
+                  "service/wallet-nft",
+                  "service/wallet-giftcard"
                 ]
               },
               {
                 "group": "활동",
                 "pages": [
-                  "activity-jobs-apply",
-                  "activity-event",
-                  "activity-contents",
-                  "activity-etc",
-                  "activity-wallet"
+                  "service/activity-jobs-apply",
+                  "service/activity-event",
+                  "service/activity-contents",
+                  "service/activity-etc",
+                  "service/activity-wallet"
                 ]
               },
               {
                 "group": "신고 · 차단",
                 "pages": [
-                  "report-post-reply",
-                  "report-profile",
-                  "report-jobs-edu",
-                  "report-discover"
+                  "service/report-post-reply",
+                  "service/report-profile",
+                  "service/report-jobs-edu",
+                  "service/report-discover"
                 ]
               },
               {
                 "group": "계정 설정",
                 "pages": [
-                  "settings-language-region-currency",
-                  "setting-notification",
-                  "settings-billing",
-                  "settings-security"
+                  "service/settings-language-region-currency",
+                  "service/setting-notification",
+                  "service/settings-billing",
+                  "service/settings-security"
                 ]
               }
             ]
           },
           {
-            "tab": "엔터프라이즈 이용 가이드"
+            "tab": "엔터프라이즈 이용 가이드",
+            "groups": [
+              {
+                "group": "자주 묻는 질문",
+                "pages": [
+                  "enterprise/faq"
+                ]
+              },
+              {
+                "group": "시작하기",
+                "pages": [
+                  "enterprise/start-overview"
+                ]
+              },
+              {
+                "group": "기업 프로필",
+                "pages": []
+              },
+              {
+                "group": "메시지",
+                "pages": []
+              },
+              {
+                "group": "채용",
+                "pages": []
+              },
+              {
+                "group": "이벤트",
+                "pages": []
+              },
+              {
+                "group": "교육",
+                "pages": []
+              },
+              {
+                "group": "광고",
+                "pages": []
+              },
+              {
+                "group": "요금제",
+                "pages": []
+              },
+              {
+                "group": "결제 관리",
+                "pages": []
+              },
+              {
+                "group": "권한 관리",
+                "pages": []
+              }
+            ]
           }
         ]
       }
