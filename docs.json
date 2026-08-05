@@ -1,7 +1,7 @@
 {
   "theme": "mint",
   "name": "Rocketpunch Docs",
-  "description": "로켓펀치 서비스 이용 가이드, 기업용 콘솔 가이드, Open API 개발자 문서.",
+  "description": "로켓펀치 서비스 이용 방법 및 개발자 문서를 확인하세요.",
   "colors": {
     "primary": "#121314",
     "light": "#ffffff",
