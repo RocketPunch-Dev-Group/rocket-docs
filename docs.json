@@ -169,19 +169,9 @@
           },
           {
             "tab": "엔터프라이즈 이용 가이드",
-            "groups": [
-              {
-                "group": "자주 묻는 질문",
-                "pages": [
-                  "enterprise/faq"
-                ]
-              },
-              {
-                "group": "시작하기",
-                "pages": [
-                  "enterprise/start-overview"
-                ]
-              },
+            "pages": [
+              "enterprise/start-overview",
+              "enterprise/faq",
               {
                 "group": "기업 프로필",
                 "pages": []
@@ -192,7 +182,11 @@
               },
               {
                 "group": "채용",
-                "pages": []
+                "pages": [
+                  "enterprise/jobs-create",
+                  "enterprise/jobs-manage",
+                  "enterprise/jobs-applicants"
+                ]
               },
               {
                 "group": "이벤트",
@@ -226,8 +220,7 @@
   },
   "logo": {
     "light": "/images/docs-light.svg",
-    "dark": "/images/docs-dark.svg",
-    "href": "https://www.rocketpunch.com/"
+    "dark": "/images/docs-dark.svg"
   },
   "background": {
     "color": {
