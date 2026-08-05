@@ -1,0 +1,34 @@
+# PR 게이트 — 깨진 문서가 발행되는 것을 막는다.
+#
+# 이 레포는 main push 를 Mintlify GitHub App 이 즉시 발행한다. 즉 저장이 곧 공개다.
+# 과거에 리뷰 없이 발행되어 API 레퍼런스 12파일이 통째로 사라지거나, 폴더 이동 후
+# 공개 URL 이 전부 404 가 된 사고가 있었다.
+#
+# 콘솔(웹 에디터) 편집은 main 에 직접 커밋하므로 이 워크플로가 막지 않는다 — 기획팀의
+# 의도된 저작 방식이기 때문이다. PR 경로에만 건다.
+name: docs-ci
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+# PR 에 커밋이 빠르게 쌓일 때 이전 실행을 취소해 러너를 아낀다.
+concurrency:
+  group: docs-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: 문서 빌드 · 링크 검증
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+      - name: mint validate
+        run: npx --yes mint@latest validate
+      - name: mint broken-links
+        run: npx --yes mint@latest broken-links
