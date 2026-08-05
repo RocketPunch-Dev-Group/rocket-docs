@@ -1,0 +1,50 @@
+---
+title: "Swapping tokens"
+description: "Learn how to exchange one token for another or move a token to a different network."
+keywords: ["swap", "exchange", "bridge", "token swap", "swap tokens", "change coins", "move between networks", "slippage", "rate of change", "quote", "gas fee", "swap between tokens"]
+---
+
+<Frame>
+  ![Empty Image](/images/empty_image.png "Empty Image")
+</Frame>
+
+## What is a swap?
+
+On Rocketpunch, you can do two things at once: swap a token you hold for a different token, and bridge the same token to a different network. This is called swapping, and both are handled together once you pick the token you're paying with and the token you want to receive.
+
+<Note>
+  A swap is an exchange between digital assets. Rocketpunch does not offer exchanging, buying, or selling between fiat currencies, including the Korean won, and digital assets.
+</Note>
+
+## Making a swap
+
+Select `Wallet` \> `Swap Tokens`, then choose the token and amount you're paying with and the token you want to receive. A quote appears. Once shown, the information stays valid for one minute. To fetch a new quote before the minute is up, click `⟳`.
+
+In `Swap Tokens` \> `Settings`, you can change how quotes are sorted, the rate of change you allow, and which quote providers are used.
+
+### Fee (gas fee)
+
+Swapping incurs a fee (gas fee). The fee is paid in the native token of the network that holds the token you're paying with. You need ETH on the Ethereum network and SOL on the Solana network.
+
+However, if the token you're paying with is on the Solana or Base network, **Rocketpunch covers the fee**. It doesn't matter which network the token you receive is on.
+
+On any other network, you pay the fee yourself. The swap won't go through if you don't have that network's native token, so you need to receive the token used for the fee first.
+
+## Rate of change (slippage tolerance)
+
+Exchange rates keep moving slightly while a swap is being processed. That means the amount shown in the quote and the amount you actually receive can differ, and this gap is called slippage. Rocketpunch also shows it on screen as the rate of change.
+
+The rate of change varies by provider and is shown when you receive a quote. If it goes above the value you allowed, the swap is canceled instead of going through. You set the allowed range in `Swap Tokens` \> `Settings` \> `Slippage Tolerance (Rate of Change)`.
+
+The default, `Auto`, receives every quote and lets you choose. If you turn `Auto` off and set the value yourself, providers with a higher rate of change won't appear in your quotes, and setting the value too low may leave you with no quotes at all.
+
+## Swap settings
+
+In `Swap Tokens` \> `Settings`, you can change the criteria used to fetch quotes.
+
+| Item | Details |
+| --- | --- |
+| Display Currency | Sets the currency that quoted amounts are converted into for display. |
+| Sort Quotes By | Sets whether quotes are sorted by `Lowest Cost` or `Fastest`. |
+| Slippage Tolerance (Rate of Change) | Sets the upper limit of the rate of change you're willing to accept. |
+| Quote Providers | Chooses which providers to request quotes from. The default is `All`, and you can search by provider name to select only some of them. |
