@@ -43,16 +43,16 @@ def blob(path):
     return subprocess.run(['git', 'hash-object', path],
                           capture_output=True, text=True, check=True).stdout.strip()
 
-# ko 원문 = 루트·console·openapi 의 mdx. en/ 아래는 번역본이라 제외한다.
+# ko 원문 = en/ 을 제외한 모든 mdx. 재귀로 훑어야 새 하위 폴더가 생겨도 누락되지 않는다.
 sources = sorted(
-    [f for f in glob.glob('*.mdx')]
-    + [f for f in glob.glob('console/*.mdx')]
-    + [f for f in glob.glob('openapi/*.mdx')]
+    f for f in glob.glob('**/*.mdx', recursive=True)
+    if not f.startswith('en/')
 )
 
 recorded = {}
 if os.path.exists(state_path):
-    recorded = json.load(open(state_path, encoding='utf-8')).get('sources', {})
+    with open(state_path, encoding='utf-8') as f:
+        recorded = json.load(f).get('sources', {})
 
 stale, untracked, missing_en, orphan_en = [], [], [], []
 
@@ -78,9 +78,9 @@ if mode == '--update':
         'note': '번역을 마친 시점의 한국어 원문 blob 해시. scripts/check-translation-sync.sh 가 관리한다.',
         'sources': {src: blob(src) for src in sources if os.path.exists(f'en/{src}')},
     }
-    with open(state_path, 'w', encoding='utf-8') as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2, sort_keys=True)
-        f.write('\n')
+    with open(state_path, 'w', encoding='utf-8') as out:
+        json.dump(payload, out, ensure_ascii=False, indent=2, sort_keys=True)
+        out.write('\n')
     print(f"기록 완료: {len(payload['sources'])}개 페이지")
     sys.exit(0)
 
