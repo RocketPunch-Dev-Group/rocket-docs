@@ -213,6 +213,28 @@
                 "pages": []
               }
             ]
+          },
+          {
+            "tab": "개발자 가이드",
+            "icon": "code",
+            "groups": [
+              {
+                "group": "시작하기",
+                "pages": [
+                  "developer/index",
+                  "developer/start-quickstart"
+                ]
+              },
+              {
+                "group": "인증",
+                "pages": [
+                  "developer/auth-app-types",
+                  "developer/auth-app-key",
+                  "developer/auth-oauth-overview",
+                  "developer/auth-oauth-quickstart"
+                ]
+              }
+            ]
           }
         ]
       }
@@ -234,5 +256,14 @@
   "appearance": {
     "default": "light"
   },
-  "redirects": []
+  "redirects": [
+    {
+      "source": "/service/:slug*",
+      "destination": "/:slug*"
+    },
+    {
+      "source": "/start-introduction",
+      "destination": "/"
+    }
+  ]
 }
