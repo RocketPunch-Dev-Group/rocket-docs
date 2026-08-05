@@ -14,6 +14,11 @@ on:
 permissions:
   contents: read
 
+# PR 에 커밋이 빠르게 쌓일 때 이전 실행을 취소해 러너를 아낀다.
+concurrency:
+  group: docs-ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   validate:
     name: 문서 빌드 · 링크 검증

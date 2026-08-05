@@ -41,7 +41,7 @@ jobs:
       - name: 스펙 내려받기
         id: fetch
         run: |
-          if ! curl -fsSL --max-time 30 "$SPEC_URL" -o /tmp/openapi.json; then
+          if ! curl -fsSL --max-time 30 --retry 3 --retry-delay 5 "$SPEC_URL" -o /tmp/openapi.json; then
             echo "✗ 스펙을 받지 못했습니다: $SPEC_URL"
             exit 1
           fi
@@ -89,4 +89,19 @@ jobs:
           rocket-open-api 가 배포한 $SPEC_URL 을 반영합니다.
           이 파일은 생성 산출물이므로 직접 편집하지 마세요 —
           변경은 rocket-open-api 에서 하고 이 워크플로가 가져옵니다."
-          git push
+
+          # 콘솔(웹 에디터)이 main 에 직커밋하는 레포다. 체크아웃부터 여기까지
+          # mint validate·broken-links 로 수십 초가 걸리므로 그 사이 경합이 실제로 일어난다.
+          # concurrency 그룹은 이 워크플로끼리만 직렬화할 뿐 사람·콘솔 커밋은 막지 못한다.
+          # 봇이 만지는 파일(스펙)과 콘솔이 만지는 파일(MDX·docs.json)이 겹치지 않아
+          # rebase 충돌은 나지 않는다.
+          for attempt in 1 2 3; do
+            if git pull --rebase --autostash origin main && git push; then
+              echo "✓ 반영 완료 (시도 $attempt)"
+              exit 0
+            fi
+            echo "⟳ 시도 $attempt 실패 — 그 사이 main 이 갱신된 것으로 보입니다. 재시도합니다."
+            sleep 5
+          done
+          echo "✗ 3회 시도 후에도 push 하지 못했습니다. 다음 스케줄에 다시 시도합니다."
+          exit 1
