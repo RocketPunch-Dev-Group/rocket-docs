@@ -480,9 +480,6 @@
     "light": "/images/docs-light.svg",
     "dark": "/images/docs-dark.svg"
   },
-  "background": {
-    "decoration": "windows"
-  },
   "icons": {
     "library": "fontawesome"
   },
