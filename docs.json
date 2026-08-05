@@ -263,7 +263,7 @@
     },
     {
       "source": "/start-introduction",
-      "destination": "/index"
+      "destination": "/"
     }
   ]
 }
