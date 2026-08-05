@@ -184,7 +184,8 @@
                 "group": "채용",
                 "pages": [
                   "console/jobs-create",
-                  "console/jobs-manage"
+                  "console/jobs-manage",
+                  "console/jobs-applicants"
                 ]
               },
               {
