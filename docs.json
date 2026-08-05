@@ -1,6 +1,7 @@
 {
   "theme": "mint",
   "name": "Rocketpunch Docs",
+  "description": "로켓펀치 서비스 이용 가이드, 기업용 콘솔 가이드, Open API 개발자 문서.",
   "colors": {
     "primary": "#121314",
     "light": "#ffffff",
@@ -512,5 +513,19 @@
       "assistant"
     ],
     "display": "header"
+  },
+  "seo": {
+    "indexing": "navigable",
+    "organization": {
+      "id": "https://www.rocketpunch.com/#organization",
+      "name": "로켓펀치",
+      "url": "https://www.rocketpunch.com",
+      "sameAs": [
+        "https://github.com/RocketPunch-Dev-Group"
+      ]
+    },
+    "metatags": {
+      "og:site_name": "Rocketpunch Docs"
+    }
   }
 }
