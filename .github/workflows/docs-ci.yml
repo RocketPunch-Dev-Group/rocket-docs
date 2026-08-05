@@ -32,3 +32,8 @@ jobs:
         run: npx --yes mint@latest validate
       - name: mint broken-links
         run: npx --yes mint@latest broken-links
+      # mint broken-links 는 내부 상대 링크만 본다. 외부 절대 URL 의 호스트 오타는
+      # 그대로 통과하므로(실제로 일괄 치환이 developers → openapis 로 깨뜨린 적이 있다)
+      # rocketpunch.com 호스트만 따로 확인한다.
+      - name: rocketpunch.com 호스트 확인
+        run: ./scripts/check-rocketpunch-hosts.sh
