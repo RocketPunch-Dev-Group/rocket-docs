@@ -178,9 +178,9 @@
               {
                 "group": "채용",
                 "pages": [
-                  "enterprise/jobs-create",
-                  "enterprise/jobs-manage",
-                  "enterprise/jobs-applicants"
+                  "console/jobs-create",
+                  "console/jobs-manage-2",
+                  "console/jobs-applicants-2"
                 ]
               },
               {
