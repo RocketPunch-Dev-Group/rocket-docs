@@ -1,0 +1,107 @@
+# rocket-open-api 가 배포한 OpenAPI 스펙을 당겨와 문서에 반영한다.
+#
+# 왜 pull 인가:
+#   Mintlify 는 docs.json 의 openapi 를 URL 로 두면 빌드 시점에만 가져간다. 즉 스펙이 바뀌어도
+#   재배포를 따로 트리거하지 않으면 문서가 조용히 낡는다. 트리거용 Admin API key 는 Enterprise
+#   전용이라 이 조직 플랜에서는 발급할 수 없다.
+#   스펙을 이 레포에 커밋하면 main push 로 Mintlify GitHub App 이 자동 배포하므로
+#   외부 자격증명이 전혀 필요 없다. 대신 rocket-open-api 가 밀어넣는 대신 여기서 당겨온다
+#   (크로스 레포 토큰 불필요).
+#
+# 왜 PR 이 아니라 직접 커밋인가:
+#   이 레포는 Actions 의 PR 생성이 비활성(can_approve_pull_request_reviews=false)이고,
+#   콘솔 편집이 이미 main 에 직커밋하는 방식으로 운영된다. 스펙은 rocket-open-api PR 에서
+#   이미 리뷰를 거친 생성 산출물이라 여기서 다시 리뷰할 대상이 아니다.
+#
+# 안전장치: 받아온 스펙이 유효하고 문서 빌드가 통과할 때만 커밋한다.
+name: sync-openapi-spec
+
+on:
+  schedule:
+    - cron: '0 * * * *'   # 매시 정각
+  workflow_dispatch:       # 배포 직후 수동 반영용
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-openapi-spec
+  cancel-in-progress: false
+
+env:
+  SPEC_URL: https://developers.rocketpunch.com/docs/openapi.json
+  SPEC_PATH: developer/openapi.json
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: 스펙 내려받기
+        id: fetch
+        run: |
+          if ! curl -fsSL --max-time 30 --retry 3 --retry-delay 5 "$SPEC_URL" -o /tmp/openapi.json; then
+            echo "✗ 스펙을 받지 못했습니다: $SPEC_URL"
+            exit 1
+          fi
+          python3 -c "import json,sys; json.load(open('/tmp/openapi.json'))" || {
+            echo "✗ 받은 파일이 유효한 JSON 이 아닙니다."; exit 1; }
+          echo "size=$(wc -c < /tmp/openapi.json)" >> "$GITHUB_OUTPUT"
+
+      - name: 변경 여부 확인
+        id: diff
+        run: |
+          # 커밋본과 의미가 같으면(키 순서만 다른 경우 포함) 아무것도 하지 않는다.
+          changed=1
+          if [ -f "$SPEC_PATH" ] && python3 - <<'PY'
+          import json, os, sys
+          a = json.load(open('/tmp/openapi.json'))
+          b = json.load(open(os.environ['SPEC_PATH']))
+          sys.exit(0 if a == b else 1)
+          PY
+          then changed=0; fi
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+          [ "$changed" = "1" ] && echo "스펙이 변경되었습니다." || echo "변경 없음 — 종료합니다."
+
+      - uses: actions/setup-node@v5
+        if: steps.diff.outputs.changed == '1'
+        with:
+          node-version: '20'
+
+      - name: 반영 후 문서 빌드 검증
+        if: steps.diff.outputs.changed == '1'
+        run: |
+          mkdir -p "$(dirname "$SPEC_PATH")"
+          cp /tmp/openapi.json "$SPEC_PATH"
+          # 잘못된 스펙이 들어오면 사이트 빌드가 깨진다. 커밋 전에 막는다.
+          npx --yes mint@latest validate
+          npx --yes mint@latest broken-links
+
+      - name: 커밋
+        if: steps.diff.outputs.changed == '1'
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$SPEC_PATH"
+          git commit -m "chore: OpenAPI 스펙 동기화
+
+          rocket-open-api 가 배포한 $SPEC_URL 을 반영합니다.
+          이 파일은 생성 산출물이므로 직접 편집하지 마세요 —
+          변경은 rocket-open-api 에서 하고 이 워크플로가 가져옵니다."
+
+          # 콘솔(웹 에디터)이 main 에 직커밋하는 레포다. 체크아웃부터 여기까지
+          # mint validate·broken-links 로 수십 초가 걸리므로 그 사이 경합이 실제로 일어난다.
+          # concurrency 그룹은 이 워크플로끼리만 직렬화할 뿐 사람·콘솔 커밋은 막지 못한다.
+          # 봇이 만지는 파일(스펙)과 콘솔이 만지는 파일(MDX·docs.json)이 겹치지 않아
+          # rebase 충돌은 나지 않는다.
+          for attempt in 1 2 3; do
+            if git pull --rebase --autostash origin main && git push; then
+              echo "✓ 반영 완료 (시도 $attempt)"
+              exit 0
+            fi
+            echo "⟳ 시도 $attempt 실패 — 그 사이 main 이 갱신된 것으로 보입니다. 재시도합니다."
+            sleep 5
+          done
+          echo "✗ 3회 시도 후에도 push 하지 못했습니다. 다음 스케줄에 다시 시도합니다."
+          exit 1

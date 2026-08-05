@@ -233,6 +233,16 @@
                   "developer/auth-oauth-overview",
                   "developer/auth-oauth-quickstart"
                 ]
+              },
+              {
+                "group": "API 레퍼런스",
+                "openapi": {
+                  "source": "developer/openapi.json",
+                  "directory": "developer/api-reference"
+                },
+                "pages": [
+                  "developer/api-reference-overview"
+                ]
               }
             ]
           }
