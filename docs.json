@@ -164,9 +164,14 @@
           },
           {
             "tab": "엔터프라이즈 이용 가이드",
-            "pages": [
-              "enterprise/start-overview",
-              "enterprise/faq",
+            "groups": [
+              {
+                "group": "시작하기",
+                "pages": [
+                  "enterprise/start-overview",
+                  "enterprise/faq"
+                ]
+              },
               {
                 "group": "기업 프로필",
                 "pages": []
