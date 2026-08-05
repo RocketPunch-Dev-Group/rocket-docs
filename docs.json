@@ -1,8 +1,8 @@
 {
-  "theme": "mint",
+  "theme": "palm",
   "name": "Rocketpunch Docs",
   "colors": {
-    "primary": "#121314",
+    "primary": "#ffffff",
     "light": "#121314",
     "dark": "#ffffff"
   },
@@ -260,7 +260,8 @@
     "color": {
       "light": "#ffffff",
       "dark": "#0E0F10"
-    }
+    },
+    "decoration": "grid"
   },
   "icons": {
     "library": "fontawesome"
@@ -277,5 +278,14 @@
       "source": "/start-introduction",
       "destination": "/"
     }
-  ]
+  ],
+  "styling": {
+    "codeblocks": "dark"
+  },
+  "contextual": {
+    "options": [
+      "assistant"
+    ],
+    "display": "header"
+  }
 }
