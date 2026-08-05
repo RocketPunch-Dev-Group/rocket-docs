@@ -34,135 +34,135 @@
               {
                 "group": "자주 묻는 질문",
                 "pages": [
-                  "service/index"
+                  "index"
                 ]
               },
               {
                 "group": "시작하기",
                 "pages": [
-                  "service/start-introduction",
-                  "service/start-history",
-                  "service/start-how-to-use"
+                  "start-introduction",
+                  "start-history",
+                  "start-how-to-use"
                 ]
               },
               {
                 "group": "로그인",
                 "pages": [
-                  "service/account-login",
-                  "service/account-identity-verification",
-                  "service/account-login-error",
-                  "service/account-initialization",
-                  "service/account-linked",
-                  "service/account-migration",
-                  "service/account-delete",
-                  "service/account-world"
+                  "account-login",
+                  "account-identity-verification",
+                  "account-login-error",
+                  "account-initialization",
+                  "account-linked",
+                  "account-migration",
+                  "account-delete",
+                  "account-world"
                 ]
               },
               {
                 "group": "프로필",
                 "pages": [
-                  "service/profile-overview",
-                  "service/profile-library",
-                  "service/settings-certification-badge",
-                  "service/profile-share",
-                  "service/profile-career",
-                  "service/profile-private",
-                  "service/profile-education",
-                  "service/profile-experience",
-                  "service/profile-language"
+                  "profile-overview",
+                  "profile-library",
+                  "settings-certification-badge",
+                  "profile-share",
+                  "profile-career",
+                  "profile-private",
+                  "profile-education",
+                  "profile-experience",
+                  "profile-language"
                 ]
               },
               {
                 "group": "피드",
                 "pages": [
-                  "service/feed-overview",
-                  "service/feed-post",
-                  "service/feed-reaction"
+                  "feed-overview",
+                  "feed-post",
+                  "feed-reaction"
                 ]
               },
               {
                 "group": "디스커버",
                 "pages": [
-                  "service/discover-overview",
-                  "service/discover-usage"
+                  "discover-overview",
+                  "discover-usage"
                 ]
               },
               {
                 "group": "채용",
                 "pages": [
-                  "service/jobs-search",
-                  "service/jobs-apply"
+                  "jobs-search",
+                  "jobs-apply"
                 ]
               },
               {
                 "group": "교육",
                 "pages": [
-                  "service/edu-search",
-                  "service/edu-apply"
+                  "edu-search",
+                  "edu-apply"
                 ]
               },
               {
                 "group": "이벤트",
                 "pages": [
-                  "service/event-overview",
-                  "service/event-ticket-purchase",
-                  "service/event-ticket-refund",
-                  "service/event-host"
+                  "event-overview",
+                  "event-ticket-purchase",
+                  "event-ticket-refund",
+                  "event-host"
                 ]
               },
               {
                 "group": "트래블",
                 "pages": [
-                  "service/travel-introduction"
+                  "travel-introduction"
                 ]
               },
               {
                 "group": "채팅",
                 "pages": [
-                  "service/chat-overview",
-                  "service/chat-usage"
+                  "chat-overview",
+                  "chat-usage"
                 ]
               },
               {
                 "group": "월렛",
                 "pages": [
-                  "service/wallet-overview",
-                  "service/wallet-manage",
-                  "service/wallet-connect",
-                  "service/wallet-send",
-                  "service/wallet-recieve",
-                  "service/wallet-exchange",
-                  "service/wallet-networks-token",
-                  "service/wallet-nft",
-                  "service/wallet-giftcard"
+                  "wallet-overview",
+                  "wallet-manage",
+                  "wallet-connect",
+                  "wallet-send",
+                  "wallet-recieve",
+                  "wallet-exchange",
+                  "wallet-networks-token",
+                  "wallet-nft",
+                  "wallet-giftcard"
                 ]
               },
               {
                 "group": "활동",
                 "pages": [
-                  "service/activity-jobs-apply",
-                  "service/activity-event",
-                  "service/activity-contents",
-                  "service/activity-etc",
-                  "service/activity-wallet"
+                  "activity-jobs-apply",
+                  "activity-event",
+                  "activity-contents",
+                  "activity-etc",
+                  "activity-wallet"
                 ]
               },
               {
                 "group": "신고 · 차단",
                 "pages": [
-                  "service/report-post-reply",
-                  "service/report-profile",
-                  "service/report-jobs-edu",
-                  "service/report-discover"
+                  "report-post-reply",
+                  "report-profile",
+                  "report-jobs-edu",
+                  "report-discover"
                 ]
               },
               {
                 "group": "계정 설정",
                 "pages": [
-                  "service/settings-language-region-currency",
-                  "service/setting-notification",
-                  "service/settings-billing",
-                  "service/settings-security"
+                  "settings-language-region-currency",
+                  "setting-notification",
+                  "settings-billing",
+                  "settings-security"
                 ]
               }
             ]
