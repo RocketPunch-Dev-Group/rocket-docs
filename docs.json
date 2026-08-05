@@ -2,9 +2,7 @@
   "theme": "palm",
   "name": "Rocketpunch Docs",
   "colors": {
-    "primary": "#ffffff",
-    "light": "#121314",
-    "dark": "#ffffff"
+    "primary": "#121314"
   },
   "favicon": {
     "light": "https://media.brand.dev/4bb65048-90b6-4750-a250-45acf9a7863a.jpg",
@@ -258,7 +256,6 @@
   },
   "background": {
     "color": {
-      "light": "#ffffff",
       "dark": "#0E0F10"
     },
     "decoration": "grid"
