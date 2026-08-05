@@ -1,0 +1,149 @@
+---
+title: "Integrate OAuth"
+description: "From generating PKCE values through user consent, token exchange, and API calls — with real code."
+keywords: ["OAuth integration", "PKCE", "code_verifier", "code_challenge", "authorization code", "token exchange", "refresh", "example", "curl"]
+---
+
+The full path to calling APIs with user consent. Before you start, register an **OAuth client app** in the [developer console](https://developers.rocketpunch.com/apps/new) and have your App Key, secret key, and redirect URI ready.
+
+Your App Key and secret key are the `client_id` and `client_secret` in OAuth terms.
+
+<Steps>
+  <Step title="Generate PKCE values">
+    Generate these fresh for every request. Only `S256` is accepted; `plain` is rejected.
+
+    ```javascript
+    import crypto from "node:crypto";
+
+    const base64url = (buf) =>
+      buf.toString("base64").replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+
+    const verifier  = base64url(crypto.randomBytes(32));
+    const challenge = base64url(crypto.createHash("sha256").update(verifier).digest());
+    ```
+
+    ```python
+    import base64, hashlib, secrets
+
+    verifier  = base64.urlsafe_b64encode(secrets.token_bytes(32)).rstrip(b"=").decode()
+    challenge = base64.urlsafe_b64encode(
+        hashlib.sha256(verifier.encode()).digest()
+    ).rstrip(b"=").decode()
+    ```
+
+    Keep the `verifier` in the session (or alongside `state`) and send it in step 3. If it falls outside the spec — 43 to 128 characters, allowed character set — the token exchange fails with `invalid_grant`.
+  </Step>
+
+  <Step title="Send the user to the consent screen">
+    Redirect the user's browser to this address.
+
+    ```
+    https://developers.rocketpunch.com/oauth/authorize
+      ?response_type=code
+      &client_id=rp_app_YOUR_KEY
+      &redirect_uri=https://builder.example.com/callback
+      &scope=profile%20email
+      &state=RANDOM_STATE
+      &code_challenge=CHALLENGE
+      &code_challenge_method=S256
+    ```
+
+    Line breaks are for readability — send it as a single line with no whitespace.
+
+    After the user signs in and grants consent, they return to your registered redirect URI.
+
+    ```
+    https://builder.example.com/callback?code=ONE_TIME_CODE&state=RANDOM_STATE
+    ```
+
+    <Warning>
+      Always verify that `state` matches what you sent — without this you are open to CSRF. And check for an `error` parameter as well as `code`: a user who declines comes back with `error`.
+    </Warning>
+  </Step>
+
+  <Step title="Exchange the code for a token">
+    Call this from your server. Calling it from a browser exposes your secret key.
+
+    ```bash
+    curl -X POST 'https://openapi.rocketpunch.com/oauth/token' \
+      -u 'rp_app_YOUR_KEY:rp_sec_YOUR_SECRET' \
+      -d 'grant_type=authorization_code' \
+      -d 'code=ONE_TIME_CODE' \
+      -d 'redirect_uri=https://builder.example.com/callback' \
+      -d 'code_verifier=VERIFIER'
+    ```
+
+    ```json
+    {
+      "access_token": "eyJhbGciOi...",
+      "token_type": "Bearer",
+      "expires_in": 900,
+      "refresh_token": "rt_...",
+      "scope": "profile email"
+    }
+    ```
+
+    The `redirect_uri` must be **character-for-character identical** to the one in step 2. The `code` is valid for 5 minutes and can be used once.
+  </Step>
+
+  <Step title="Call the API with the token">
+    ```bash
+    curl 'https://openapi.rocketpunch.com/oauth/userinfo' \
+      -H 'Authorization: Bearer eyJhbGciOi...'
+    ```
+
+    User-context `/api/v1/**` calls work the same way.
+
+    ```bash
+    curl -X POST 'https://openapi.rocketpunch.com/api/v1/posts' \
+      -H 'Authorization: Bearer eyJhbGciOi...' \
+      -H 'Content-Type: application/json' \
+      -d '{"text":"My first post through the Rocketpunch Open API."}'
+    ```
+  </Step>
+</Steps>
+
+## Refreshing tokens
+
+Access tokens expire after 15 minutes.
+
+```bash
+curl -X POST 'https://openapi.rocketpunch.com/oauth/token' \
+  -u 'rp_app_YOUR_KEY:rp_sec_YOUR_SECRET' \
+  -d 'grant_type=refresh_token' \
+  -d 'refresh_token=rt_...'
+```
+
+<Warning>
+  The response carries a new `refresh_token`. **Store it and discard the old one.** Refresh tokens rotate on every use, so a repeat request with the old value fails.
+</Warning>
+
+## Disconnecting
+
+When a user asks to disconnect, revoke the token.
+
+```bash
+curl -X POST 'https://openapi.rocketpunch.com/oauth/revoke' \
+  -u 'rp_app_YOUR_KEY:rp_sec_YOUR_SECRET' \
+  -d 'token=rt_...'
+```
+
+## Common errors
+
+| Symptom | Cause | Fix |
+| --- | --- | --- |
+| A 400 page instead of the consent screen | The `client_id` is not registered, or the `redirect_uri` differs from the registered value | Compare against the console value character by character, trailing slash included |
+| Token exchange fails with `invalid_grant` | The `code` was already used or is older than 5 minutes, or the `code_verifier` does not match | Codes are single use. Check that you are reading the `verifier` back from the session correctly |
+| `redirect_uri` mismatch error | Steps 2 and 3 sent different values | Use the exact same string in both requests |
+| `403` · `C0011` | The token lacks a required scope | Request consent again including the scope you need |
+
+<Note>
+  For safety, a failed redirect URI check shows the user a 400 page and never redirects to an unregistered address.
+</Note>
+
+## Before you go to production
+
+- Never put your secret key in a browser or mobile app bundle. Exchange tokens on the server.
+- Generate `state` per request and verify it in the callback.
+- Store refresh tokens per user, and overwrite with the new value on every refresh.
+- When a user disconnects, revoke and delete the stored tokens.

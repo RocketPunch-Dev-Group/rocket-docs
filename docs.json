@@ -247,6 +247,43 @@
             ]
           }
         ]
+      },
+      {
+        "language": "en",
+        "tabs": [
+          {
+            "tab": "Open API Guide",
+            "icon": "code",
+            "groups": [
+              {
+                "group": "Getting started",
+                "pages": [
+                  "en/openapi/index",
+                  "en/openapi/start-quickstart"
+                ]
+              },
+              {
+                "group": "Authentication",
+                "pages": [
+                  "en/openapi/auth-app-types",
+                  "en/openapi/auth-app-key",
+                  "en/openapi/auth-oauth-overview",
+                  "en/openapi/auth-oauth-quickstart"
+                ]
+              },
+              {
+                "group": "API reference",
+                "pages": [
+                  "en/openapi/api-reference-overview"
+                ],
+                "openapi": {
+                  "source": "openapi/openapi.en.json",
+                  "directory": "en/openapi/api-reference"
+                }
+              }
+            ]
+          }
+        ]
       }
     ]
   },
