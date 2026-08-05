@@ -21,7 +21,8 @@ permissions:
 
 concurrency:
   group: translation-sync-${{ github.ref }}
-  cancel-in-progress: true
+  # main 에서는 취소하지 않는다 — 이슈 갱신 도중 취소되면 추적 상태가 어긋난다.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   check:
@@ -44,6 +45,12 @@ jobs:
           code=$?
           set -e
           echo "$out"
+          # 1 = 드리프트, 2 이상 = 도구 오류(python3 부재 등). 후자를 드리프트로 오인하면
+          # '번역이 낡았다'는 잘못된 추적 이슈가 열린다.
+          if [ "$code" -ge 2 ]; then
+            echo "✗ 검사 도구가 실패했습니다 (exit $code)."
+            exit "$code"
+          fi
           {
             echo "report<<REPORT_EOF"
             echo "$out"
@@ -61,8 +68,11 @@ jobs:
           REPORT: ${{ steps.check.outputs.report }}
         run: |
           title='영문 번역이 한국어 원문보다 낡았습니다'
-          existing=$(gh issue list --state open --search "$title in:title" \
-                       --json number --jq '.[0].number // empty')
+          # gh issue list --search 는 GitHub 검색 인덱싱(수분 지연)에 의존해 main 연속 push 시
+          # 추적 이슈가 중복 생성될 수 있다. 목록을 받아 제목을 정확 매칭한다.
+          # gh 의 --jq 는 --arg 를 받지 않으므로 시스템 jq 로 넘긴다(러너에 기본 설치).
+          existing=$(gh issue list --state open --limit 100 --json number,title \
+                     | jq -r --arg t "$title" 'map(select(.title == $t)) | .[0].number // empty')
 
           if [ "$DRIFT" = "0" ]; then
             if [ -n "$existing" ]; then
@@ -76,7 +86,7 @@ jobs:
           fi
 
           body=$(printf '한국어 원문이 바뀌었는데 영문판이 따라오지 않았습니다.\n\n```\n%s\n```\n\n### 고치는 법\n\n1. 위 목록의 `en/<파일>` 을 한국어 원문에 맞춰 갱신합니다.\n2. `./scripts/check-translation-sync.sh --update` 로 현재 상태를 기록합니다.\n3. 두 변경을 함께 PR 로 올립니다.\n\nUI 용어는 rocket-web 의 `messages/{ko,en}` 번들 표기를 따릅니다.\n\n---\n마지막 확인: %s (`%s`)\n' \
-                  "$REPORT" "$(date -u '+%%Y-%%m-%%d %%H:%%M UTC')" "${GITHUB_SHA:0:7}")
+                  "$REPORT" "$(date -u '+%Y-%m-%d %H:%M UTC')" "${GITHUB_SHA:0:7}")
 
           if [ -n "$existing" ]; then
             gh issue edit "$existing" --body "$body"
