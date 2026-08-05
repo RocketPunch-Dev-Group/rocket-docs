@@ -1,0 +1,31 @@
+---
+title: "Receive assets"
+description: "Learn how to receive assets from a Rocketpunch user or an external wallet."
+keywords: ["receive", "deposit", "receive assets", "receive coins", "copy address", "QR code", "wallet address", "check network", "handle address"]
+---
+
+<Frame>
+  ![Empty Image](/images/empty_image.png "Empty Image")
+</Frame>
+
+## How to receive
+
+1. Click `Wallet` \> `Receive`.
+2. Select the wallet address where you want to receive the asset. Under `Select Wallet`, you can choose `Rocketpunch Wallet` or an external wallet address.
+3. Find the network of the token you want to receive in the list, then copy the address on the right, or open the QR code and show it to the sender directly.
+
+| Network of the asset the sender is sending | Address to give them |
+| --- | --- |
+| EVM networks such as Ethereum, Base, and Polygon | Address starting with `0x` |
+| Solana | Solana address |
+| Bitcoin | Bitcoin address |
+
+Besides the tokens in the list, you can also send and receive custom tokens. For details, see [Manage networks and tokens](/en/wallet-networks-token).
+
+<Warning>
+  Always verify that the wallet address you give out and its supported network are correct.<br />Once assets are sent, the transfer cannot be undone, and even if the address format is valid, sending on the wrong network will result in lost assets.
+</Warning>
+
+## Receiving with a handle address
+
+Rocketpunch provides an address in the form `handle.rockets.app` that you can use instead of a long EVM address. It uses your Rocketpunch handle as is, and this address can only send and receive EVM assets. Bitcoin and Solana assets must be received at an address on those networks.
