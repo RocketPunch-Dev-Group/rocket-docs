@@ -34,7 +34,7 @@
               {
                 "group": "시작하기",
                 "pages": [
-                  "start-introduction",
+                  "index",
                   "start-history",
                   "start-how-to-use",
                   "faq"
