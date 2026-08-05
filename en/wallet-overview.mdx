@@ -1,0 +1,91 @@
+---
+title: "Wallet overview"
+description: "Here's what Rocketpunch Wallet is and how it's organized."
+keywords: ["wallet", "crypto wallet", "digital assets", "balance", "holdings", "network", "address", "gas fee", "network fee", "display currency", "private key", "secret recovery phrase", "seed phrase", "crypto", "coin", "token"]
+---
+
+<Frame caption="Wallet UI">
+  ![Empty Image](/images/empty_image.png "Empty Image")
+</Frame>
+
+## What is Wallet?
+
+Rocketpunch Wallet is a place to store, send, and receive digital assets. You don't need to install a separate program or create a new account — you can use it right away with the Rocketpunch account you already have.
+
+That said, if you lose your means of access, no one can recover it, including Rocketpunch. You are responsible for keeping your private key and secret recovery phrase safe.
+
+<Tip>
+  Rocketpunch Wallet is a non-custodial wallet. Rocketpunch does not hold your private key, so you can connect to another non-custodial wallet with your private key or secret recovery phrase and use the same assets there.
+</Tip>
+
+## Networks and addresses
+
+Blockchain networks are independent ledgers, and assets are recorded separately on each one. That means addresses differ from network to network, and you need an address on that network to send or receive assets.
+
+Most assets you can send and receive on Rocketpunch are EVM assets that follow the Ethereum standard. Ethereum, Base, Polygon, and Arbitrum One are among them, and they all use the same address starting with `0x`.
+
+### Handle address
+
+Rocketpunch provides an address in the form `handle.rockets.app` that you can use instead of a long EVM address. It uses your Rocketpunch handle as is, and this address can only send and receive EVM assets. Bitcoin and Solana assets must be received at an address on those networks.
+
+<Tip>
+  When Rocketpunch users send assets to each other, you can also find the other person by name instead of by network address or handle address. This method works for all non-EVM assets, so see [Send](/en/wallet-send) for details.
+</Tip>
+
+## Fees (gas fees)
+
+Transferring or swapping assets incurs a fee on the network. This is called a gas fee, and it can only be paid in that network's native currency. The Solana network needs SOL, and the Ethereum network needs ETH.
+
+| Situation | Fee |
+| --- | --- |
+| Sending assets from Rocketpunch Wallet | Rocketpunch covers the gas fee for you. As long as you hold the token you want to send, you can transfer it even without that network's native currency. |
+| Swapping assets (swap · bridge) in Rocketpunch Wallet | You pay the gas fee yourself. Without that network's native currency the swap will not go through, so receive some of the native currency first. |
+
+## Check your assets
+
+The top of the Wallet screen shows the combined current value of the assets you hold, and the tabs below it let you check each category.
+
+Tokens you hold across multiple networks appear as `Multichain` in the asset list. Select an asset to see the balance by network.
+
+| Item | Details |
+| --- | --- |
+| Assets | The list of tokens you hold. Select an asset to see your holdings, price changes, and balance by network. |
+| History | The transaction history of tokens you sent and received. |
+| NFT | The NFTs you hold. |
+
+<Note>
+  Prices are provided for reference only and may differ from actual trading prices.
+</Note>
+
+## Change your display currency
+
+Current value and prices are shown in the currency you set. You can change the display currency in `Wallet` \> `More button ☰` \> `Change Display Currency`, or in `Settings` \> `Language & Region`. It does not affect the assets you hold.
+
+## Private key · secret recovery phrase
+
+Your private key and secret recovery phrase are what prove ownership of your wallet. Enter them into another wallet as they are, and you can use the same assets there too.
+
+- **Private key:** Access to a single address.
+- **Secret recovery phrase:** Access to the entire wallet. It recovers every address that belongs to that wallet.
+
+### Precautions
+
+Anyone who obtains your private key or secret recovery phrase gains full control — registering the wallet, managing assets, and transferring them. If you lose it, no one can recover it, including Rocketpunch.
+
+<Warning>
+  **On-screen exposure:** Make sure no one else can see your screen while you view it. Be careful that it is not captured by screen recording, streaming, or screenshots.
+
+  **Storage:** Do not copy or save it to cloud notes, your photo gallery, or the clipboard. If a third-party cloud service is hacked or your account is leaked, your wallet can be taken along with it.
+
+  **Sharing:** Do not pass it to anyone else. Rocketpunch will never ask for your private key or secret recovery phrase under any circumstances.
+</Warning>
+
+### How to view them
+
+Go to `Rocketpunch Wallet` \> `Manage My Wallets` \> `More button ⋮`, where you can select `Check Secret Recovery Phrase` and `Check Private Key`. You can view and copy the private key right away, but to see the secret recovery phrase you must first review the precautions and complete passkey or email verification.
+
+<Tip>
+  If the email verification code doesn't arrive, check your spam folder, or change the email that receives the code yourself in `Settings` \> `Account` \> `My Info & Login` \> `Contact` \> `Email`.
+</Tip>
+
+To connect your assets to another wallet with the private key or secret recovery phrase you viewed, see [Import and export a wallet](/en/wallet-manage).

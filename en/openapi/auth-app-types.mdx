@@ -1,0 +1,62 @@
+---
+title: "Choosing an app type"
+description: "Whether to build an App Key app or an OAuth client app."
+keywords: ["app type", "App Key app", "OAuth client", "app registration", "choosing a type", "permissions"]
+---
+
+When you register an app you pick a type that matches the APIs you plan to use. There is one question that decides it: **does this need a user to sign in?**
+
+| | App Key app | OAuth client app |
+| --- | --- | --- |
+| What is it | An app that reads public data | An app where users sign in with their Rocketpunch account and grant permission |
+| User login | Not required | Required |
+| What you get | App Key | App Key, secret key, and a registered redirect URI |
+| Typical APIs | Reading jobs, events, and posts | Creating, updating, and deleting on a user's behalf |
+
+## App Key app
+
+You only read public data. A job search service, an event aggregator, an analytics dashboard — anything that never acts on behalf of a specific user.
+
+Send your App Key in the `X-RP-API-Key` header and you are done. No user sign-in, no consent screen.
+
+## OAuth client app
+
+To act on a user's behalf you need that user's consent. Once they sign in with their Rocketpunch account and grant permission, you receive a token that lets you call the API as that user.
+
+You also register a **redirect URI** — the address users return to after granting consent.
+
+<Warning>
+  Each app has **one** redirect URI and it must match **character for character**. A single trailing slash or an extra query string is enough to get the authorization rejected.
+</Warning>
+
+## Not sure which one?
+
+<AccordionGroup>
+  <Accordion title="I want to search job postings and show them in my service">
+    **App Key app.** Reading public data does not require a user to sign in.
+  </Accordion>
+
+  <Accordion title="I want posts written in my service to also appear on Rocketpunch">
+    **OAuth client app.** The post is authored as a specific user, so you need that user's consent.
+  </Accordion>
+
+  <Accordion title="I want to use a user's Rocketpunch profile for sign-up in my service">
+    **OAuth client app.** The `profile` scope gives you their name and profile information; the `email` scope gives you their email address.
+  </Accordion>
+
+  <Accordion title="What if I need both?">
+    Register an OAuth client app. It also receives an App Key, so you can keep calling public-data endpoints with the App Key exactly as before.
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="App Key authentication" icon="key" href="/en/openapi/auth-app-key">
+    Send your key in a header and manage it safely.
+  </Card>
+
+  <Card title="OAuth 2.0 overview" icon="user-lock" href="/en/openapi/auth-oauth-overview">
+    The authorization model, token lifetimes, and available scopes.
+  </Card>
+</CardGroup>

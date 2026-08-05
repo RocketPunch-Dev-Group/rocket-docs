@@ -29,8 +29,8 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  SPEC_URL: https://developers.rocketpunch.com/docs/openapi.json
-  SPEC_PATH: openapi/openapi.json
+  SPEC_BASE_URL: https://developers.rocketpunch.com/docs
+  SPEC_DIR: openapi
 
 jobs:
   sync:
@@ -41,28 +41,48 @@ jobs:
       - name: 스펙 내려받기
         id: fetch
         run: |
-          if ! curl -fsSL --max-time 30 --retry 3 --retry-delay 5 "$SPEC_URL" -o /tmp/openapi.json; then
-            echo "✗ 스펙을 받지 못했습니다: $SPEC_URL"
+          # ko 는 정본이라 못 받으면 실패한다.
+          if ! curl -fsSL --max-time 30 --retry 3 --retry-delay 5 "$SPEC_BASE_URL/openapi.json" -o /tmp/openapi.json; then
+            echo "✗ ko 스펙을 받지 못했습니다: $SPEC_BASE_URL/openapi.json"
             exit 1
           fi
           python3 -c "import json,sys; json.load(open('/tmp/openapi.json'))" || {
-            echo "✗ 받은 파일이 유효한 JSON 이 아닙니다."; exit 1; }
-          echo "size=$(wc -c < /tmp/openapi.json)" >> "$GITHUB_OUTPUT"
+            echo "✗ ko 스펙이 유효한 JSON 이 아닙니다."; exit 1; }
+
+          # en 은 rocket-open-api 번역 카탈로그의 산출물이라 배포가 늦을 수 있다.
+          # 없다고 ko 반영까지 막지 않는다 — 경고만 남기고 ko 만 진행한다.
+          have_en=0
+          if curl -fsSL --max-time 30 --retry 3 --retry-delay 5 "$SPEC_BASE_URL/openapi.en.json" -o /tmp/openapi.en.json \
+             && python3 -c "import json,sys; json.load(open('/tmp/openapi.en.json'))"; then
+            have_en=1
+          else
+            echo "⚠ en 스펙을 받지 못했습니다. ko 만 반영합니다: $SPEC_BASE_URL/openapi.en.json"
+            rm -f /tmp/openapi.en.json
+          fi
+          echo "have_en=$have_en" >> "$GITHUB_OUTPUT"
 
       - name: 변경 여부 확인
         id: diff
         run: |
-          # 커밋본과 의미가 같으면(키 순서만 다른 경우 포함) 아무것도 하지 않는다.
-          changed=1
-          if [ -f "$SPEC_PATH" ] && python3 - <<'PY'
-          import json, os, sys
-          a = json.load(open('/tmp/openapi.json'))
-          b = json.load(open(os.environ['SPEC_PATH']))
-          sys.exit(0 if a == b else 1)
+          # 커밋본과 의미가 같으면(키 순서만 다른 경우 포함) 그 파일은 건드리지 않는다.
+          # 파일별로 따로 판정해야 한다 — 하나만 바뀌었는데 둘 다 덮어쓰면
+          # 안 바뀐 쪽에 키 순서 노이즈가 섞인 커밋이 남는다.
+          changed=0; changed_files=""
+          for name in openapi.json openapi.en.json; do
+            [ -f "/tmp/$name" ] || continue
+            if ! python3 - "$SPEC_DIR/$name" "/tmp/$name" <<'PY'
+          import json, sys
+          try:
+              committed = json.load(open(sys.argv[1]))
+          except FileNotFoundError:
+              sys.exit(1)
+          sys.exit(0 if committed == json.load(open(sys.argv[2])) else 1)
           PY
-          then changed=0; fi
+            then changed=1; changed_files="$changed_files $name"; fi
+          done
           echo "changed=$changed" >> "$GITHUB_OUTPUT"
-          [ "$changed" = "1" ] && echo "스펙이 변경되었습니다." || echo "변경 없음 — 종료합니다."
+          echo "changed_files=$changed_files" >> "$GITHUB_OUTPUT"
+          if [ "$changed" = "1" ]; then echo "변경된 스펙:$changed_files"; else echo "변경 없음 — 종료합니다."; fi
 
       - uses: actions/setup-node@v5
         if: steps.diff.outputs.changed == '1'
@@ -72,8 +92,10 @@ jobs:
       - name: 반영 후 문서 빌드 검증
         if: steps.diff.outputs.changed == '1'
         run: |
-          mkdir -p "$(dirname "$SPEC_PATH")"
-          cp /tmp/openapi.json "$SPEC_PATH"
+          mkdir -p "$SPEC_DIR"
+          for name in ${{ steps.diff.outputs.changed_files }}; do
+            cp "/tmp/$name" "$SPEC_DIR/$name"
+          done
           # 잘못된 스펙이 들어오면 사이트 빌드가 깨진다. 커밋 전에 막는다.
           npx --yes mint@latest validate
           npx --yes mint@latest broken-links
@@ -83,10 +105,12 @@ jobs:
         run: |
           git config user.name  'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add "$SPEC_PATH"
+          for name in ${{ steps.diff.outputs.changed_files }}; do
+            git add "$SPEC_DIR/$name"
+          done
           git commit -m "chore: OpenAPI 스펙 동기화
 
-          rocket-open-api 가 배포한 $SPEC_URL 을 반영합니다.
+          rocket-open-api 가 배포한 ko/en 스펙을 반영합니다.
           이 파일은 생성 산출물이므로 직접 편집하지 마세요 —
           변경은 rocket-open-api 에서 하고 이 워크플로가 가져옵니다."
 

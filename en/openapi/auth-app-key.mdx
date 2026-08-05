@@ -1,0 +1,70 @@
+---
+title: "App Key authentication"
+description: "Call the API with your App Key in a header, and store and rotate it safely."
+keywords: ["App Key", "API Key", "authentication", "X-RP-API-Key", "secret key", "key rotation", "reissue", "security"]
+---
+
+Endpoints that read public data need only an App Key. Send the `X-RP-API-Key` header on every request.
+
+```
+X-RP-API-Key: rp_app_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+## Two keys are issued
+
+Registering an app gives you two keys with different purposes.
+
+| Key | Prefix | Used for | Visibility |
+| --- | --- | --- | --- |
+| App Key | `rp_app_` | The `X-RP-API-Key` header on API calls | Viewable in the console at any time |
+| Secret key | `rp_sec_` | Client authentication when exchanging OAuth tokens | Shown **once**, right after issuance or rotation |
+
+<Warning>
+  The secret key is stored only as a hash, so not even Rocketpunch can show it to you again. If you lose it, you have to rotate.
+</Warning>
+
+## Handling keys safely
+
+An App Key identifies your app. If it leaks, someone else can burn through your quota or make calls in your name.
+
+- **Call from your server only.** A key in browser JavaScript or a mobile app bundle is readable by anyone.
+- **Keep it in environment variables or a secret store.** Do not write it into source and commit it.
+- **Never push it to a public repository.** Reverting is not enough — it stays in history, so rotate immediately.
+
+## If a key leaks
+
+Rotate it from the app detail screen in the [developer console](https://developers.rocketpunch.com/apps).
+
+<Steps>
+  <Step title="Rotate">
+    Trigger key rotation on the app detail screen. A new key is issued immediately and the previous one stops working.
+  </Step>
+
+  <Step title="Replace">
+    Copy the newly displayed secret key right there and move it somewhere safe. You cannot see it again.
+  </Step>
+
+  <Step title="Deploy">
+    Update the environment variables in your running service and deploy. Calls still using the old key fail with `401` (`C0001`).
+  </Step>
+</Steps>
+
+<Note>
+  Rotation invalidates the previous key immediately. If you need a zero-downtime swap, plan a deploy window ahead of time.
+</Note>
+
+## Checking usage
+
+The usage page on the app detail screen shows your per-minute and daily call volume. Successful responses include an `X-RP-RateLimit-Remaining` header with the calls left in the current minute.
+
+Exceeding a limit returns `429` (`C0010`) with a `Retry-After` header. Wait that many seconds, then retry.
+
+<Note>
+  The limits in effect and the per-operation sub-limits are in the rate limit section of the [API reference](/en/openapi/api-reference-overview).
+</Note>
+
+## Next steps
+
+<Card title="OAuth 2.0 integration" icon="user-lock" href="/en/openapi/auth-oauth-overview">
+  APIs that need user permission require OAuth 2.0 consent.
+</Card>

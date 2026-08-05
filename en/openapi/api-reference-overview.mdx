@@ -1,0 +1,30 @@
+---
+title: "About the API reference"
+description: "How to read the endpoint list, and the conventions that apply to every request and response."
+keywords: ["API reference", "endpoints", "specification", "spec", "OpenAPI", "pagination", "error codes", "rate limit"]
+---
+
+The list below is every endpoint in the Rocketpunch Open API. Each page shows request parameters, response schemas, and examples.
+
+The list is generated from the OpenAPI specification the server produces. When the API changes, the docs change with it, so what you read here does not drift from what the server does.
+
+## How to read it
+
+| What you see | What it means |
+| --- | --- |
+| The `security` field | The authentication that endpoint requires. `apiKey` means App Key; `bearerAuth` means an OAuth token |
+| A `required` marker | A parameter you must send |
+| Response codes | Alongside `200` you can inspect the shape of `400`, `401`, `429`, and other error responses |
+
+## Conventions that apply everywhere
+
+- **Authentication** — `X-RP-API-Key` for public data, `Authorization: Bearer` for APIs that need user permission. See [App Key authentication](/en/openapi/auth-app-key) and [OAuth 2.0 overview](/en/openapi/auth-oauth-overview).
+- **Response language** — set with the `Accept-Language` header. Without it you get Korean.
+- **Pagination** — list responses accept `page` (starting at 1) and `pageSize` (default 20, max 50), and return `items`, `totalItems`, and `totalPages`.
+- **Error shape** — every non-2xx response comes back as `code`, `message`, `timestamp`, and `details`.
+
+Exact values, limits, and the full error code list are in the endpoint pages below and in the description at the top of the specification.
+
+<Note>
+  Keep the three hosts straight. API calls go to `openapi.rocketpunch.com`, app and key management to `developers.rocketpunch.com`, and documentation is here on `docs.rocketpunch.com`. See [Getting started](/en/openapi) for the breakdown.
+</Note>
