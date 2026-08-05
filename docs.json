@@ -173,7 +173,7 @@
               {
                 "group": "자주 묻는 질문",
                 "pages": [
-                  "enterprise/biz-faq"
+                  "enterprise/faq"
                 ]
               },
               {
@@ -181,6 +181,42 @@
                 "pages": [
                   "enterprise/start-overview"
                 ]
+              },
+              {
+                "group": "기업 프로필",
+                "pages": []
+              },
+              {
+                "group": "메시지",
+                "pages": []
+              },
+              {
+                "group": "채용",
+                "pages": []
+              },
+              {
+                "group": "이벤트",
+                "pages": []
+              },
+              {
+                "group": "교육",
+                "pages": []
+              },
+              {
+                "group": "광고",
+                "pages": []
+              },
+              {
+                "group": "요금제",
+                "pages": []
+              },
+              {
+                "group": "결제 관리",
+                "pages": []
+              },
+              {
+                "group": "권한 관리",
+                "pages": []
               }
             ]
           }
