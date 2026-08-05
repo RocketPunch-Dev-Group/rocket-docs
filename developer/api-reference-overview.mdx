@@ -1,0 +1,30 @@
+---
+title: "API 레퍼런스 안내"
+description: "엔드포인트 목록을 읽는 법과 요청 · 응답 공통 규약을 안내해 드릴게요."
+keywords: ["API 레퍼런스", "엔드포인트", "명세", "스펙", "OpenAPI", "페이지네이션", "에러 코드", "Rate Limit"]
+---
+
+아래 목록은 로켓펀치 Open API의 전체 엔드포인트입니다. 각 페이지에서 요청 파라미터 · 응답 스키마 · 예시를 확인할 수 있습니다.
+
+이 목록은 서버가 생성하는 OpenAPI 스펙에서 자동으로 만들어집니다. 실제 API가 바뀌면 문서도 함께 바뀌므로 여기 적힌 내용이 서버 동작과 어긋나지 않습니다.
+
+## 읽는 법
+
+| 표시 | 의미 |
+| --- | --- |
+| `security` 항목 | 그 엔드포인트가 요구하는 인증 방식입니다. `apiKey` 는 App Key, `bearerAuth` 는 OAuth 토큰을 뜻합니다 |
+| `required` 표시 | 반드시 보내야 하는 파라미터입니다 |
+| 응답 코드 | `200` 외에 `400` · `401` · `429` 등 오류 응답의 형태도 함께 확인할 수 있습니다 |
+
+## 모든 요청에 공통으로 적용되는 것
+
+- **인증** — 공개 데이터 조회는 `X-RP-API-Key`, 사용자 권한이 필요한 API는 `Authorization: Bearer` 입니다. 자세한 내용은 [App Key 인증](/developer/auth-app-key)과 [OAuth 2.0 개요](/developer/auth-oauth-overview)에 있습니다.
+- **응답 언어** — `Accept-Language` 헤더로 정합니다. 지정하지 않으면 한국어로 옵니다.
+- **페이지네이션** — 목록 응답은 `page`(1부터 시작)와 `pageSize`(기본 20, 최대 50)를 받고 `items` · `totalItems` · `totalPages` 를 돌려줍니다.
+- **오류 형식** — 2xx 가 아닌 모든 응답은 `code` · `message` · `timestamp` · `details` 형태로 옵니다.
+
+각 항목의 정확한 값과 제한, 전체 에러 코드 목록은 아래 엔드포인트 문서와 스펙 상단 설명에 정리돼 있습니다.
+
+<Note>
+  세 개의 주소를 구분해 주세요. API 호출은 `openapi.rocketpunch.com`, 앱과 키 관리는 `developers.rocketpunch.com`, 문서는 지금 보고 계신 `docs.rocketpunch.com` 입니다. 자세한 구분은 [시작하기](/developer)에 있습니다.
+</Note>
