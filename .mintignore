@@ -8,3 +8,6 @@ drafts/
 
 # Scraped source content (not documentation pages)
 sources/
+
+# 저장소 스크립트(문서 아님)
+scripts/
