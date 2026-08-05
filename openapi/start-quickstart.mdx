@@ -8,9 +8,9 @@ App Key 발급부터 첫 API 호출까지 3단계면 됩니다. 별도 승인 �
 
 <Steps>
   <Step title="앱 등록하고 App Key 발급받기">
-    [개발자 콘솔](https://developers.rocketpunch.com/apps/new)에 로켓펀치 계정으로 로그인한 뒤 앱을 등록합니다. 앱 이름과 설명, 그리고 용도에 맞는 타입을 고르면 인증 정보가 바로 발급됩니다.
+    [개발자 콘솔](https://openapis.rocketpunch.com/apps/new)에 로켓펀치 계정으로 로그인한 뒤 앱을 등록합니다. 앱 이름과 설명, 그리고 용도에 맞는 타입을 고르면 인증 정보가 바로 발급됩니다.
 
-    공개 데이터만 조회한다면 **App Key 전용 앱**을, 사용자를 대신해 글을 쓰는 등의 작업이 필요하다면 **OAuth 클라이언트 앱**을 선택하세요. 자세한 기준은 [앱 타입 선택](/developer/auth-app-types)에서 확인할 수 있습니다.
+    공개 데이터만 조회한다면 **App Key 전용 앱**을, 사용자를 대신해 글을 쓰는 등의 작업이 필요하다면 **OAuth 클라이언트 앱**을 선택하세요. 자세한 기준은 [앱 타입 선택](/openapi/auth-app-types)에서 확인할 수 있습니다.
 
     <Warning>
       시크릿 키(`rp_sec_`로 시작)는 발급과 재발급 직후 **한 번만** 표시됩니다. 화면을 벗어나면 다시 볼 수 없으니 그 자리에서 안전한 곳에 옮겨 두세요.
@@ -78,17 +78,17 @@ curl 'https://openapi.rocketpunch.com/api/v1/jobs?keyword=AI' \
 | `429` · `C0010` | 호출 한도를 넘었습니다 | `Retry-After` 헤더의 초만큼 기다린 뒤 다시 호출하세요 |
 
 <Note>
-  엔드포인트별 파라미터와 응답 스키마, 전체 에러 코드 목록은 [API 레퍼런스](/developer/api-reference-overview)에서 확인할 수 있습니다.
+  엔드포인트별 파라미터와 응답 스키마, 전체 에러 코드 목록은 [API 레퍼런스](/openapi/api-reference-overview)에서 확인할 수 있습니다.
 </Note>
 
 ## 다음 단계
 
 <CardGroup cols={2}>
-  <Card title="App Key 인증 자세히" icon="key" href="/developer/auth-app-key">
+  <Card title="App Key 인증 자세히" icon="key" href="/openapi/auth-app-key">
     키 보관과 회전, 노출됐을 때의 대처를 안내합니다.
   </Card>
 
-  <Card title="OAuth 2.0 연동" icon="user-lock" href="/developer/auth-oauth-quickstart">
+  <Card title="OAuth 2.0 연동" icon="user-lock" href="/openapi/auth-oauth-quickstart">
     사용자 동의를 받아 사용자 컨텍스트 API를 호출합니다.
   </Card>
 </CardGroup>

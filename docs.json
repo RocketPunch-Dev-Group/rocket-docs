@@ -217,33 +217,33 @@
             "hidden": true
           },
           {
-            "tab": "개발자 가이드",
+            "tab": "Open API 가이드",
             "icon": "code",
             "groups": [
               {
                 "group": "시작하기",
                 "pages": [
-                  "developer/index",
-                  "developer/start-quickstart"
+                  "openapi/index",
+                  "openapi/start-quickstart"
                 ]
               },
               {
                 "group": "인증",
                 "pages": [
-                  "developer/auth-app-types",
-                  "developer/auth-app-key",
-                  "developer/auth-oauth-overview",
-                  "developer/auth-oauth-quickstart"
+                  "openapi/auth-app-types",
+                  "openapi/auth-app-key",
+                  "openapi/auth-oauth-overview",
+                  "openapi/auth-oauth-quickstart"
                 ]
               },
               {
                 "group": "API 레퍼런스",
                 "openapi": {
-                  "source": "developer/openapi.json",
-                  "directory": "developer/api-reference"
+                  "source": "openapi/openapi.json",
+                  "directory": "openapi/api-reference"
                 },
                 "pages": [
-                  "developer/api-reference-overview"
+                  "openapi/api-reference-overview"
                 ]
               }
             ]
@@ -276,6 +276,14 @@
     {
       "source": "/start-introduction",
       "destination": "/"
+    },
+    {
+      "source": "/developer/:slug*",
+      "destination": "/openapi/:slug*"
+    },
+    {
+      "source": "/developer",
+      "destination": "/openapi"
     }
   ]
 }

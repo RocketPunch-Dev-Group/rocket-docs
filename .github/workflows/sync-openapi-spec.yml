@@ -30,7 +30,7 @@ concurrency:
 
 env:
   SPEC_URL: https://developers.rocketpunch.com/docs/openapi.json
-  SPEC_PATH: developer/openapi.json
+  SPEC_PATH: openapi/openapi.json
 
 jobs:
   sync:
