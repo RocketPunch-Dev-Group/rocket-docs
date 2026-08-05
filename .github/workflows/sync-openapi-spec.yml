@@ -29,8 +29,8 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  SPEC_URL: https://developers.rocketpunch.com/docs/openapi.json
-  SPEC_PATH: openapi/openapi.json
+  SPEC_BASE_URL: https://developers.rocketpunch.com/docs
+  SPEC_DIR: openapi
 
 jobs:
   sync:
@@ -41,26 +41,32 @@ jobs:
       - name: 스펙 내려받기
         id: fetch
         run: |
-          if ! curl -fsSL --max-time 30 --retry 3 --retry-delay 5 "$SPEC_URL" -o /tmp/openapi.json; then
-            echo "✗ 스펙을 받지 못했습니다: $SPEC_URL"
-            exit 1
-          fi
-          python3 -c "import json,sys; json.load(open('/tmp/openapi.json'))" || {
-            echo "✗ 받은 파일이 유효한 JSON 이 아닙니다."; exit 1; }
-          echo "size=$(wc -c < /tmp/openapi.json)" >> "$GITHUB_OUTPUT"
+          # ko 는 정본, en 은 rocket-open-api 의 번역 카탈로그로 생성된 산출물이다.
+          for name in openapi.json openapi.en.json; do
+            if ! curl -fsSL --max-time 30 --retry 3 --retry-delay 5 "$SPEC_BASE_URL/$name" -o "/tmp/$name"; then
+              echo "✗ 스펙을 받지 못했습니다: $SPEC_BASE_URL/$name"
+              exit 1
+            fi
+            python3 -c "import json,sys; json.load(open('/tmp/$name'))" || {
+              echo "✗ 받은 파일이 유효한 JSON 이 아닙니다: $name"; exit 1; }
+          done
 
       - name: 변경 여부 확인
         id: diff
         run: |
           # 커밋본과 의미가 같으면(키 순서만 다른 경우 포함) 아무것도 하지 않는다.
-          changed=1
-          if [ -f "$SPEC_PATH" ] && python3 - <<'PY'
-          import json, os, sys
-          a = json.load(open('/tmp/openapi.json'))
-          b = json.load(open(os.environ['SPEC_PATH']))
-          sys.exit(0 if a == b else 1)
+          changed=0
+          for name in openapi.json openapi.en.json; do
+            if ! python3 - "$SPEC_DIR/$name" "/tmp/$name" <<'PY'
+          import json, sys
+          try:
+              committed = json.load(open(sys.argv[1]))
+          except FileNotFoundError:
+              sys.exit(1)
+          sys.exit(0 if committed == json.load(open(sys.argv[2])) else 1)
           PY
-          then changed=0; fi
+            then changed=1; fi
+          done
           echo "changed=$changed" >> "$GITHUB_OUTPUT"
           [ "$changed" = "1" ] && echo "스펙이 변경되었습니다." || echo "변경 없음 — 종료합니다."
 
@@ -72,8 +78,8 @@ jobs:
       - name: 반영 후 문서 빌드 검증
         if: steps.diff.outputs.changed == '1'
         run: |
-          mkdir -p "$(dirname "$SPEC_PATH")"
-          cp /tmp/openapi.json "$SPEC_PATH"
+          mkdir -p "$SPEC_DIR"
+          cp /tmp/openapi.json /tmp/openapi.en.json "$SPEC_DIR/"
           # 잘못된 스펙이 들어오면 사이트 빌드가 깨진다. 커밋 전에 막는다.
           npx --yes mint@latest validate
           npx --yes mint@latest broken-links
@@ -83,10 +89,10 @@ jobs:
         run: |
           git config user.name  'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add "$SPEC_PATH"
+          git add "$SPEC_DIR/openapi.json" "$SPEC_DIR/openapi.en.json"
           git commit -m "chore: OpenAPI 스펙 동기화
 
-          rocket-open-api 가 배포한 $SPEC_URL 을 반영합니다.
+          rocket-open-api 가 배포한 ko/en 스펙을 반영합니다.
           이 파일은 생성 산출물이므로 직접 편집하지 마세요 —
           변경은 rocket-open-api 에서 하고 이 워크플로가 가져옵니다."
 
