@@ -168,8 +168,8 @@
               {
                 "group": "시작하기",
                 "pages": [
-                  "enterprise/start-overview",
-                  "enterprise/faq"
+                  "console/start-overview",
+                  "console/faq"
                 ]
               },
               {
@@ -184,7 +184,6 @@
                 "group": "채용",
                 "pages": [
                   "console/jobs-create",
-                  "console/jobs-manage-2",
                   "console/jobs-applicants-2"
                 ]
               },
