@@ -1,0 +1,94 @@
+---
+title: "Quickstart"
+description: "Issue an App Key and make your first API call, in three steps."
+keywords: ["quickstart", "getting started", "App Key", "first call", "API call", "tutorial", "onboarding"]
+---
+
+Three steps from issuing an App Key to your first API call. There is no approval process — you can start immediately.
+
+<Steps>
+  <Step title="Register an app and get an App Key">
+    Sign in to the [developer console](https://developers.rocketpunch.com/apps/new) with your Rocketpunch account and register an app. Enter a name and description, pick the type that matches what you are building, and your credentials are issued on the spot.
+
+    If you only read public data, choose an **App Key app**. If you need to act on a user's behalf — writing posts, for example — choose an **OAuth client app**. See [Choosing an app type](/en/openapi/auth-app-types) for the details.
+
+    <Warning>
+      The secret key (it starts with `rp_sec_`) is shown **once**, right after issuance or rotation. Once you leave the screen you cannot see it again, so move it somewhere safe immediately.
+    </Warning>
+  </Step>
+
+  <Step title="Set up the auth header">
+    Send your App Key in the `X-RP-API-Key` header on every request.
+
+    ```
+    X-RP-API-Key: rp_app_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    ```
+
+    No cookies, no query-string tokens, no sessions. One header per request.
+  </Step>
+
+  <Step title="Make your first call">
+    Let's search job postings.
+
+    ```bash
+    curl 'https://openapi.rocketpunch.com/api/v1/jobs?keyword=AI' \
+      -H 'X-RP-API-Key: rp_app_YOUR_KEY_HERE'
+    ```
+
+    ```javascript
+    const res = await fetch(
+      "https://openapi.rocketpunch.com/api/v1/jobs?keyword=AI",
+      { headers: { "X-RP-API-Key": process.env.ROCKETPUNCH_API_KEY } },
+    );
+
+    const { items, totalItems, totalPages } = await res.json();
+    ```
+
+    ```python
+    import os, requests
+
+    res = requests.get(
+        "https://openapi.rocketpunch.com/api/v1/jobs",
+        params={"keyword": "AI"},
+        headers={"X-RP-API-Key": os.environ["ROCKETPUNCH_API_KEY"]},
+    )
+    data = res.json()
+    ```
+  </Step>
+</Steps>
+
+## Got a response?
+
+List responses return `items` along with `totalItems`, `totalPages`, `page`, and `pageSize`. Page numbers start at 1.
+
+Set the response language with the `Accept-Language` header. Without it you get Korean.
+
+```bash
+curl 'https://openapi.rocketpunch.com/api/v1/jobs?keyword=AI' \
+  -H 'X-RP-API-Key: rp_app_YOUR_KEY_HERE' \
+  -H 'Accept-Language: en'
+```
+
+## Something not working?
+
+| Response | Cause | Fix |
+| --- | --- | --- |
+| `401` · `C0001` | The App Key is missing or invalid | Check that the header name is `X-RP-API-Key` and that the key starts with `rp_app_` |
+| `400` · `C0005` | A query parameter failed validation | The response `details` field names the offending item |
+| `429` · `C0010` | You exceeded the call limit | Wait the number of seconds in the `Retry-After` header, then retry |
+
+<Note>
+  Per-endpoint parameters, response schemas, and the full error code list are in the [API reference](/en/openapi/api-reference-overview).
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="App Key authentication" icon="key" href="/en/openapi/auth-app-key">
+    Storing and rotating keys, and what to do if one leaks.
+  </Card>
+
+  <Card title="OAuth 2.0 integration" icon="user-lock" href="/en/openapi/auth-oauth-quickstart">
+    Get user consent and call user-context APIs.
+  </Card>
+</CardGroup>

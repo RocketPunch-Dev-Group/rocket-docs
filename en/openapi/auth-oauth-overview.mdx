@@ -1,0 +1,72 @@
+---
+title: "OAuth 2.0 overview"
+description: "The authorization model for calling APIs on a user's behalf, plus token lifetimes and available scopes."
+keywords: ["OAuth", "OAuth 2.0", "authorization", "permissions", "scope", "access token", "refresh token", "PKCE", "consent"]
+---
+
+To write on a user's behalf or read their information you need that user's consent. Rocketpunch handles this with the OAuth 2.0 **Authorization Code + PKCE** flow.
+
+## The model at a glance
+
+| Item | Value |
+| --- | --- |
+| Authorization flow | Authorization Code + PKCE, with refresh token rotation |
+| Client type | Confidential only — a secret key is required |
+| PKCE | `S256` **required** — `plain` and omission are rejected |
+| Access token | JWT, 15 minutes by default |
+| Refresh token | A string starting with `rt_`, 30 days by default, **replaced on every use** |
+| Authorization code | Valid 5 minutes, **single use** |
+| Redirect URI | One per app, exact character match |
+
+## Endpoints
+
+These are split across two hosts: where you send the user's browser, and where your servers exchange tokens.
+
+| Step | Endpoint | Called by |
+| --- | --- | --- |
+| User consent | `https://developers.rocketpunch.com/oauth/authorize` | The user's browser |
+| Token issue and refresh | `https://openapi.rocketpunch.com/oauth/token` | Your server |
+| Token revocation | `https://openapi.rocketpunch.com/oauth/revoke` | Your server |
+| User info | `https://openapi.rocketpunch.com/oauth/userinfo` | Your server |
+| Metadata | `https://openapi.rocketpunch.com/.well-known/oauth-authorization-server` | Your server |
+
+<Warning>
+  The consent screen is on the developer console host (`developers.rocketpunch.com`), while token issuance is on the API host (`openapi.rocketpunch.com`). This is a common mix-up — double-check it.
+</Warning>
+
+## Scopes
+
+Two permissions can be granted today.
+
+| Scope | What you get |
+| --- | --- |
+| `profile` | The user's name and profile information |
+| `email` | The user's email address |
+
+Requested scopes are **granted or denied together**. Users cannot pick a subset.
+
+Calling `/oauth/userinfo` requires `profile`, and including the email in the response requires `email` as well.
+
+<Note>
+  Consent for additional scopes is currently available to app owners only. Support for general users will be expanded later.
+</Note>
+
+## When the consent screen is skipped
+
+If the user's existing consent is still valid and already covers everything you are requesting, the flow passes straight through. The screen reappears when:
+
+- the user is connecting for the first time
+- you request broader permissions than before
+- the consent has expired or its terms changed
+
+## Working with tokens
+
+Access tokens expire after 15 minutes. Use the refresh token to get a new one.
+
+Refresh tokens are **replaced with a new value on every use**. Always store the new refresh token from the response and discard the old one — reusing the old value fails.
+
+## Next steps
+
+<Card title="Integrate OAuth" icon="rocket" href="/en/openapi/auth-oauth-quickstart">
+  From generating PKCE values to exchanging tokens and calling the API, with real code.
+</Card>
