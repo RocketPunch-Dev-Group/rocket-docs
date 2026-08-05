@@ -32,17 +32,12 @@
             "icon": "book",
             "groups": [
               {
-                "group": "자주 묻는 질문",
-                "pages": [
-                  "index"
-                ]
-              },
-              {
                 "group": "시작하기",
                 "pages": [
                   "start-introduction",
                   "start-history",
-                  "start-how-to-use"
+                  "start-how-to-use",
+                  "index"
                 ]
               },
               {
