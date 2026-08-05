@@ -1,0 +1,86 @@
+# 한국어 원문이 바뀌었는데 영문판이 따라오지 않은 페이지를 추적한다.
+#
+# 경로가 둘이라 처리도 다르다:
+#   - 콘솔(웹 에디터) 편집은 main 에 직접 커밋된다. 기획팀의 의도된 저작 방식이라
+#     여기서 막을 수 없다. 대신 추적 이슈를 갱신해 무엇이 낡았는지 계속 보이게 한다.
+#   - git PR 은 작성자가 그 자리에서 고칠 수 있으므로 차단 검사로 건다.
+name: translation-sync
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.mdx'
+      - 'scripts/translation-state.json'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: translation-sync-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: 번역 동기화 확인
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      # PR 에서는 차단 검사. 작성자가 en/ 을 함께 고치고 --update 로 기록하면 통과한다.
+      - name: 검사 (PR)
+        if: github.event_name == 'pull_request'
+        run: ./scripts/check-translation-sync.sh
+
+      - name: 검사 (main·수동)
+        id: check
+        if: github.event_name != 'pull_request'
+        run: |
+          set +e
+          out=$(./scripts/check-translation-sync.sh 2>&1)
+          code=$?
+          set -e
+          echo "$out"
+          {
+            echo "report<<REPORT_EOF"
+            echo "$out"
+            echo "REPORT_EOF"
+          } >> "$GITHUB_OUTPUT"
+          echo "drift=$code" >> "$GITHUB_OUTPUT"
+
+      # 낡은 번역이 있으면 추적 이슈를 하나 만들어 계속 갱신한다(중복 생성 방지).
+      # 해소되면 자동으로 닫는다.
+      - name: 추적 이슈 갱신
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DRIFT: ${{ steps.check.outputs.drift }}
+          REPORT: ${{ steps.check.outputs.report }}
+        run: |
+          title='영문 번역이 한국어 원문보다 낡았습니다'
+          existing=$(gh issue list --state open --search "$title in:title" \
+                       --json number --jq '.[0].number // empty')
+
+          if [ "$DRIFT" = "0" ]; then
+            if [ -n "$existing" ]; then
+              gh issue close "$existing" \
+                --comment "한국어 원문과 영문판이 다시 동기화되어 자동으로 닫습니다. (커밋 ${GITHUB_SHA:0:7})"
+              echo "✓ 드리프트 해소 — 이슈 #$existing 을 닫았습니다."
+            else
+              echo "✓ 드리프트 없음."
+            fi
+            exit 0
+          fi
+
+          body=$(printf '한국어 원문이 바뀌었는데 영문판이 따라오지 않았습니다.\n\n```\n%s\n```\n\n### 고치는 법\n\n1. 위 목록의 `en/<파일>` 을 한국어 원문에 맞춰 갱신합니다.\n2. `./scripts/check-translation-sync.sh --update` 로 현재 상태를 기록합니다.\n3. 두 변경을 함께 PR 로 올립니다.\n\nUI 용어는 rocket-web 의 `messages/{ko,en}` 번들 표기를 따릅니다.\n\n---\n마지막 확인: %s (`%s`)\n' \
+                  "$REPORT" "$(date -u '+%%Y-%%m-%%d %%H:%%M UTC')" "${GITHUB_SHA:0:7}")
+
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --body "$body"
+            echo "이슈 #$existing 을 갱신했습니다."
+          else
+            gh issue create --title "$title" --body "$body"
+          fi
