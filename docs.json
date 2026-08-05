@@ -212,7 +212,9 @@
                 "group": "권한 관리",
                 "pages": []
               }
-            ]
+            ],
+            "icon": "buildings",
+            "hidden": true
           },
           {
             "tab": "개발자 가이드",
