@@ -7,4 +7,4 @@
 # 생성 산출물 — 직접 편집하지 마세요.
 # rocket-open-api 가 코드에서 생성한 스펙을 sync-openapi-spec 워크플로가 가져옵니다.
 # 여기서 고쳐도 다음 동기화 때 되돌아갑니다. 변경은 rocket-open-api 에서 하세요.
-/developer/openapi.json @RocketPunch-Dev-Group/tech
+/openapi/openapi.json @RocketPunch-Dev-Group/tech
