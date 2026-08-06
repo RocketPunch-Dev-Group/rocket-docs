@@ -85,7 +85,7 @@
 | --- | --- |
 | C레벨 | C-level |
 | 고급 | Advanced (communicates freely) |
-| 미들 | Middle |
+| 미들 | Mid-level (스펙 정본 · 번들 추가 대상 아님) |
 | 상급 | Upper-intermediate (communicates smoothly at work) |
 | 시니어 | Senior |
 | 신입 | Entry level |
