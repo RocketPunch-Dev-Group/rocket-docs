@@ -210,7 +210,9 @@
               },
               {
                 "group": "메시지",
-                "pages": []
+                "pages": [
+                  "console/inbox"
+                ]
               },
               {
                 "group": "교육",
