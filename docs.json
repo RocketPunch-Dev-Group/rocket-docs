@@ -127,7 +127,7 @@
                   "wallet-manage",
                   "wallet-connect",
                   "wallet-send",
-                  "wallet-recieve",
+                  "wallet-receive",
                   "wallet-exchange",
                   "wallet-networks-token",
                   "wallet-nft",
@@ -353,7 +353,7 @@
                   "en/wallet-manage",
                   "en/wallet-connect",
                   "en/wallet-send",
-                  "en/wallet-recieve",
+                  "en/wallet-receive",
                   "en/wallet-exchange",
                   "en/wallet-networks-token",
                   "en/wallet-nft",
@@ -504,6 +504,14 @@
     {
       "source": "/developer",
       "destination": "/openapi"
+    },
+    {
+      "source": "/wallet-recieve",
+      "destination": "/wallet-receive"
+    },
+    {
+      "source": "/en/wallet-recieve",
+      "destination": "/en/wallet-receive"
     }
   ],
   "styling": {
