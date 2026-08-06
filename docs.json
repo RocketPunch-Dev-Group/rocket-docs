@@ -173,12 +173,22 @@
                 ]
               },
               {
-                "group": "기업 프로필",
-                "pages": []
+                "group": "권한 관리",
+                "pages": [
+                  "console/permission-request",
+                  "console/permission-roles",
+                  "console/permission-invite"
+                ]
               },
               {
-                "group": "메시지",
-                "pages": []
+                "group": "기업 프로필",
+                "pages": [
+                  "console/profile-basic",
+                  "console/profile-detail",
+                  "console/profile-links",
+                  "console/profile-employees",
+                  "console/profile-delete"
+                ]
               },
               {
                 "group": "채용",
@@ -190,27 +200,45 @@
               },
               {
                 "group": "이벤트",
+                "pages": [
+                  "console/event-create",
+                  "console/event-manage",
+                  "console/event-guest",
+                  "console/event-catering",
+                  "console/event-host"
+                ]
+              },
+              {
+                "group": "메시지",
                 "pages": []
               },
               {
                 "group": "교육",
-                "pages": []
+                "pages": [
+                  "console/edu-create",
+                  "console/edu-manage"
+                ]
               },
               {
                 "group": "광고",
-                "pages": []
+                "pages": [
+                  "console/ads-overview",
+                  "console/ads-banner"
+                ]
               },
               {
                 "group": "요금제",
-                "pages": []
+                "pages": [
+                  "console/plan-overview",
+                  "console/plan-change",
+                  "console/plan-credit"
+                ]
               },
               {
                 "group": "결제 관리",
-                "pages": []
-              },
-              {
-                "group": "권한 관리",
-                "pages": []
+                "pages": [
+                  "console/payment-overview"
+                ]
               }
             ]
           }
