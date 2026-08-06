@@ -28,6 +28,7 @@
     "languages": [
       {
         "language": "ko",
+        "default": true,
         "tabs": [
           {
             "tab": "서비스 이용 가이드",
