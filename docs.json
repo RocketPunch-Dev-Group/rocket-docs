@@ -137,6 +137,7 @@
                 "pages": [
                   "activity-jobs-apply",
                   "activity-external-apply",
+                  "activity-event-ticket",
                   "activity-contents",
                   "activity-etc",
                   "activity-wallet"
