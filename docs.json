@@ -186,8 +186,6 @@
                 "pages": [
                   "console/profile-overview",
                   "console/profile-basic",
-                  "console/profile-detail",
-                  "console/profile-links",
                   "console/profile-employees",
                   "console/profile-delete"
                 ]
