@@ -178,7 +178,8 @@
                 "pages": [
                   "console/permission-request",
                   "console/permission-roles",
-                  "console/permission-invite"
+                  "console/permission-invite",
+                  "console/permission-delete"
                 ]
               },
               {
