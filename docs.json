@@ -59,12 +59,12 @@
                   "profile-overview",
                   "profile-library",
                   "settings-certification-badge",
-                  "profile-share",
                   "profile-career",
-                  "profile-private",
                   "profile-education",
                   "profile-experience",
-                  "profile-language"
+                  "profile-language",
+                  "profile-share",
+                  "profile-private"
                 ]
               },
               {
