@@ -174,21 +174,21 @@
                 ]
               },
               {
-                "group": "권한 관리",
-                "pages": [
-                  "console/permission-roles",
-                  "console/permission-invite",
-                  "console/permission-manage",
-                  "console/permission-request"
-                ]
-              },
-              {
                 "group": "기업 프로필",
                 "pages": [
                   "console/profile-overview",
                   "console/profile-basic",
                   "console/profile-employees",
                   "console/profile-delete"
+                ]
+              },
+              {
+                "group": "권한 관리",
+                "pages": [
+                  "console/permission-roles",
+                  "console/permission-invite",
+                  "console/permission-manage",
+                  "console/permission-request"
                 ]
               },
               {
