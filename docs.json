@@ -176,10 +176,10 @@
               {
                 "group": "권한 관리",
                 "pages": [
-                  "console/permission-request",
                   "console/permission-roles",
                   "console/permission-invite",
-                  "console/permission-delete"
+                  "console/permission-manage",
+                  "console/permission-request"
                 ]
               },
               {
