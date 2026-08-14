@@ -233,8 +233,7 @@
                 "group": "요금제",
                 "pages": [
                   "console/plan-overview",
-                  "console/plan-change",
-                  "console/plan-credit"
+                  "console/plan-change"
                 ]
               },
               {
