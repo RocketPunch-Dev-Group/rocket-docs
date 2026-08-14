@@ -203,8 +203,8 @@
                 "group": "이벤트",
                 "pages": [
                   "console/event-create",
-                  "console/event-manage",
                   "console/event-guest",
+                  "console/event-manage",
                   "console/event-catering",
                   "console/event-host"
                 ]
