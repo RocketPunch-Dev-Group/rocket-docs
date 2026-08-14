@@ -205,8 +205,8 @@
                   "console/event-create",
                   "console/event-guest",
                   "console/event-manage",
-                  "console/event-catering",
-                  "console/event-host"
+                  "console/event-host",
+                  "console/event-catering"
                 ]
               },
               {
