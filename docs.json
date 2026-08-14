@@ -183,7 +183,7 @@
                 ]
               },
               {
-                "group": "권한 관리",
+                "group": "멤버 및 권한",
                 "pages": [
                   "console/permission-roles",
                   "console/permission-invite",
@@ -205,8 +205,8 @@
                   "console/event-create",
                   "console/event-guest",
                   "console/event-manage",
-                  "console/event-host",
-                  "console/event-catering"
+                  "console/event-catering",
+                  "console/event-host"
                 ]
               },
               {
@@ -230,15 +230,10 @@
                 ]
               },
               {
-                "group": "요금제",
+                "group": "결제 및 요금제",
                 "pages": [
                   "console/plan-overview",
-                  "console/plan-change"
-                ]
-              },
-              {
-                "group": "결제 관리",
-                "pages": [
+                  "console/plan-change",
                   "console/payment-overview"
                 ]
               }
