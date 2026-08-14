@@ -212,7 +212,7 @@
               {
                 "group": "메시지",
                 "pages": [
-                  "console/inbox"
+                  "console/message-start"
                 ]
               },
               {
