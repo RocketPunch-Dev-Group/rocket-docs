@@ -170,6 +170,7 @@
                 "group": "시작하기",
                 "pages": [
                   "console/start-overview",
+                  "console/start-language",
                   "console/faq"
                 ]
               },
@@ -178,8 +179,15 @@
                 "pages": [
                   "console/profile-overview",
                   "console/profile-basic",
+                  "console/profile-switch",
                   "console/profile-employees",
                   "console/profile-delete"
+                ]
+              },
+              {
+                "group": "메시지",
+                "pages": [
+                  "console/message-start"
                 ]
               },
               {
@@ -207,12 +215,6 @@
                   "console/event-manage",
                   "console/event-catering",
                   "console/event-host"
-                ]
-              },
-              {
-                "group": "메시지",
-                "pages": [
-                  "console/message-start"
                 ]
               },
               {
