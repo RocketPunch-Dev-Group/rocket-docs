@@ -181,8 +181,8 @@
                   "console/profile-basic",
                   "console/profile-switch",
                   "console/profile-post",
-                  "console/profile-employees",
-                  "console/profile-delete"
+                  "console/profile-delete",
+                  "console/profile-employees"
                 ]
               },
               {
