@@ -233,6 +233,14 @@
                 ]
               },
               {
+                "group": "상점",
+                "pages": [
+                  "console/store-create",
+                  "console/store-product",
+                  "console/store-order"
+                ]
+              },
+              {
                 "group": "결제 및 요금제",
                 "pages": [
                   "console/plan-overview",
