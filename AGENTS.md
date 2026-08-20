@@ -64,3 +64,21 @@ npx mint@latest broken-links        # 내부 링크
 ```
 
 `mint broken-links` 는 내부 상대 링크만 봅니다. 외부 절대 URL 의 호스트 오타는 `check-rocketpunch-hosts.sh` 가 잡습니다.
+
+## 콘솔 커밋의 작성자 귀속
+
+Mintlify 콘솔 편집은 작성자의 GitHub 계정이 연결돼 있지 않으면 `mintlify[bot]` 이름으로 커밋됩니다.
+실제로 문서를 쓴 사람의 기여가 GitHub 기여 그래프에 남지 않습니다.
+
+**근본 해결은 Mintlify 대시보드에서 작성자의 GitHub 계정을 연결하는 것입니다.** 연결되면 커밋 author 가
+처음부터 본인이 됩니다(예: `Seunguk <62605811+aware-in@users.noreply.github.com>` 으로 남은 커밋들).
+
+연결 전에 쌓인 커밋은 `Co-authored-by:` 트레일러로 뒤늦게 메울 수 있습니다.
+
+```bash
+./scripts/add-mintlify-coauthor.sh origin/main..edit-console
+git push --force-with-lease origin edit-console
+```
+
+기본 브랜치를 되쓰면 열려 있는 PR 이 `base_ref_force_pushed` 로 **자동으로 닫히고 재열기가 되지 않습니다**
+(실제로 #21 이 이렇게 닫혀 #22 로 옮겼습니다). 되쓰기는 작업 브랜치에서 머지 전에 끝내세요.
