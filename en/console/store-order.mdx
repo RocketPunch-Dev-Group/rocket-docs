@@ -1,0 +1,52 @@
+---
+title: "Managing orders"
+description: "How to review incoming orders and quote requests, and handle payments and refunds."
+keywords: ["manage orders", "order list", "order status", "pending", "order approved", "delivered", "order canceled", "quote request", "quote", "contact details", "customer contact", "additional payment", "payment request", "payment link", "payment method", "refund", "partial refund", "full refund", "cancel", "requested delivery date", "delivery address", "event order"]
+---
+
+`Rocketpunch` \> `Enterprise Services` \> `Store` \> `Manage orders` is where you review incoming orders and quote requests. Choose a service type tab, then pick either `Orders` or `Quote requests`.
+
+Orders arrive per event. The list shows the event name, the items ordered, the amount paid, the requested delivery date, and the order status; selecting an order opens its details on the right. Select `View event` to go to that event.
+
+A customer can add products and pay right away, or skip the products and request a quote by giving only their expected headcount and budget. Quote requests work the same way as orders: you check the contact details and send a payment request. For the customer's side, see [Event catering](/en/console/event-catering).
+
+When an order or quote request comes in, a notification is sent to the contact email registered on your store home.
+
+## Contacting the customer
+
+In the order details, select `View contact details` to see their phone number and email. Use it when you need to arrange delivery or pass along more information.
+
+<Warning>
+  For everyone's safety, do not steer customers toward outside payment or cash payment.
+</Warning>
+
+## Changing the order status
+
+In the order details, set the order status to `Pending`, `Order approved`, `Delivered`, or `Order canceled`.
+
+**The order status is how your store records its own progress.** Setting it to `Order canceled` does not cancel the payment. To actually cancel it, use `Refund and cancel`.
+
+## Requesting an additional payment
+
+When the amount goes up while you are working with the customer, select `Request additional payment`, enter a title for the request, the amount, how long the request stays valid, and any payment instructions, then select `Send payment request`. Write a clear title and instructions so the customer can tell what they are paying for.
+
+The customer receives a payment link at the phone number and email they entered when ordering. They can pay by credit card, check card, Toss Pay, Kakao Pay, Naver Pay, or PAYCO, and a confirmation email is sent once the payment goes through.
+
+Payment requests you have sent appear in that order's details, where you can send more or refund them one at a time.
+
+{/* TODO(needs confirmation: what happens to a payment link after its validity period expires) */}
+
+## Refunding and canceling
+
+Select `Refund and cancel` at the bottom of the order details. It applies to the amount the customer paid up front; payment requests you sent separately are refunded one at a time under `Payment requests sent`.
+
+| Type | What happens | Reasons you can choose |
+| --- | --- | --- |
+| Cancel and refund in full | Cancels the whole order. | Buyer requested cancellation, cannot fulfill due to a product issue, cannot fulfill due to a delivery issue, repayment of the amount, other |
+| Partial refund | Refunds only the amount you enter. You cannot enter more than the amount paid. | Refund of the difference after a change to the order, additional discount applied, product price reduced, other |
+
+Choosing `Other` lets you write the reason yourself.
+
+<Warning>
+  Refunds and cancellations cannot be undone. The button on a processed order changes to `Refund requested` and cannot be selected again.
+</Warning>

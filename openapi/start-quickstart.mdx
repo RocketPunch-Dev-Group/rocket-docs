@@ -1,0 +1,94 @@
+---
+title: "빠른 시작"
+description: "App Key를 발급받고 첫 API를 호출하기까지, 3단계로 안내해 드릴게요."
+keywords: ["빠른 시작", "퀵스타트", "시작하기", "App Key 발급", "앱키 발급", "첫 호출", "API 호출", "튜토리얼", "온보딩"]
+---
+
+App Key 발급부터 첫 API 호출까지 3단계면 됩니다. 별도 승인 절차 없이 바로 시작할 수 있습니다.
+
+<Steps>
+  <Step title="앱 등록하고 App Key 발급받기">
+    [개발자 콘솔](https://developers.rocketpunch.com/apps/new)에 로켓펀치 계정으로 로그인한 뒤 앱을 등록합니다. 앱 이름과 설명, 그리고 용도에 맞는 타입을 고르면 인증 정보가 바로 발급됩니다.
+
+    공개 데이터만 조회한다면 **App Key 전용 앱**을, 사용자를 대신해 글을 쓰는 등의 작업이 필요하다면 **OAuth 클라이언트 앱**을 선택하세요. 자세한 기준은 [앱 타입 선택](/openapi/auth-app-types)에서 확인할 수 있습니다.
+
+    <Warning>
+      시크릿 키(`rp_sec_`로 시작)는 발급과 재발급 직후 **한 번만** 표시됩니다. 화면을 벗어나면 다시 볼 수 없으니 그 자리에서 안전한 곳에 옮겨 두세요.
+    </Warning>
+  </Step>
+
+  <Step title="인증 헤더 구성하기">
+    모든 요청에 발급받은 App Key를 `X-RP-API-Key` 헤더로 담습니다.
+
+    ```
+    X-RP-API-Key: rp_app_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    ```
+
+    쿠키나 쿼리스트링 토큰, 세션 같은 건 쓰지 않습니다. 요청마다 헤더 하나만 붙이면 됩니다.
+  </Step>
+
+  <Step title="첫 API 호출하기">
+    채용공고를 검색해 보겠습니다.
+
+    ```bash
+    curl 'https://openapi.rocketpunch.com/api/v1/jobs?keyword=AI' \
+      -H 'X-RP-API-Key: rp_app_YOUR_KEY_HERE'
+    ```
+
+    ```javascript
+    const res = await fetch(
+      "https://openapi.rocketpunch.com/api/v1/jobs?keyword=AI",
+      { headers: { "X-RP-API-Key": process.env.ROCKETPUNCH_API_KEY } },
+    );
+
+    const { items, totalItems, totalPages } = await res.json();
+    ```
+
+    ```python
+    import os, requests
+
+    res = requests.get(
+        "https://openapi.rocketpunch.com/api/v1/jobs",
+        params={"keyword": "AI"},
+        headers={"X-RP-API-Key": os.environ["ROCKETPUNCH_API_KEY"]},
+    )
+    data = res.json()
+    ```
+  </Step>
+</Steps>
+
+## 응답을 받으셨나요?
+
+목록 응답은 `items`와 함께 `totalItems` · `totalPages` · `page` · `pageSize`를 돌려줍니다. 페이지 번호는 1부터 시작합니다.
+
+응답 언어는 `Accept-Language` 헤더로 정할 수 있습니다. 지정하지 않으면 한국어로 옵니다.
+
+```bash
+curl 'https://openapi.rocketpunch.com/api/v1/jobs?keyword=AI' \
+  -H 'X-RP-API-Key: rp_app_YOUR_KEY_HERE' \
+  -H 'Accept-Language: en'
+```
+
+## 잘 안 되나요?
+
+| 응답 | 원인 | 해결 |
+| --- | --- | --- |
+| `401` · `C0001` | App Key가 없거나 잘못됐습니다 | 헤더 이름이 `X-RP-API-Key`인지, 키가 `rp_app_`으로 시작하는지 확인하세요 |
+| `400` · `C0005` | 쿼리 파라미터가 규칙에 맞지 않습니다 | 응답의 `details`에 문제가 된 항목 이름이 담겨 옵니다 |
+| `429` · `C0010` | 호출 한도를 넘었습니다 | `Retry-After` 헤더의 초만큼 기다린 뒤 다시 호출하세요 |
+
+<Note>
+  엔드포인트별 파라미터와 응답 스키마, 전체 에러 코드 목록은 [API 레퍼런스](/openapi/api-reference-overview)에서 확인할 수 있습니다.
+</Note>
+
+## 다음 단계
+
+<CardGroup cols={2}>
+  <Card title="App Key 인증 자세히" icon="key" href="/openapi/auth-app-key">
+    키 보관과 회전, 노출됐을 때의 대처를 안내합니다.
+  </Card>
+
+  <Card title="OAuth 2.0 연동" icon="user-lock" href="/openapi/auth-oauth-quickstart">
+    사용자 동의를 받아 사용자 컨텍스트 API를 호출합니다.
+  </Card>
+</CardGroup>

@@ -1,0 +1,60 @@
+---
+title: "Manage networks and tokens"
+description: "Learn how to add a new network or import tokens that don't show up."
+keywords: ["network", "custom network", "add network", "chain", "Chain ID", "RPC", "add token", "import token", "contract address", "scam token", "fraudulent token", "missing token"]
+---
+
+<Frame>
+  ![Empty Image](/images/empty_image.png "Empty Image")
+</Frame>
+
+## Networks
+
+Rocketpunch Wallet comes with the major networks registered by default. You can see the registered networks in `Wallet` \> `More button ☰` \> `Network Connection`.
+
+## Adding a custom network
+
+You can add networks that aren't in the default list yourself. Go to `Wallet` \> `More button ☰` \> `Network Connection` \> `Add Custom Network` and enter the following details.
+
+| Item | Details |
+| --- | --- |
+| Network Name | The name of the network. |
+| RPC URL | The address used to connect to the network. You can register more than one. |
+| Chain ID | The unique number that identifies the network. |
+| Currency Symbol | The symbol of that network's native currency. For Ethereum, this is ETH. |
+| Block Explorer URL | The address of a site where transaction history can be looked up. It's optional, and you can register more than one. |
+
+Networks you add are listed separately as `Custom Networks`, and you can delete them from the list.
+
+<Warning>
+  You have to enter the network details accurately. Incorrect details can make transfers fail or cause you to lose assets. Only use the values officially published by whoever created the network.
+</Warning>
+
+## Tokens
+
+By default, the asset list only shows some of the popular tokens. Tokens that don't appear in the list can be added and imported yourself.
+
+In `Wallet` \> `More button ☰` \> `Import Token`, you can review the tokens you've imported and add a new one with `Add Custom Token`. Select the network first, then add the token by searching for it by name or entering the details yourself.
+
+When you add a token by entering the details yourself, enter the following.
+
+| Item | Details |
+| --- | --- |
+| Token Contract Address | The address that identifies the token on the network. Two tokens with the same name are different tokens if their contract addresses differ. |
+| Token Symbol | The short name shown in the asset list. For USD Coin, this is USDC. |
+| Token Name | The token's official name. For USDC, this is USD Coin. |
+| Decimals | The smallest unit the token can be divided into. Enter the value set when the token was issued, exactly as it is. |
+
+### Watch out for scam tokens
+
+When you add a token yourself, you have to review and agree to the following.
+
+<Warning>
+  **Check the contract address, not the name.** Anyone can issue a token and give it any name they want, so there are many malicious tokens disguised as well-known ones. Search for the token you want in an explorer such as Etherscan, BscScan, or Polygonscan to find its exact contract address.
+
+  **Be careful with tokens that arrive without your knowledge.** Anyone who knows your wallet address can send you tokens. When a project sends tokens to many wallets for free to attract attention, it's called an airdrop. Airdrops are used legitimately, but they're also used to manufacture interest in worthless tokens or for phishing.
+
+  **Anything that asks for your secret recovery phrase is a scam.** Scam tokens block you from swapping them for other tokens and instead ask you to enter personal information or your secret recovery phrase. If your secret recovery phrase is leaked, you can lose every asset in your wallet.
+</Warning>
+
+Imported tokens appear in the asset list, and you can also select them in [Send](/en/wallet-send) and [Receive](/en/wallet-receive).

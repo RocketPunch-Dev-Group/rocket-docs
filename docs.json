@@ -1,10 +1,11 @@
 {
   "theme": "mint",
   "name": "Rocketpunch Docs",
+  "description": "로켓펀치 서비스 이용 방법 및 개발자 문서를 확인하세요.",
   "colors": {
     "primary": "#121314",
-    "light": "#121314",
-    "dark": "#ffffff"
+    "light": "#ffffff",
+    "dark": "#121314"
   },
   "favicon": {
     "light": "https://media.brand.dev/4bb65048-90b6-4750-a250-45acf9a7863a.jpg",
@@ -15,7 +16,8 @@
       "type": "button",
       "label": "Go to Rocketpunch",
       "href": "https://www.rocketpunch.com"
-    }
+    },
+    "links": []
   },
   "footer": {
     "socials": {
@@ -26,6 +28,7 @@
     "languages": [
       {
         "language": "ko",
+        "default": true,
         "tabs": [
           {
             "tab": "서비스 이용 가이드",
@@ -125,7 +128,7 @@
                   "wallet-manage",
                   "wallet-connect",
                   "wallet-send",
-                  "wallet-recieve",
+                  "wallet-receive",
                   "wallet-exchange",
                   "wallet-networks-token",
                   "wallet-nft",
@@ -249,6 +252,298 @@
               }
             ],
             "icon": "buildings"
+          },
+          {
+            "tab": "Open API 가이드",
+            "icon": "code",
+            "groups": [
+              {
+                "group": "시작하기",
+                "pages": [
+                  "openapi/index",
+                  "openapi/start-quickstart"
+                ]
+              },
+              {
+                "group": "인증",
+                "pages": [
+                  "openapi/auth-app-types",
+                  "openapi/auth-app-key",
+                  "openapi/auth-oauth-overview",
+                  "openapi/auth-oauth-quickstart"
+                ]
+              },
+              {
+                "group": "API 레퍼런스",
+                "openapi": {
+                  "source": "openapi/openapi.json",
+                  "directory": "openapi/api-reference"
+                },
+                "pages": [
+                  "openapi/api-reference-overview"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "language": "en",
+        "tabs": [
+          {
+            "tab": "Service Guide",
+            "icon": "book",
+            "groups": [
+              {
+                "group": "Getting started",
+                "pages": [
+                  "en/index",
+                  "en/start-history",
+                  "en/start-how-to-use",
+                  "en/faq"
+                ]
+              },
+              {
+                "group": "Log in",
+                "pages": [
+                  "en/account-login",
+                  "en/account-identity-verification",
+                  "en/account-login-error",
+                  "en/account-initialization",
+                  "en/account-linked",
+                  "en/account-migration",
+                  "en/account-delete",
+                  "en/account-world"
+                ]
+              },
+              {
+                "group": "Profile",
+                "pages": [
+                  "en/profile-overview",
+                  "en/profile-library",
+                  "en/settings-certification-badge",
+                  "en/profile-share",
+                  "en/profile-career",
+                  "en/profile-private",
+                  "en/profile-education",
+                  "en/profile-experience",
+                  "en/profile-language"
+                ]
+              },
+              {
+                "group": "Feed",
+                "pages": [
+                  "en/feed-overview",
+                  "en/feed-post",
+                  "en/feed-reaction"
+                ]
+              },
+              {
+                "group": "Discover",
+                "pages": [
+                  "en/discover-overview",
+                  "en/discover-usage"
+                ]
+              },
+              {
+                "group": "Hiring",
+                "pages": [
+                  "en/jobs-search",
+                  "en/jobs-apply"
+                ]
+              },
+              {
+                "group": "Education",
+                "pages": [
+                  "en/edu-search",
+                  "en/edu-apply"
+                ]
+              },
+              {
+                "group": "Events",
+                "pages": [
+                  "en/event-overview",
+                  "en/event-ticket-purchase",
+                  "en/event-ticket-refund",
+                  "en/event-host"
+                ]
+              },
+              {
+                "group": "Travel",
+                "pages": [
+                  "en/travel-introduction"
+                ]
+              },
+              {
+                "group": "Chat",
+                "pages": [
+                  "en/chat-overview",
+                  "en/chat-usage"
+                ]
+              },
+              {
+                "group": "Wallet",
+                "pages": [
+                  "en/wallet-overview",
+                  "en/wallet-manage",
+                  "en/wallet-connect",
+                  "en/wallet-send",
+                  "en/wallet-receive",
+                  "en/wallet-exchange",
+                  "en/wallet-networks-token",
+                  "en/wallet-nft",
+                  "en/wallet-giftcard"
+                ]
+              },
+              {
+                "group": "Activity",
+                "pages": [
+                  "en/activity-jobs-apply",
+                  "en/activity-external-apply",
+                  "en/activity-event-ticket",
+                  "en/activity-contents",
+                  "en/activity-etc",
+                  "en/activity-wallet"
+                ]
+              },
+              {
+                "group": "Report · Block",
+                "pages": [
+                  "en/report-post-reply",
+                  "en/report-profile",
+                  "en/report-jobs-edu",
+                  "en/report-discover"
+                ]
+              },
+              {
+                "group": "Account settings",
+                "pages": [
+                  "en/settings-language-region-currency",
+                  "en/setting-notification",
+                  "en/settings-billing",
+                  "en/settings-security"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "Enterprise Guide",
+            "groups": [
+              {
+                "group": "Getting started",
+                "pages": [
+                  "en/console/start-overview",
+                  "en/console/start-language",
+                  "en/console/faq"
+                ]
+              },
+              {
+                "group": "Company profile",
+                "pages": [
+                  "en/console/profile-overview",
+                  "en/console/profile-basic",
+                  "en/console/profile-switch",
+                  "en/console/profile-post",
+                  "en/console/profile-delete",
+                  "en/console/profile-employees"
+                ]
+              },
+              {
+                "group": "Messages",
+                "pages": [
+                  "en/console/message-start"
+                ]
+              },
+              {
+                "group": "Members and permissions",
+                "pages": [
+                  "en/console/permission-roles",
+                  "en/console/permission-invite",
+                  "en/console/permission-manage",
+                  "en/console/permission-request"
+                ]
+              },
+              {
+                "group": "Hiring",
+                "pages": [
+                  "en/console/jobs-create",
+                  "en/console/jobs-manage",
+                  "en/console/jobs-applicants"
+                ]
+              },
+              {
+                "group": "Events",
+                "pages": [
+                  "en/console/event-create",
+                  "en/console/event-guest",
+                  "en/console/event-manage",
+                  "en/console/event-catering",
+                  "en/console/event-host"
+                ]
+              },
+              {
+                "group": "Education",
+                "pages": [
+                  "en/console/edu-create",
+                  "en/console/edu-manage"
+                ]
+              },
+              {
+                "group": "Advertising",
+                "pages": [
+                  "en/console/ads-overview",
+                  "en/console/ads-banner"
+                ]
+              },
+              {
+                "group": "Store",
+                "pages": [
+                  "en/console/store-create",
+                  "en/console/store-product",
+                  "en/console/store-order"
+                ]
+              },
+              {
+                "group": "Billing and plans",
+                "pages": [
+                  "en/console/plan-overview",
+                  "en/console/payment-overview"
+                ]
+              }
+            ],
+            "icon": "buildings"
+          },
+          {
+            "tab": "Open API Guide",
+            "icon": "code",
+            "groups": [
+              {
+                "group": "Getting started",
+                "pages": [
+                  "en/openapi/index",
+                  "en/openapi/start-quickstart"
+                ]
+              },
+              {
+                "group": "Authentication",
+                "pages": [
+                  "en/openapi/auth-app-types",
+                  "en/openapi/auth-app-key",
+                  "en/openapi/auth-oauth-overview",
+                  "en/openapi/auth-oauth-quickstart"
+                ]
+              },
+              {
+                "group": "API reference",
+                "pages": [
+                  "en/openapi/api-reference-overview"
+                ],
+                "openapi": {
+                  "source": "openapi/openapi.en.json",
+                  "directory": "en/openapi/api-reference"
+                }
+              }
+            ]
           }
         ]
       }
@@ -258,17 +553,67 @@
     "light": "/images/docs-light.svg",
     "dark": "/images/docs-dark.svg"
   },
-  "background": {
-    "color": {
-      "light": "#ffffff",
-      "dark": "#0E0F10"
-    }
-  },
   "icons": {
     "library": "fontawesome"
   },
   "appearance": {
-    "default": "light"
+    "default": "system"
   },
-  "redirects": []
+  "redirects": [
+    {
+      "source": "/service/:slug*",
+      "destination": "/:slug*"
+    },
+    {
+      "source": "/start-introduction",
+      "destination": "/"
+    },
+    {
+      "source": "/developer/:slug*",
+      "destination": "/openapi/:slug*"
+    },
+    {
+      "source": "/developer",
+      "destination": "/openapi"
+    },
+    {
+      "source": "/wallet-recieve",
+      "destination": "/wallet-receive"
+    },
+    {
+      "source": "/en/wallet-recieve",
+      "destination": "/en/wallet-receive"
+    }
+  ],
+  "styling": {
+    "codeblocks": "dark"
+  },
+  "contextual": {
+    "options": [
+      "assistant"
+    ],
+    "display": "header"
+  },
+  "seo": {
+    "indexing": "navigable",
+    "organization": {
+      "id": "https://www.rocketpunch.com/#organization",
+      "name": "로켓펀치",
+      "url": "https://www.rocketpunch.com",
+      "sameAs": [
+        "https://github.com/RocketPunch-Dev-Group"
+      ]
+    },
+    "metatags": {
+      "og:site_name": "Rocketpunch Docs"
+    }
+  },
+  "fonts": {
+    "family": "Geist"
+  },
+  "integrations": {
+    "ga4": {
+      "measurementId": "G-QXWJ4N0G36"
+    }
+  }
 }
