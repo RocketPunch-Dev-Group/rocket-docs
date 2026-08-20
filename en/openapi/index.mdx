@@ -1,0 +1,58 @@
+---
+title: "Getting started with the Rocketpunch Open API"
+description: "How to connect job, event, and post data to your app — and what each of the three hosts is for."
+keywords: ["Open API", "API", "developer", "builder", "integration", "App Key", "OAuth", "REST API", "developer guide"]
+---
+
+The Rocketpunch Open API is a REST API for reading and integrating data such as job postings, events, and posts. Issue an App Key once and you can start calling it right away. Actions that act on a user's behalf — writing a post, for example — go through OAuth 2.0 consent.
+
+## First, there are three hosts
+
+Three addresses with different jobs. This trips people up, so here it is up front.
+
+| Host | Role | When you use it |
+| --- | --- | --- |
+| `openapi.rocketpunch.com` | **API server** | Calling the API. `/api/v1/...` requests and token issuance (`/oauth/token`) go here. |
+| `developers.rocketpunch.com` | **Developer console** | Registering apps and managing App Keys. The user consent screen (`/oauth/authorize`) also lives here. |
+| `docs.rocketpunch.com` | **Documentation** | These docs. |
+
+<Warning>
+  Token issuance (`/oauth/token`) is on the API server, but user consent (`/oauth/authorize`) is on the developer console. The two hosts differ — watch for this when you wire up the flow.
+</Warning>
+
+## Two ways to authenticate
+
+Which one you need depends on what you are trying to do.
+
+| | App Key | OAuth 2.0 |
+| --- | --- | --- |
+| Header | `X-RP-API-Key` | `Authorization: Bearer` |
+| User login | Not required | Required |
+| What you can do | Read public data | Create, update, and delete on a user's behalf |
+| Example | Search job postings, list events | Write a post, read your company permissions |
+
+Each endpoint's `security` field in the API reference tells you which one it expects.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Quickstart" icon="rocket" href="/en/openapi/start-quickstart">
+    Issue an App Key and make your first API call in three steps.
+  </Card>
+
+  <Card title="Choosing an app type" icon="cubes" href="/en/openapi/auth-app-types">
+    Decide between an App Key app and an OAuth client app.
+  </Card>
+
+  <Card title="App Key authentication" icon="key" href="/en/openapi/auth-app-key">
+    Send your key in a header, and store and rotate it safely.
+  </Card>
+
+  <Card title="OAuth 2.0" icon="user-lock" href="/en/openapi/auth-oauth-overview">
+    Get user consent and call user-context APIs.
+  </Card>
+</CardGroup>
+
+<Note>
+  Endpoint lists, request and response schemas, rate limits, and error codes are in the [API reference](/en/openapi/api-reference-overview).
+</Note>
