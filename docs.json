@@ -182,10 +182,10 @@
                 "pages": [
                   "console/profile-overview",
                   "console/profile-basic",
-                  "console/profile-switch",
                   "console/profile-post",
                   "console/profile-delete",
-                  "console/profile-employees"
+                  "console/profile-employees",
+                  "console/profile-switch"
                 ]
               },
               {
@@ -442,10 +442,10 @@
                 "pages": [
                   "en/console/profile-overview",
                   "en/console/profile-basic",
-                  "en/console/profile-switch",
                   "en/console/profile-post",
                   "en/console/profile-delete",
-                  "en/console/profile-employees"
+                  "en/console/profile-employees",
+                  "en/console/profile-switch"
                 ]
               },
               {
