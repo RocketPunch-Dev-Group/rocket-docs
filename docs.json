@@ -179,10 +179,10 @@
                 "pages": [
                   "console/profile-overview",
                   "console/profile-basic",
-                  "console/profile-switch",
                   "console/profile-post",
                   "console/profile-delete",
-                  "console/profile-employees"
+                  "console/profile-employees",
+                  "console/profile-switch"
                 ]
               },
               {
