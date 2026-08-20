@@ -499,6 +499,7 @@
               {
                 "group": "Store",
                 "pages": [
+                  "en/console/store-overview",
                   "en/console/store-create",
                   "en/console/store-product",
                   "en/console/store-order"
