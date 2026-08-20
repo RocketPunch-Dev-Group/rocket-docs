@@ -238,6 +238,7 @@
               {
                 "group": "상점",
                 "pages": [
+                  "console/store-overview",
                   "console/store-create",
                   "console/store-product",
                   "console/store-order"
