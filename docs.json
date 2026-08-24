@@ -214,9 +214,9 @@
                 "group": "이벤트",
                 "pages": [
                   "console/event-create",
-                  "console/event-guest",
                   "console/event-manage",
                   "console/event-host",
+                  "console/event-guest",
                   "console/event-check-in",
                   "console/event-ticket",
                   "console/event-announcement",
