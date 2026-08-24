@@ -218,7 +218,8 @@
                   "console/event-manage",
                   "console/event-catering",
                   "console/event-host",
-                  "console/event-check-in"
+                  "console/event-check-in",
+                  "console/event-ticket"
                 ]
               },
               {
