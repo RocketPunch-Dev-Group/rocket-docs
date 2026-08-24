@@ -216,11 +216,11 @@
                   "console/event-create",
                   "console/event-guest",
                   "console/event-manage",
-                  "console/event-catering",
                   "console/event-host",
                   "console/event-check-in",
                   "console/event-ticket",
-                  "console/event-announcement"
+                  "console/event-announcement",
+                  "console/event-catering"
                 ]
               },
               {
