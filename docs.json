@@ -436,7 +436,6 @@
                 "group": "Getting started",
                 "pages": [
                   "en/console/start-overview",
-                  "en/console/start-language",
                   "en/console/faq"
                 ]
               },
@@ -478,10 +477,13 @@
                 "group": "Events",
                 "pages": [
                   "en/console/event-create",
-                  "en/console/event-guest",
                   "en/console/event-manage",
-                  "en/console/event-catering",
-                  "en/console/event-host"
+                  "en/console/event-host",
+                  "en/console/event-guest",
+                  "en/console/event-check-in",
+                  "en/console/event-ticket",
+                  "en/console/event-announcement",
+                  "en/console/event-catering"
                 ]
               },
               {
