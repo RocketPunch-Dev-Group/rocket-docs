@@ -1,7 +1,7 @@
 ---
 title: "Managing event guests"
 description: "How to approve registrants and check them in at the venue."
-keywords: ["guests", "guest management", "attendees", "registrants", "queue", "approval", "approve attendance", "check-in", "entry", "attendance", "guest list", "registration status", "tickets remaining", "search guests"]
+keywords: ["guests", "guest management", "attendees", "registrants", "queue", "approval", "approve attendance", "check-in", "entry", "attendance", "guest list", "registration status", "tickets remaining", "search guests", "hide guests"]
 ---
 
 Open your event in `Rocketpunch` \> `Enterprise Services` and manage registrations in `Guests and queue` on the event.
@@ -11,14 +11,15 @@ Open your event in `Rocketpunch` \> `Enterprise Services` and manage registratio
 | Status | Description |
 | --- | --- |
 | Pending | A registrant waiting for host approval. |
+| Invited | A guest the host invited. |
 | Approved | A guest whose attendance is confirmed. |
+| Rejected | A registrant whose request was turned down. |
+| Not checked in | A guest whose attendance is confirmed but who has not checked in yet. |
 | Checked in | A guest who arrived and was let in. |
-| Canceled |  |
-| Rejected |  |
+| No-show | A guest whose attendance was confirmed but who did not come. |
+| Canceled | A guest who canceled their attendance. |
 
-{/* TODO(to write: descriptions for the [Canceled] and [Rejected] statuses) */}
-
-If you did not turn on `Host approval required` for the ticket, registrations are approved the moment they are made.
+If you did not turn on `Host approval required` when creating the ticket, registrations are approved the moment they are made.
 
 ## Reviewing guests
 
@@ -32,11 +33,7 @@ For an event with `Hide location` turned on, the location is revealed only to ap
 
 ## Checking guests in
 
-{/* TODO(structure: split check-in into its own page) */}
-
-On the day of the event, let arriving guests in from `Check-in`.
-
-If someone is only handling check-in, invite them as an additional event admin and let them run it. For details, see [Managing event hosts and permissions](/en/console/event-host).
+On the day of the event, let arriving guests in from `Check-in`. For details, see [Managing event check-in](/en/console/event-check-in).
 
 {/* TODO(to write: the steps for checking a guest in with a QR code) */}
 
@@ -45,3 +42,9 @@ If someone is only handling check-in, invite them as an additional event admin a
 Tickets with a limited quantity also show how many remain. You can adjust the quantity in `Ticket management`.
 
 {/* TODO(to write: issuing ticket discount codes) */}
+
+## Hiding guests
+
+Set this under `Permissions and settings` \> `Additional settings` on the event.
+
+- **Hide guests:** Hides the attending guest list so only the host can see it.
