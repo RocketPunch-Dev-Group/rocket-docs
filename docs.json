@@ -215,11 +215,11 @@
                 "pages": [
                   "console/event-create",
                   "console/event-manage",
-                  "console/event-check-in",
                   "console/event-ticket",
                   "console/event-guest",
-                  "console/event-announcement",
+                  "console/event-check-in",
                   "console/event-catering",
+                  "console/event-announcement",
                   "console/event-host"
                 ]
               },
