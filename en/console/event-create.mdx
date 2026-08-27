@@ -14,42 +14,45 @@ You can create an event in `Rocketpunch` \> `Enterprise Services` \> `Events` \>
 | Event name | Required. |
 | Event type | Pick up to 2. |
 | Event topic | Pick up to 3. |
-| Visibility | Sets who the event is open to. Choose public, private (link), or private (invite). |
+| Visibility | Sets who the event is open to. Choose public or private (link). |
 | Event start · end | Set a date and time for each. |
 
-<AccordionGroup>
-  <Accordion title="Event types">
-    - **Pop-up store** — a limited-run event
-    - **Fair** — expos and exhibitions
-    - **Conference** — talks, seminars, and forums
-    - **Networking** — meetups and mentoring
-    - **Business** — IR and launch days
-    - **Competition** — hackathons and contests
-    - **Lifestyle** — festivals, performances, and cultural events
-  </Accordion>
+#### Event types
 
-  <Accordion title="Event topics">
-    - **Web3** — blockchain and cryptocurrency
-    - **Technology** — AI, engineering, and research
-    - **Product** — services, planning, design, and marketing
-    - **Finance** — assets, investing, personal finance, and banking
-    - **Humanities** — society, climate, life sciences, religion, and public interest
-    - **Business** — business, strategy, organization, HR, and sales
-    - **Culture** — games, content, art, food, and media
-  </Accordion>
+| Type | Includes |
+| --- | --- |
+| Pop-up store | Limited-run events |
+| Fair | Expos and exhibitions |
+| Conference | Talks, seminars, and forums |
+| Networking | Meetups and mentoring |
+| Business | IR and launch days |
+| Competition | Hackathons and contests |
+| Lifestyle | Festivals, performances, and cultural events |
 
-  <Accordion title="Visibility options">
-    - **Public event** — anyone can view and search for the event.
-    - **Private (link only)** — does not appear in search or recommendations. Only people with the private URL can view it.
-    - **Private (invite only)** — only invited guests can view and register. You invite guests after creating the event.
-  </Accordion>
-</AccordionGroup>
+#### Event topics
+
+| Topic | Includes |
+| --- | --- |
+| Web3 | Blockchain and cryptocurrency |
+| Technology | AI, engineering, and research |
+| Product | Services, planning, design, and marketing |
+| Finance | Assets, investing, personal finance, and banking |
+| Humanities | Society, climate, life sciences, religion, and public interest |
+| Business | Business, strategy, organization, HR, and sales |
+| Culture | Games, content, art, food, and media |
+
+#### Visibility options
+
+| Visibility | Who can view it |
+| --- | --- |
+| Public event | Anyone can view and search for the event. |
+| Private (link only) | Does not appear in search or recommendations. Only people with the private URL can view it. |
 
 ## Entering the details
 
 | Field | Details |
 | --- | --- |
-| Event description | You can write about 20,000 characters describing the event. Markdown is supported. |
+| Event description | You can write a full description of the event. Markdown is supported. |
 | Attached images | <ul><li>Up to 10 images, each up to 10MB, up to 2,160px wide and 8,640px tall</li><li>They appear stacked vertically below the description with no gap between them, which is useful for a poster split across several files.</li></ul> |
 
 ## Setting the event location
@@ -68,16 +71,20 @@ Turn on `Hide location` to reveal the street address only to approved guests —
 ## Creating tickets
 
 | Field | Details |
-| --- | --- |
-| Ticket name | Required. |
+| :-- | :-- |
+| Ticket price | Choose a free or a paid ticket. |
+| Ticket name | Required. Up to 38 characters. |
 | Ticket description | Describes the ticket. Up to 2 lines of 19 characters each. |
 | Host approval required | Registrants join a queue instead of being confirmed immediately. Whether the ticket is free or paid, the host has to approve it before they can attend. |
 | Limited quantity | Limits how many tickets are issued. |
+| Waitlist once sold out | Available when you set a limited quantity. |
 | Sales start · end date | Sets the window in which the ticket can be purchased. |
 
 Select `Add ticket` to create several kinds of tickets with different conditions.
 
-{/* TODO(to write: how to set a ticket price) */}
+<Note>
+  For the terms covering paid ticket sales, see the [Event Service Terms](https://www.rocketpunch.com/terms?termType=TERMS_OF_EVENT).
+</Note>
 
 ### Setting up the ticket form
 
@@ -89,10 +96,26 @@ In `Ticket form settings`, you decide what information registrants give you when
 | Phone number | Optional. |
 | Additional fields | Write your own questions. <br />Choose short answer, long answer, checkbox, or multiple choice, and set whether each is required. |
 
+## Setting a refund policy
+
+Paid tickets require a refund policy. Pick one of three in `Change` under `Refund policy`. It applies to every paid ticket on the event at once.
+
+| Policy | How it works |
+| :-- | :-- |
+| Free cancellation | Guests cancel for a full refund up to 24 hours before the event starts. After that, cancellations go to the host for approval. |
+| Standard cancellation | A fee is deducted based on the cancellation date and the rest is refunded automatically. **Cancellations within 24 hours of purchase are refunded in full**, following the Korea Fair Trade Commission's consumer dispute resolution standards.<br /><br />\[10+ days before\] **100% refund** <br />\[7-9 days before\] **90% refund** <br />\[3-6 days before\] **80% refund** <br />\[1-2 days before\] **70% refund** <br />\[Day of the event\] **10% refund** <br />\[After the event starts\] **0% refund** |
+| Host approval | The guest submits a cancellation with a reason and the host decides on a full or partial refund. |
+
+<Warning>
+  Changing the policy also changes the refund terms for tickets that have already sold. Guests know the terms as they were at the time of purchase, so tell them with an [announcement](/en/console/event-announcement) after you change it.
+
+  The host pays the fee even when a refund happens. For the exact terms, see the [Event Service Terms](https://www.rocketpunch.com/terms?termType=TERMS_OF_EVENT).
+</Warning>
+
 ## Ticket sales fees
 
 Creating an event costs nothing. Fees apply only when you sell paid tickets.
 
-The brokerage fee is 3% on the Free plan and free on Growth and above. A card processing fee applies on top of that: 2% for payments in Korea and 3% for international payments. You can review your settlements in `Tickets` \> `Settlement` under event management.
+The brokerage fee is 3% on the Free plan and free on Growth and above. A card processing fee applies on top of that: 2% for cards issued in Korea and 3% for cards issued elsewhere. You can review your settlements in `Tickets` \> `Settlement` under event management.
 
 For the conditions on each plan, see [Plans](/en/console/plan-overview).

@@ -478,12 +478,12 @@
                 "pages": [
                   "en/console/event-create",
                   "en/console/event-manage",
-                  "en/console/event-host",
+                  "en/console/event-ticket",
                   "en/console/event-guest",
                   "en/console/event-check-in",
-                  "en/console/event-ticket",
+                  "en/console/event-catering",
                   "en/console/event-announcement",
-                  "en/console/event-catering"
+                  "en/console/event-host"
                 ]
               },
               {

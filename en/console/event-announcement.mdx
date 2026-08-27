@@ -1,7 +1,7 @@
 ---
 title: "Sending event announcements"
 description: "How to send announcements to your event guests by text message and email."
-keywords: ["announcement", "send an announcement", "notice", "bulk send", "bulk email", "send email", "send SMS", "text message", "SMS", "notify guests", "contact attendees", "recipients", "refresh recipients", "schedule a send", "send now", "40-byte subject", "character limit", "emoji", "emoji not supported", "reminder", "reminder email", "24 hours before", "1 hour before", "announcement not delivered", "notification"]
+keywords: ["announcement", "send an announcement", "notice", "bulk send", "bulk email", "send email", "send SMS", "text message", "SMS", "notify guests", "contact attendees", "recipients", "refresh recipients", "schedule a send", "send now", "40-byte subject", "character limit", "emoji", "emoji not supported", "reminder", "reminder email", "24 hours before", "1 hour before", "announcement not delivered", "notification", "automatic email"]
 ---
 
 `Rocketpunch` \> `Enterprise Services` \> `Events` \> `Events` \> `Manage event` \> `Announcements` is where you send guests an announcement by text message or email.
@@ -10,14 +10,26 @@ keywords: ["announcement", "send an announcement", "notice", "bulk send", "bulk 
 
 In `Choose recipients`, pick the guests who receive the announcement and set when it goes out. You can send immediately or schedule it. Choose email, text message, or both as the delivery method. Enter a subject and body, then select `Send announcement`.
 
-Announcements go to the email address each guest entered when registering their ticket. If your guest list changed after registration, select refresh recipients to bring it up to date.
+Announcements go to the phone number and email address each guest entered when registering their ticket. If your guest list changed after registration, select refresh recipients to bring it up to date.
 
 <Warning>
   The subject can be at most 40 bytes, and emoji are stripped from both the subject and the body. <br />Sending text messages costs money. The minimum payment is ₩100; if you try to pay less than that, the minimum ₩100 is charged.
 </Warning>
 
-## Additional settings
+## Sending reminder emails
 
-Under additional settings in `Events` \> `Manage event` \> `Permissions and settings`, you can turn on reminder emails. Guests are sent a reminder 24 hours and 1 hour before the event starts.
+Under additional settings in `Events` \> `Manage event` \> `Permissions and settings`, you can turn on reminder emails. Guests are sent a reminder 24 hours and 1 hour before the event starts, including `View my ticket and QR code`.
 
-{/* TODO(character limits) */}
+## Automatic emails
+
+Separately from the announcements a host sends, an email goes out automatically whenever a guest's ticket status changes.
+
+| Trigger | Subject | What it says |
+| --- | --- | --- |
+| Added to the waitlist because the event is full | You're on the waitlist! | Tells them the event is full and they are on the waitlist. They can attend if someone with a spot cancels or the host approves them. |
+| Registration approved | Your ticket is approved! | Confirms their attendance and tells them about visiting on the day. |
+| Registration rejected | About your ticket registration | Tells them their registration was turned down. |
+| Paid ticket payment completed | Your ticket purchase is complete! | Lists the ticket they bought and the amount paid. |
+| Ticket status changed | Your ticket status has changed | Gives both the previous and the new status. |
+| Check-in completed | You're checked in! | Confirms the check-in and the time it happened. |
+| Host cancels the event | The host canceled this event | Tells them the event was canceled. Paid tickets are refunded automatically, which takes up to 7 days. |
