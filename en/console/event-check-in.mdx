@@ -1,7 +1,38 @@
 ---
 title: "Managing event check-in"
-description: "How to check guests in on the day and put someone in charge of check-in."
-keywords: ["check-in", "checkin", "manage check-in", "entry", "let guests in", "on-site registration", "attendance", "confirm attendance", "QR", "QR code", "verify a ticket", "on-site operations", "staff", "check-in staff", "check-in permission", "additional admin", "event admin", "day of the event"]
+description: "How to check guests in on the day and manage your check-in status."
+keywords: ["check-in", "checkin", "manage check-in", "entry", "let guests in", "on-site registration", "attendance", "confirm attendance", "QR", "QR code", "scan", "scanner", "camera", "hardware scanner", "barcode scanner", "mobile scanner", "check in with a phone", "standard mode", "fast mode", "not checked in", "checked in", "no-show", "undo check-in", "bulk update", "check-in staff", "day of the event"]
 ---
 
-If someone is only handling check-in, invite them as an additional event admin and let them run it. For details, see [Managing event hosts and permissions](/en/console/event-host).
+In `Rocketpunch` \> `Enterprise Services` \> `Events` \> `Events` \> `Manage event` \> `Guests and queue`, select `Check-in` and the check-in screen opens in a new tab.
+
+## Choosing how you scan
+
+Pick one of three options under check-in method. You can change it at any time from the check-in screen.
+
+- **This device's camera:** Reads QR codes with the camera on the device you are using.
+- **Hardware scanner:** Uses a separate QR or barcode scanner connected to your computer.
+- **Mobile scanner:** Scan the QR shown on screen with your phone, or open the address with `Copy URL`, and you can scan from your phone.
+
+## Choosing a check-in mode
+
+| Mode | Behavior |
+| --- | --- |
+| Standard mode | After a scan completes, you select the approve button to confirm the check-in. |
+| Fast mode | After a scan completes, the guest is marked checked in immediately, without reviewing their details. |
+
+## Reviewing check-in status
+
+The check-in screen lists approved guests. If a registrant is missing, go to `View full queue` or to `Guests and queue` on the event and approve the registrants who are still pending.
+
+Guests who did not check in are automatically changed to `No-show` once the event ends.
+
+## Changing check-in status by hand
+
+Select a guest in the list to open their details. Select `Checked in` to check them in manually, without scanning a QR code.
+
+To change several at once, select the guests in the list, pick either `Not checked in` or `Checked in`, and select `Bulk update status`.
+
+## Adding check-in staff
+
+Under additional admins in `Permissions and settings` on the event, select `Invite admin` to invite a private admin (a company) who helps run check-in. For details, see [Event admins, deletion, and settings](/en/console/event-host).

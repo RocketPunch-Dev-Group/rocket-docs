@@ -4,11 +4,9 @@ description: "How to review incoming orders and quote requests, and handle payme
 keywords: ["manage orders", "order list", "order status", "pending", "order approved", "delivered", "order canceled", "quote request", "quote", "contact details", "customer contact", "additional payment", "payment request", "payment link", "payment method", "refund", "partial refund", "full refund", "cancel", "requested delivery date", "delivery address", "event order"]
 ---
 
-`Rocketpunch` \> `Enterprise Services` \> `Store` \> `Manage orders` is where you review incoming orders and quote requests. Choose a service type tab, then pick either `Orders` or `Quote requests`.
+`Rocketpunch` \> `Enterprise Services` \> `Store` \> `Manage orders` is where you review incoming orders and quote requests.
 
-Orders arrive per event. The list shows the event name, the items ordered, the amount paid, the requested delivery date, and the order status; selecting an order opens its details on the right. Select `View event` to go to that event.
-
-A customer can add products and pay right away, or skip the products and request a quote by giving only their expected headcount and budget. Quote requests work the same way as orders: you check the contact details and send a payment request. For the customer's side, see [Event catering](/en/console/event-catering).
+Orders arrive per event. The list shows the event name, the items ordered, the amount paid, the requested delivery date, and the order status; selecting an order shows its details on the right.
 
 When an order or quote request comes in, a notification is sent to the contact email registered on your store home.
 
@@ -16,23 +14,23 @@ When an order or quote request comes in, a notification is sent to the contact e
 
 In the order details, select `View contact details` to see their phone number and email. Use it when you need to arrange delivery or pass along more information.
 
-For everyone's safety, do not steer customers toward outside payment or cash payment.
+<Note>
+  For everyone's safety, do not steer customers toward outside payment or cash payment.
+</Note>
 
-## Changing the order status
+## Changing an order or quote status
 
-In the order details, set the order status to `Pending`, `Order approved`, `Delivered`, or `Order canceled`.
+In the order details, you can change the order or quote status to `Pending`, `Order approved`, `Delivered`, or `Order canceled`.
 
-**The order status is how your store records its own progress.** Setting it to `Order canceled` does not cancel the payment. To actually cancel it, use `Refund and cancel`.
+The order status is for your store to track its own progress, so setting it to `Order canceled` does not cancel the payment. To actually cancel the payment, select `Refund and cancel`.
 
 ## Requesting an additional payment
 
-When the amount goes up while you are working with the customer, select `Request additional payment`, enter a title for the request, the amount, how long the request stays valid, and any payment instructions, then select `Send payment request`. Write a clear title and instructions so the customer can tell what they are paying for.
+When the amount comes to more than the original order, select `Request additional payment` to ask for the difference. Enter a title for the request, the amount, how long the request stays valid, and any payment instructions, then select `Send payment request`.
 
 The customer receives a payment link at the phone number and email they entered when ordering. They can pay by credit card, check card, Toss Pay, Kakao Pay, Naver Pay, or PAYCO, and a confirmation email is sent once the payment goes through.
 
 Payment requests you have sent appear in that order's details, where you can send more or refund them one at a time.
-
-{/* TODO(needs confirmation: what happens to a payment link after its validity period expires) */}
 
 ## Refunding and canceling
 
