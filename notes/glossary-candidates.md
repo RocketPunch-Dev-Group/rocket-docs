@@ -286,3 +286,42 @@
 | 한국어, 영어, 스페인어, 중국어(번체·간체), 일본어, 베트남어, 태국어, 독일어, 프랑스어, 포르투갈어 | Korean, English, Spanish, Chinese (Traditional and Simplified), Japanese, Vietnamese, Thai, German, French, Portuguese |
 | 핸들 주소 / `핸들.rockets.app` | Handle address / `handle.rockets.app` |
 | 핸들.rockets.app | handle.rockets.app |
+
+## 엔터프라이즈 콘솔 (28)
+
+PR #21 의 콘솔 문서를 영문화하며 직접 옮긴 UI 라벨입니다. 콘솔은 English 를 지원하므로
+(`console/start-language.mdx`) 제품에 이미 정본 라벨이 있을 수 있습니다. **번들이 아니라
+콘솔 실제 표기를 먼저 확인해야 합니다.** 확인되면 문서를 그쪽에 맞춥니다.
+
+`기업 서비스` 는 www.rocketpunch.com 영문 화면의 `Enterprise Services` 를 그대로 따랐습니다.
+
+| 한국어 | 사용한 영문 | 확인 |
+| --- | --- | --- |
+| 기업 서비스 | Enterprise Services | 웹 확인됨 |
+| 결제 관리 | Billing | 미확인 |
+| 게스트 및 대기열 | Guests and queue | 미확인 |
+| 공고 리뷰어 | Posting reviewer | 미확인 |
+| 공지 발송 | Announcements | 미확인 |
+| 광고 | Advertising | 미확인 |
+| 권한 관리 | Permissions | 미확인 |
+| 권한 및 설정 | Permissions and settings | 미확인 |
+| 구성원 | Member | 미확인 |
+| 기본 정보 | Basic information | 미확인 |
+| 기업 상세 정보 | Company details | 미확인 |
+| 기업 정보 | Company information | 미확인 |
+| 등록 행사 / 개방 행사 | Registered Event / Open Event | 용어집 기존 항목 |
+| 메시지함 | Messages | 미확인 |
+| 모집 중 / 모집 종료 | Enrolling / Enrollment closed | 미확인 |
+| 상점 | Store | 미확인 |
+| 소유자 / 주소유자 | Owner / Primary owner | 미확인 |
+| 세션 및 연사 | Sessions and speakers | 미확인 |
+| 임시 저장 | Draft / Save draft | 미확인 |
+| 재직자(관련 사람) | People | 미확인 |
+| 접수 대기 / 주문 승인 / 배송 완료 / 주문 취소 | Pending / Order approved / Delivered / Order canceled | 미확인 |
+| 추가 결제 요청 | Request additional payment | 미확인 |
+| 추가 관리자 | Additional admin | 미확인 |
+| 판매 상품 관리 | Manage products | 미확인 |
+| 한정 수량 | Limited quantity | 미확인 |
+| 호스트 승인 필요 | Host approval required | 미확인 |
+| 환불 및 취소 | Refund and cancel | 미확인 |
+| 개별 항목 액세스 권한 | Item-level access | 미확인 |

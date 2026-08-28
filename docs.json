@@ -62,12 +62,12 @@
                   "profile-overview",
                   "profile-library",
                   "settings-certification-badge",
-                  "profile-share",
                   "profile-career",
-                  "profile-private",
                   "profile-education",
                   "profile-experience",
-                  "profile-language"
+                  "profile-language",
+                  "profile-share",
+                  "profile-private"
                 ]
               },
               {
@@ -139,7 +139,8 @@
                 "group": "활동",
                 "pages": [
                   "activity-jobs-apply",
-                  "activity-event",
+                  "activity-external-apply",
+                  "activity-event-ticket",
                   "activity-contents",
                   "activity-etc",
                   "activity-wallet"
@@ -177,11 +178,29 @@
               },
               {
                 "group": "기업 프로필",
-                "pages": []
+                "pages": [
+                  "console/profile-overview",
+                  "console/profile-basic",
+                  "console/profile-post",
+                  "console/profile-delete",
+                  "console/profile-employees",
+                  "console/profile-switch"
+                ]
               },
               {
                 "group": "메시지",
-                "pages": []
+                "pages": [
+                  "console/message-start"
+                ]
+              },
+              {
+                "group": "멤버 및 권한",
+                "pages": [
+                  "console/permission-roles",
+                  "console/permission-invite",
+                  "console/permission-manage",
+                  "console/permission-request"
+                ]
               },
               {
                 "group": "채용",
@@ -193,31 +212,49 @@
               },
               {
                 "group": "이벤트",
-                "pages": []
+                "pages": [
+                  "console/event-create",
+                  "console/event-manage",
+                  "console/event-ticket",
+                  "console/event-guest",
+                  "console/event-check-in",
+                  "console/event-catering",
+                  "console/event-announcement",
+                  "console/event-host"
+                ]
               },
               {
                 "group": "교육",
-                "pages": []
+                "pages": [
+                  "console/edu-create",
+                  "console/edu-manage"
+                ]
               },
               {
                 "group": "광고",
-                "pages": []
+                "pages": [
+                  "console/ads-overview",
+                  "console/ads-banner"
+                ]
               },
               {
-                "group": "요금제",
-                "pages": []
+                "group": "상점",
+                "pages": [
+                  "console/store-overview",
+                  "console/store-create",
+                  "console/store-product",
+                  "console/store-order"
+                ]
               },
               {
-                "group": "결제 관리",
-                "pages": []
-              },
-              {
-                "group": "권한 관리",
-                "pages": []
+                "group": "결제 및 요금제",
+                "pages": [
+                  "console/plan-overview",
+                  "console/payment-overview"
+                ]
               }
             ],
-            "icon": "buildings",
-            "hidden": true
+            "icon": "buildings"
           },
           {
             "tab": "Open API 가이드",
@@ -365,7 +402,8 @@
                 "group": "Activity",
                 "pages": [
                   "en/activity-jobs-apply",
-                  "en/activity-event",
+                  "en/activity-external-apply",
+                  "en/activity-event-ticket",
                   "en/activity-contents",
                   "en/activity-etc",
                   "en/activity-wallet"
@@ -403,11 +441,29 @@
               },
               {
                 "group": "Company profile",
-                "pages": []
+                "pages": [
+                  "en/console/profile-overview",
+                  "en/console/profile-basic",
+                  "en/console/profile-post",
+                  "en/console/profile-delete",
+                  "en/console/profile-employees",
+                  "en/console/profile-switch"
+                ]
               },
               {
                 "group": "Messages",
-                "pages": []
+                "pages": [
+                  "en/console/message-start"
+                ]
+              },
+              {
+                "group": "Members and permissions",
+                "pages": [
+                  "en/console/permission-roles",
+                  "en/console/permission-invite",
+                  "en/console/permission-manage",
+                  "en/console/permission-request"
+                ]
               },
               {
                 "group": "Hiring",
@@ -419,29 +475,49 @@
               },
               {
                 "group": "Events",
-                "pages": []
+                "pages": [
+                  "en/console/event-create",
+                  "en/console/event-manage",
+                  "en/console/event-ticket",
+                  "en/console/event-guest",
+                  "en/console/event-check-in",
+                  "en/console/event-catering",
+                  "en/console/event-announcement",
+                  "en/console/event-host"
+                ]
               },
               {
                 "group": "Education",
-                "pages": []
+                "pages": [
+                  "en/console/edu-create",
+                  "en/console/edu-manage"
+                ]
               },
               {
                 "group": "Advertising",
-                "pages": []
+                "pages": [
+                  "en/console/ads-overview",
+                  "en/console/ads-banner"
+                ]
               },
               {
-                "group": "Plans",
-                "pages": []
+                "group": "Store",
+                "pages": [
+                  "en/console/store-overview",
+                  "en/console/store-create",
+                  "en/console/store-product",
+                  "en/console/store-order"
+                ]
               },
               {
-                "group": "Billing",
-                "pages": []
-              },
-              {
-                "group": "Permissions",
-                "pages": []
+                "group": "Billing and plans",
+                "pages": [
+                  "en/console/plan-overview",
+                  "en/console/payment-overview"
+                ]
               }
-            ]
+            ],
+            "icon": "buildings"
           },
           {
             "tab": "Open API Guide",

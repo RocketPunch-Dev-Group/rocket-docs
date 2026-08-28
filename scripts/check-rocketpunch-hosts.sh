@@ -28,7 +28,7 @@ cd "$ROOT"
 # 새 호스트가 생기면 실재 여부를 확인한 뒤 여기에 추가한다.
 #   www 서비스 · docs 문서 · developers 개발자 콘솔 · openapi API 서버
 #   enterprise 기업용 · image 이미지 CDN · partner/support 폼 · travel 트래블
-ALLOWED='^(www|docs|developers|openapi|enterprise|image|partner|support|travel)$'
+ALLOWED='^(www|docs|developers|openapi|enterprise|image|partner|support|travel|ads)$'
 ALLOW_EXTRA="${ALLOW_EXTRA:-}"
 
 echo "── rocketpunch.com 호스트 검사 ─────────────────────────"
