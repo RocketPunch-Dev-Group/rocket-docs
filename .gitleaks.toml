@@ -2,7 +2,7 @@
 useDefault = true
 
 # These are generated git blob IDs, checked by check-translation-sync.sh.
-# Match both this file and a complete MDX-to-SHA1 mapping line; keep other scans active.
+# Match both the state file and a complete MDX-to-SHA1 mapping line; keep other scans active.
 [[rules]]
 id = "generic-api-key"
 
