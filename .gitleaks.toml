@@ -1,0 +1,14 @@
+[extend]
+useDefault = true
+
+# These are generated git blob IDs, checked by check-translation-sync.sh.
+# Match both this file and a complete MDX-to-SHA1 mapping line; keep other scans active.
+[[rules]]
+id = "generic-api-key"
+
+[[rules.allowlists]]
+description = "Generated translation source blob hashes"
+condition = "AND"
+paths = ['''(^|/)scripts/translation-state\.json$''']
+regexTarget = "line"
+regexes = ['''^\s*"[^"]+\.mdx":\s*"[a-f0-9]{40}",?\s*$''']
