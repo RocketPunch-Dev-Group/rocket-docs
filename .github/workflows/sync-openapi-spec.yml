@@ -34,7 +34,9 @@ env:
 
 jobs:
   sync:
-    runs-on: ubuntu-latest
+    runs-on:
+      group: ci-arc
+      labels: capable-small
     steps:
       - uses: actions/checkout@v6
 
