@@ -28,7 +28,7 @@ jobs:
   check:
     name: 번역 동기화 확인
     runs-on:
-      group: ci-arc
+      group: ci-arc-small
       labels: capable-small
     steps:
       - uses: actions/checkout@v6

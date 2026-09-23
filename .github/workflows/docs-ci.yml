@@ -23,7 +23,7 @@ jobs:
   validate:
     name: 문서 빌드 · 링크 검증
     runs-on:
-      group: ci-arc
+      group: ci-arc-small
       labels: capable-small
     steps:
       - uses: actions/checkout@v6

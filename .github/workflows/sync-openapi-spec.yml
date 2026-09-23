@@ -35,7 +35,7 @@ env:
 jobs:
   sync:
     runs-on:
-      group: ci-arc
+      group: ci-arc-small
       labels: capable-small
     steps:
       - uses: actions/checkout@v6
