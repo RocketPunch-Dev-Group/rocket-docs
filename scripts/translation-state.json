@@ -3,7 +3,7 @@
   "sources": {
     "account-delete.mdx": "8a36a36a69a64cac742ddd52f80126958ba526cb",
     "account-identity-verification.mdx": "c6757c3b8fdef9a111dac4516c3cc0d679ff9c40",
-    "account-initialization.mdx": "2faba26af5205db15f29f57a42cb488d0c809bfc",
+    "account-initialization.mdx": "642d67e66fc2a2da93bd173a1f8f3039b261698f",
     "account-linked.mdx": "7adf2001ae5b78a6c998f7c10f54453a98db3806",
     "account-login-error.mdx": "c52f49ad9a083273b3678041cfc63b9c58672680",
     "account-login.mdx": "01f4126317e60bcf46314baad26aa8591e049bce",
@@ -80,7 +80,7 @@
     "profile-library.mdx": "62a7d5f7ea92fd7f9c45fea34158f949a6ef3277",
     "profile-overview.mdx": "974956efef614e54d6f8301e8e964a4553ce25a9",
     "profile-private.mdx": "5eb5205a7afebe7bccc16f7e1e079314b61984c5",
-    "profile-share.mdx": "7ed8d6ee603ab8f6ff0437961913d26ac71d81e7",
+    "profile-share.mdx": "c71480500f36f7e82d6ffe4d1510ece69c2b96b2",
     "report-discover.mdx": "abb7e674a1480c2d2bc8f19d73a99da501ff2a40",
     "report-jobs-edu.mdx": "db275dd360718438f949494b2b90a7a378c39e1a",
     "report-post-reply.mdx": "f75c6e91ae9d91311ec3d34ca6db80c51935cb63",
@@ -100,7 +100,7 @@
     "wallet-networks-token.mdx": "e32442ec41c2d88b436e059b2ca823583d020dcb",
     "wallet-nft.mdx": "7885a53fdaf8aa3e0ea4ba7c347045f76019af7f",
     "wallet-overview.mdx": "4578b4d1a1e5f2e7604337f8c36582c02e733608",
-    "wallet-receive.mdx": "b5ea52cead0303f5a2bffee5c9031dbba7dd81cd",
+    "wallet-receive.mdx": "21bd3d743c037213b68c13ecd2e6f9d1a552197e",
     "wallet-send.mdx": "b92ad7f4309c9e14345c1da28328c1c1ba2e05df"
   }
 }

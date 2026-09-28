@@ -29,7 +29,17 @@ The first time you log in to Rocketpunch, you set your handle and career. You ca
 
 You can change your handle yourself in `My Profile` \> `Edit profile`. Once changed, you have to wait 60 days before you can change it again. Within 30 days of the change, though, you can revert to your previous handle regardless of that limit.
 
-During that period, the old handle address automatically points to the new one. After 30 days, another user can take the old handle.
+During that period, the profile address for your old handle redirects to your new profile address. After 30 days, another user can take the old handle.
+
+<Warning>
+  **Your short profile URL and handle address (ENS, `handle.rockets.app`) do not redirect to your new handle.**
+
+  - Changing your handle immediately requests release of the old ENS name. Release is asynchronous, so stop using the old short URL and handle address when you change your handle.
+  - The 30-day reservation prevents other users from registering your old handle. During that period, `www.rocketpunch.com/@oldhandle` redirects to your new profile, but the released short URL (`oldhandle.rockets.app`) does not.
+  - Update the short URL on your resume and business cards, and ask senders to update their address books. Before a transfer, verify that your new name resolves to your wallet address. Your wallet's `0x` address stays the same.
+  - Another user may register the old name after the reservation ends. Do not send assets to it.
+  - Reverting to your previous handle registers that ENS name again. The short URL and handle address work once registration completes.
+</Warning>
 
 If you are using a handle created under the old rules, you are prompted to set a handle that meets the current rules the next time you log in. Your handle may also change when you migrate or merge a previous account's profile into your current account.
 
