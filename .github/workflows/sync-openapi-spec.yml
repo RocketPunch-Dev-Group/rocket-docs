@@ -20,6 +20,12 @@ on:
   schedule:
     - cron: '0 * * * *'   # 매시 정각
   workflow_dispatch:       # 배포 직후 수동 반영용
+    inputs:
+      runner:
+        description: "러너 선택 (auto = 조직/레포 변수 RUNNER_MODE 를 따른다)"
+        type: choice
+        options: [auto, self-hosted, github]
+        default: auto
 
 permissions:
   contents: write
@@ -34,9 +40,11 @@ env:
 
 jobs:
   sync:
-    runs-on:
-      group: ci-arc-small
-      labels: capable-small
+    runs-on: >-
+      ${{ fromJSON((
+        github.event.inputs.runner == 'github' ||
+        (github.event.inputs.runner != 'self-hosted' && vars.RUNNER_MODE == 'github')
+      ) && vars.RUNNER_GH_SMALL || vars.RUNNER_SH_SMALL || '{"group":"ci-arc-small","labels":"capable-small"}') }}
     steps:
       - uses: actions/checkout@v6
 
