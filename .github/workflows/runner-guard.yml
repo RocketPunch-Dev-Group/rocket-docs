@@ -1,0 +1,12 @@
+# runner-guard — runs-on 이 러너 전환 정본 식을 쓰는지 검사한다 (ADR-0014, RP-2964)
+# 판정 로직과 정본 식은 허브 소유다 — 이 파일은 호출 이상으로 키우지 않는다.
+name: runner-guard
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/**"
+
+jobs:
+  guard:
+    uses: RocketPunch-Dev-Group/rocket-hub/.github/workflows/runner-guard.yml@main

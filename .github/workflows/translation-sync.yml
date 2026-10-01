@@ -14,6 +14,12 @@ on:
       - 'scripts/translation-state.json'
   pull_request:
   workflow_dispatch:
+    inputs:
+      runner:
+        description: "러너 선택 (auto = 조직/레포 변수 RUNNER_MODE 를 따른다)"
+        type: choice
+        options: [auto, self-hosted, github]
+        default: auto
 
 permissions:
   contents: read
@@ -27,9 +33,11 @@ concurrency:
 jobs:
   check:
     name: 번역 동기화 확인
-    runs-on:
-      group: ci-arc
-      labels: capable-small
+    runs-on: >-
+      ${{ fromJSON((
+        github.event.inputs.runner == 'github' ||
+        (github.event.inputs.runner != 'self-hosted' && vars.RUNNER_MODE == 'github')
+      ) && vars.RUNNER_GH_SMALL || vars.RUNNER_SH_SMALL || '{"group":"ci-arc-small","labels":"capable-small"}') }}
     steps:
       - uses: actions/checkout@v6
 
