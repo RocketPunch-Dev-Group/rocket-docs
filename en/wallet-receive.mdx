@@ -25,3 +25,11 @@ Besides the tokens in the list, you can also send and receive custom tokens. For
 ## Receiving with a handle address
 
 Rocketpunch provides an address in the form `handle.rockets.app` that you can use instead of a long EVM address. It uses your Rocketpunch handle as is, and this address can only send and receive EVM assets. Bitcoin and Solana assets must be received at an address on those networks.
+
+<Warning>
+  When you change your handle, the old handle address (ENS) does not redirect to the new one.
+
+  - Release of the old ENS name is requested immediately. Stop sending assets to it as soon as you change your handle, including during the 30-day reservation.
+  - Tell senders your new name and verify that it resolves to your wallet address before a transfer. Your `0x` wallet address stays the same.
+  - Another user may claim the old name after the 30-day reservation. See [Changing your handle](/en/account-initialization#changing-your-handle) for details.
+</Warning>

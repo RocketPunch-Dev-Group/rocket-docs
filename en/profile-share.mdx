@@ -8,7 +8,7 @@ keywords: ["share profile", "profile URL", "profile link", "short URL", "short l
 
 Your profile URL is built from your handle (ID). For example, if your handle is `steve`, your profile URL is `www.rocketpunch.com/@steve`. Copy this URL and paste it into a message, an email, social media, and anywhere else you want to share it.
 
-If your handle changes, the old URL automatically points to the new one, so links you have already shared keep working.
+When you change your handle, your old profile URL (`www.rocketpunch.com/@oldhandle`) redirects to the new profile URL for 30 days. Update any links you have shared within that period.
 
 ## Short profile URL
 
@@ -17,6 +17,14 @@ Add `.rockets.app` to your handle to get a short profile URL. For example, if yo
 <Tip>
   Your short profile URL is also used as your wallet address. For details, see [Wallet overview](/en/wallet-overview).
 </Tip>
+
+<Warning>
+  The 30-day redirect does not apply to your short URL (`oldhandle.rockets.app`).
+
+  - Changing your handle immediately requests release of the old ENS name, which is processed asynchronously. Stop using the old short URL and handle address (ENS) as soon as you change your handle.
+  - Update links on your resume and business cards, and ask senders to update their address books. Verify that the new name resolves to your wallet address before using it.
+  - The new short URL works once ENS registration completes. See [Changing your handle](/en/account-initialization#changing-your-handle) for details.
+</Warning>
 
 ## Share with a QR code
 
