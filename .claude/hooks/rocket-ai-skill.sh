@@ -1,16 +1,33 @@
 #!/bin/bash
-# 공통 스킬(rocket-ai-skill) 부트스트랩 — 각 레포 .claude/settings.json의 SessionStart 훅이 부른다.
+# 공통 스킬(rocket-ai-skill) 부트스트랩 — 각 레포의 SessionStart 훅이 부른다.
+#   Claude Code: .claude/settings.json → .claude/hooks/rocket-ai-skill.sh
+#   Codex:       .codex/hooks.json     → .claude/hooks/rocket-ai-skill.sh codex
 # 설치돼 있으면 ~/rocket-ai-skill/hooks/session-start.sh로 최신화하고, 없으면 설치한다.
 # 원본은 rocket-ai-skill/hooks/repo-bootstrap.sh — 레포에는 .claude/hooks/rocket-ai-skill.sh로 복사해 둔다.
 # 실패해도 세션을 막지 않는다(항상 exit 0). 실패하면 다음 세션에서 다시 시도한다.
 
 DIR="$HOME/rocket-ai-skill"
 REPO_URL="https://github.com/RocketPunch-Dev-Group/rocket-ai-skill.git"
+CLIENT="${1:-claude}"
 
-notice() { printf '{"systemMessage":"%s"}\n' "$1"; }
+# 훅 응답을 낸다. Claude Code 형식(JSON)으로 받아, Codex면 Codex가 아는 systemMessage만 남긴다.
+# Codex에는 reloadSkills가 없어 Claude 전용 필드는 넘기지 않는다.
+emit() {
+  [ -n "$1" ] || return 0
+  if [ "$CLIENT" = codex ]; then
+    local msg
+    msg="$(printf '%s' "$1" | sed -n 's/.*"systemMessage":"\([^"]*\)".*/\1/p' | sed "s/'! /'/g")"
+    [ -n "$msg" ] && printf '{"systemMessage":"%s"}\n' "$msg"
+  else
+    printf '%s\n' "$1"
+  fi
+  return 0
+}
+notice() { emit "$(printf '{"systemMessage":"%s"}' "$1")"; }
 
 if [ -x "$DIR/hooks/session-start.sh" ]; then
-  exec "$DIR/hooks/session-start.sh"
+  emit "$("$DIR/hooks/session-start.sh")"
+  exit 0
 fi
 if [ -e "$DIR" ]; then
   notice "공통 스킬: ~/rocket-ai-skill이 설치본이 아닙니다. 확인 후 지우면 다음 세션에서 자동 설치됩니다."
@@ -31,7 +48,7 @@ trap 'rm -rf "$tmp"; rmdir "$lock" 2>/dev/null' EXIT
 
 if [ -e "$DIR" ]; then
   # 잠금을 기다리는 사이 다른 세션이 설치를 마쳤다
-  printf '{"hookSpecificOutput":{"hookEventName":"SessionStart","reloadSkills":true}}\n'
+  emit '{"hookSpecificOutput":{"hookEventName":"SessionStart","reloadSkills":true}}'
   exit 0
 fi
 
@@ -48,10 +65,12 @@ if [ $? -ne 0 ]; then
 fi
 mv "$tmp" "$DIR"
 
-if "$DIR/install.sh" >/dev/null 2>&1; then
-  printf '{"systemMessage":"%s","hookSpecificOutput":{"hookEventName":"SessionStart","reloadSkills":true}}\n' \
-    "공통 스킬을 ~/rocket-ai-skill에 설치했습니다(common 묶음). 분야 묶음 추가: ~/rocket-ai-skill/install.sh --packs backend"
-else
+if ! "$DIR/install.sh" >/dev/null 2>&1; then
   notice "공통 스킬: 받았지만 스킬 연결에 실패했습니다. ~/rocket-ai-skill/install.sh를 직접 실행해 보세요."
+elif [ "$CLIENT" = codex ]; then
+  notice "공통 스킬을 ~/rocket-ai-skill에 설치했습니다(common 묶음). 스킬이 보이지 않으면 Codex를 다시 시작하세요."
+else
+  emit "$(printf '{"systemMessage":"%s","hookSpecificOutput":{"hookEventName":"SessionStart","reloadSkills":true}}' \
+    "공통 스킬을 ~/rocket-ai-skill에 설치했습니다(common 묶음). 분야 묶음 추가: ~/rocket-ai-skill/install.sh --packs backend")"
 fi
 exit 0
