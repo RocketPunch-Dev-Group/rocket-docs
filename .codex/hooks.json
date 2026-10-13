@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/bash \"$(git rev-parse --show-toplevel)/.claude/hooks/rocket-ai-skill.sh\" codex",
+            "timeout": 30,
+            "statusMessage": "공통 스킬 확인"
+          }
+        ]
+      }
+    ]
+  }
+}
