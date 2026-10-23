@@ -9,4 +9,4 @@ on:
 
 jobs:
   guard:
-    uses: RocketPunch-Dev-Group/rocket-hub/.github/workflows/runner-guard.yml@main
+    uses: RocketPunch-Dev-Group/rocket-hub/.github/workflows/runner-guard.yml@a1a4b787fe4d9969172cabefcd27c48ce08496ed # rocket-hub #201: legacy + pinned arm64
