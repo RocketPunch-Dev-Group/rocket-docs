@@ -97,7 +97,7 @@ jobs:
       - uses: actions/setup-node@v5
         if: steps.diff.outputs.changed == '1'
         with:
-          node-version: '20'
+          node-version: '22.23.4'
 
       - name: 반영 후 문서 빌드 검증
         if: steps.diff.outputs.changed == '1'
